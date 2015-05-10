@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E91DEEAC1AFFAAC500F004F8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E91DEEAB1AFFAAC500F004F8 /* libc++.dylib */; };
+		E91DEEE21AFFAC4200F004F8 /* TSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEB11AFFAC4200F004F8 /* TSUtils.m */; };
+		E91DEEE31AFFAC4200F004F8 /* TSNavigationStripModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEB51AFFAC4200F004F8 /* TSNavigationStripModel.m */; };
+		E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEB71AFFAC4200F004F8 /* TSNavigationStripView.m */; };
+		E91DEEE51AFFAC4200F004F8 /* TSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEBB1AFFAC4200F004F8 /* TSScrollView.m */; };
+		E91DEEE61AFFAC4200F004F8 /* TSTableViewContentHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEC01AFFAC4200F004F8 /* TSTableViewContentHolder.m */; };
+		E91DEEE71AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEC21AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m */; };
+		E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEC41AFFAC4200F004F8 /* TSTableViewExpandSection.m */; };
+		E91DEEE91AFFAC4200F004F8 /* TSTableViewHeaderPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEC61AFFAC4200F004F8 /* TSTableViewHeaderPanel.m */; };
+		E91DEEEA1AFFAC4200F004F8 /* TSTableViewHeaderSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEC81AFFAC4200F004F8 /* TSTableViewHeaderSection.m */; };
+		E91DEEEB1AFFAC4200F004F8 /* TSTableViewRow.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEECA1AFFAC4200F004F8 /* TSTableViewRow.m */; };
+		E91DEEEC1AFFAC4200F004F8 /* TSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEECC1AFFAC4200F004F8 /* TSTableView.m */; };
+		E91DEEED1AFFAC4200F004F8 /* TSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEECE1AFFAC4200F004F8 /* TSTableViewCell.m */; };
+		E91DEEEE1AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEED21AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m */; };
+		E91DEEEF1AFFAC4200F004F8 /* TSTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEED41AFFAC4200F004F8 /* TSTableViewModel.m */; };
+		E91DEEF01AFFAC4200F004F8 /* TSTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEED71AFFAC4200F004F8 /* TSTabView.m */; };
+		E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDB1AFFAC4200F004F8 /* TSTabViewModel.m */; };
+		E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDE1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m */; };
+		E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */; };
 		E98C60D11AFFA19900710840 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C609A1AFFA19900710840 /* Realm.framework */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
 		E9F3BD271AFF966900D998FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD261AFF966900D998FC /* main.m */; };
@@ -33,6 +52,52 @@
 /* Begin PBXFileReference section */
 		5081CC4A0994217905D52E9B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19FF4B7E4FF5F87622D6772 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E91DEEAB1AFFAAC500F004F8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		E91DEEAF1AFFAC4200F004F8 /* TSDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSDefines.h; sourceTree = "<group>"; };
+		E91DEEB01AFFAC4200F004F8 /* TSUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUtils.h; sourceTree = "<group>"; };
+		E91DEEB11AFFAC4200F004F8 /* TSUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUtils.m; sourceTree = "<group>"; };
+		E91DEEB31AFFAC4200F004F8 /* TSNavigationStripDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSNavigationStripDataSource.h; sourceTree = "<group>"; };
+		E91DEEB41AFFAC4200F004F8 /* TSNavigationStripModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSNavigationStripModel.h; sourceTree = "<group>"; };
+		E91DEEB51AFFAC4200F004F8 /* TSNavigationStripModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSNavigationStripModel.m; sourceTree = "<group>"; };
+		E91DEEB61AFFAC4200F004F8 /* TSNavigationStripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSNavigationStripView.h; sourceTree = "<group>"; };
+		E91DEEB71AFFAC4200F004F8 /* TSNavigationStripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSNavigationStripView.m; sourceTree = "<group>"; };
+		E91DEEB81AFFAC4200F004F8 /* TSNavigationStripViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSNavigationStripViewDelegate.h; sourceTree = "<group>"; };
+		E91DEEBA1AFFAC4200F004F8 /* TSScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSScrollView.h; sourceTree = "<group>"; };
+		E91DEEBB1AFFAC4200F004F8 /* TSScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSScrollView.m; sourceTree = "<group>"; };
+		E91DEEBE1AFFAC4200F004F8 /* TSTableViewAppearanceCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewAppearanceCoordinator.h; sourceTree = "<group>"; };
+		E91DEEBF1AFFAC4200F004F8 /* TSTableViewContentHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewContentHolder.h; sourceTree = "<group>"; };
+		E91DEEC01AFFAC4200F004F8 /* TSTableViewContentHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewContentHolder.m; sourceTree = "<group>"; };
+		E91DEEC11AFFAC4200F004F8 /* TSTableViewExpandControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewExpandControlPanel.h; sourceTree = "<group>"; };
+		E91DEEC21AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewExpandControlPanel.m; sourceTree = "<group>"; };
+		E91DEEC31AFFAC4200F004F8 /* TSTableViewExpandSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewExpandSection.h; sourceTree = "<group>"; };
+		E91DEEC41AFFAC4200F004F8 /* TSTableViewExpandSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewExpandSection.m; sourceTree = "<group>"; };
+		E91DEEC51AFFAC4200F004F8 /* TSTableViewHeaderPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewHeaderPanel.h; sourceTree = "<group>"; };
+		E91DEEC61AFFAC4200F004F8 /* TSTableViewHeaderPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewHeaderPanel.m; sourceTree = "<group>"; };
+		E91DEEC71AFFAC4200F004F8 /* TSTableViewHeaderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewHeaderSection.h; sourceTree = "<group>"; };
+		E91DEEC81AFFAC4200F004F8 /* TSTableViewHeaderSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewHeaderSection.m; sourceTree = "<group>"; };
+		E91DEEC91AFFAC4200F004F8 /* TSTableViewRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewRow.h; sourceTree = "<group>"; };
+		E91DEECA1AFFAC4200F004F8 /* TSTableViewRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewRow.m; sourceTree = "<group>"; };
+		E91DEECB1AFFAC4200F004F8 /* TSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableView.h; sourceTree = "<group>"; };
+		E91DEECC1AFFAC4200F004F8 /* TSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableView.m; sourceTree = "<group>"; };
+		E91DEECD1AFFAC4200F004F8 /* TSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewCell.h; sourceTree = "<group>"; };
+		E91DEECE1AFFAC4200F004F8 /* TSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewCell.m; sourceTree = "<group>"; };
+		E91DEECF1AFFAC4200F004F8 /* TSTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewDataSource.h; sourceTree = "<group>"; };
+		E91DEED01AFFAC4200F004F8 /* TSTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewDelegate.h; sourceTree = "<group>"; };
+		E91DEED11AFFAC4200F004F8 /* TSTableViewHeaderSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewHeaderSectionView.h; sourceTree = "<group>"; };
+		E91DEED21AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewHeaderSectionView.m; sourceTree = "<group>"; };
+		E91DEED31AFFAC4200F004F8 /* TSTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTableViewModel.h; sourceTree = "<group>"; };
+		E91DEED41AFFAC4200F004F8 /* TSTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTableViewModel.m; sourceTree = "<group>"; };
+		E91DEED61AFFAC4200F004F8 /* TSTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabView.h; sourceTree = "<group>"; };
+		E91DEED71AFFAC4200F004F8 /* TSTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabView.m; sourceTree = "<group>"; };
+		E91DEED81AFFAC4200F004F8 /* TSTabViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewDataSource.h; sourceTree = "<group>"; };
+		E91DEED91AFFAC4200F004F8 /* TSTabViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewDelegate.h; sourceTree = "<group>"; };
+		E91DEEDA1AFFAC4200F004F8 /* TSTabViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewModel.h; sourceTree = "<group>"; };
+		E91DEEDB1AFFAC4200F004F8 /* TSTabViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabViewModel.m; sourceTree = "<group>"; };
+		E91DEEDD1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanel.h; sourceTree = "<group>"; };
+		E91DEEDE1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabViewWithDropDownPanel.m; sourceTree = "<group>"; };
+		E91DEEDF1AFFAC4200F004F8 /* TSTabViewWithDropDownPanelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelDelegate.h; sourceTree = "<group>"; };
+		E91DEEE01AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelModel.h; sourceTree = "<group>"; };
+		E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabViewWithDropDownPanelModel.m; sourceTree = "<group>"; };
 		E98C609A1AFFA19900710840 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Resource/Realm.framework; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E9F3BD211AFF966900D998FC /* QualityKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QualityKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91DEEAC1AFFAAC500F004F8 /* libc++.dylib in Frameworks */,
 				E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */,
 				E98C60D11AFFA19900710840 /* Realm.framework in Frameworks */,
 				FEBA09359E94001A00D39585 /* libPods.a in Frameworks */,
@@ -77,6 +143,7 @@
 		5CA8AC4B39253730B6CDC4BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E91DEEAB1AFFAAC500F004F8 /* libc++.dylib */,
 				E98C609A1AFFA19900710840 /* Realm.framework */,
 				E98C60E51AFFA1DC00710840 /* QuartzCore.framework */,
 				5081CC4A0994217905D52E9B /* libPods.a */,
@@ -84,43 +151,112 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E91DEEA61AFFA7F000F004F8 /* TSUIKit */ = {
+		E91DEEAD1AFFAC4200F004F8 /* TSUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				E91DEEA71AFFA7F000F004F8 /* TSMisc */,
-				E91DEEA81AFFA7F000F004F8 /* TSTableView */,
-				E91DEEAA1AFFA7F000F004F8 /* TSTabView */,
+				E91DEEAE1AFFAC4200F004F8 /* TSMisc */,
+				E91DEEB21AFFAC4200F004F8 /* TSNavigationStripView */,
+				E91DEEB91AFFAC4200F004F8 /* TSScrollView */,
+				E91DEEBC1AFFAC4200F004F8 /* TSTableView */,
+				E91DEED51AFFAC4200F004F8 /* TSTabView */,
+				E91DEEDC1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel */,
 			);
 			path = TSUIKit;
 			sourceTree = "<group>";
 		};
-		E91DEEA71AFFA7F000F004F8 /* TSMisc */ = {
+		E91DEEAE1AFFAC4200F004F8 /* TSMisc */ = {
 			isa = PBXGroup;
 			children = (
+				E91DEEAF1AFFAC4200F004F8 /* TSDefines.h */,
+				E91DEEB01AFFAC4200F004F8 /* TSUtils.h */,
+				E91DEEB11AFFAC4200F004F8 /* TSUtils.m */,
 			);
 			path = TSMisc;
 			sourceTree = "<group>";
 		};
-		E91DEEA81AFFA7F000F004F8 /* TSTableView */ = {
+		E91DEEB21AFFAC4200F004F8 /* TSNavigationStripView */ = {
 			isa = PBXGroup;
 			children = (
-				E91DEEA91AFFA7F000F004F8 /* Private */,
+				E91DEEB31AFFAC4200F004F8 /* TSNavigationStripDataSource.h */,
+				E91DEEB41AFFAC4200F004F8 /* TSNavigationStripModel.h */,
+				E91DEEB51AFFAC4200F004F8 /* TSNavigationStripModel.m */,
+				E91DEEB61AFFAC4200F004F8 /* TSNavigationStripView.h */,
+				E91DEEB71AFFAC4200F004F8 /* TSNavigationStripView.m */,
+				E91DEEB81AFFAC4200F004F8 /* TSNavigationStripViewDelegate.h */,
+			);
+			path = TSNavigationStripView;
+			sourceTree = "<group>";
+		};
+		E91DEEB91AFFAC4200F004F8 /* TSScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				E91DEEBA1AFFAC4200F004F8 /* TSScrollView.h */,
+				E91DEEBB1AFFAC4200F004F8 /* TSScrollView.m */,
+			);
+			path = TSScrollView;
+			sourceTree = "<group>";
+		};
+		E91DEEBC1AFFAC4200F004F8 /* TSTableView */ = {
+			isa = PBXGroup;
+			children = (
+				E91DEEBD1AFFAC4200F004F8 /* Private */,
+				E91DEECB1AFFAC4200F004F8 /* TSTableView.h */,
+				E91DEECC1AFFAC4200F004F8 /* TSTableView.m */,
+				E91DEECD1AFFAC4200F004F8 /* TSTableViewCell.h */,
+				E91DEECE1AFFAC4200F004F8 /* TSTableViewCell.m */,
+				E91DEECF1AFFAC4200F004F8 /* TSTableViewDataSource.h */,
+				E91DEED01AFFAC4200F004F8 /* TSTableViewDelegate.h */,
+				E91DEED11AFFAC4200F004F8 /* TSTableViewHeaderSectionView.h */,
+				E91DEED21AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m */,
+				E91DEED31AFFAC4200F004F8 /* TSTableViewModel.h */,
+				E91DEED41AFFAC4200F004F8 /* TSTableViewModel.m */,
 			);
 			path = TSTableView;
 			sourceTree = "<group>";
 		};
-		E91DEEA91AFFA7F000F004F8 /* Private */ = {
+		E91DEEBD1AFFAC4200F004F8 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				E91DEEBE1AFFAC4200F004F8 /* TSTableViewAppearanceCoordinator.h */,
+				E91DEEBF1AFFAC4200F004F8 /* TSTableViewContentHolder.h */,
+				E91DEEC01AFFAC4200F004F8 /* TSTableViewContentHolder.m */,
+				E91DEEC11AFFAC4200F004F8 /* TSTableViewExpandControlPanel.h */,
+				E91DEEC21AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m */,
+				E91DEEC31AFFAC4200F004F8 /* TSTableViewExpandSection.h */,
+				E91DEEC41AFFAC4200F004F8 /* TSTableViewExpandSection.m */,
+				E91DEEC51AFFAC4200F004F8 /* TSTableViewHeaderPanel.h */,
+				E91DEEC61AFFAC4200F004F8 /* TSTableViewHeaderPanel.m */,
+				E91DEEC71AFFAC4200F004F8 /* TSTableViewHeaderSection.h */,
+				E91DEEC81AFFAC4200F004F8 /* TSTableViewHeaderSection.m */,
+				E91DEEC91AFFAC4200F004F8 /* TSTableViewRow.h */,
+				E91DEECA1AFFAC4200F004F8 /* TSTableViewRow.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
 		};
-		E91DEEAA1AFFA7F000F004F8 /* TSTabView */ = {
+		E91DEED51AFFAC4200F004F8 /* TSTabView */ = {
 			isa = PBXGroup;
 			children = (
+				E91DEED61AFFAC4200F004F8 /* TSTabView.h */,
+				E91DEED71AFFAC4200F004F8 /* TSTabView.m */,
+				E91DEED81AFFAC4200F004F8 /* TSTabViewDataSource.h */,
+				E91DEED91AFFAC4200F004F8 /* TSTabViewDelegate.h */,
+				E91DEEDA1AFFAC4200F004F8 /* TSTabViewModel.h */,
+				E91DEEDB1AFFAC4200F004F8 /* TSTabViewModel.m */,
 			);
 			path = TSTabView;
+			sourceTree = "<group>";
+		};
+		E91DEEDC1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel */ = {
+			isa = PBXGroup;
+			children = (
+				E91DEEDD1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.h */,
+				E91DEEDE1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m */,
+				E91DEEDF1AFFAC4200F004F8 /* TSTabViewWithDropDownPanelDelegate.h */,
+				E91DEEE01AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.h */,
+				E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */,
+			);
+			path = TSTabViewWithDropDownPanel;
 			sourceTree = "<group>";
 		};
 		E98C60971AFFA19900710840 /* Controller */ = {
@@ -153,7 +289,7 @@
 		E98C60D01AFFA19900710840 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E91DEEA61AFFA7F000F004F8 /* TSUIKit */,
+				E91DEEAD1AFFAC4200F004F8 /* TSUIKit */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -192,9 +328,9 @@
 			isa = PBXGroup;
 			children = (
 				E98C60E41AFFA1A600710840 /* Main */,
-				E98C60971AFFA19900710840 /* Controller */,
 				E98C60981AFFA19900710840 /* Model */,
 				E98C60D01AFFA19900710840 /* View */,
+				E98C60971AFFA19900710840 /* Controller */,
 				E98C60991AFFA19900710840 /* Resource */,
 				E9F3BD241AFF966900D998FC /* Supporting Files */,
 			);
@@ -371,9 +507,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
+				E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */,
+				E91DEEEF1AFFAC4200F004F8 /* TSTableViewModel.m in Sources */,
+				E91DEEEE1AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m in Sources */,
 				E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */,
+				E91DEEEB1AFFAC4200F004F8 /* TSTableViewRow.m in Sources */,
+				E91DEEEC1AFFAC4200F004F8 /* TSTableView.m in Sources */,
+				E91DEEE51AFFAC4200F004F8 /* TSScrollView.m in Sources */,
+				E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */,
+				E91DEEED1AFFAC4200F004F8 /* TSTableViewCell.m in Sources */,
+				E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */,
+				E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */,
 				E9F3BD2D1AFF966900D998FC /* MasterViewController.m in Sources */,
+				E91DEEE61AFFAC4200F004F8 /* TSTableViewContentHolder.m in Sources */,
+				E91DEEE21AFFAC4200F004F8 /* TSUtils.m in Sources */,
+				E91DEEF01AFFAC4200F004F8 /* TSTabView.m in Sources */,
+				E91DEEEA1AFFAC4200F004F8 /* TSTableViewHeaderSection.m in Sources */,
+				E91DEEE31AFFAC4200F004F8 /* TSNavigationStripModel.m in Sources */,
+				E91DEEE71AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m in Sources */,
 				E9F3BD271AFF966900D998FC /* main.m in Sources */,
+				E91DEEE91AFFAC4200F004F8 /* TSTableViewHeaderPanel.m in Sources */,
 				E9F3BD301AFF966900D998FC /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
