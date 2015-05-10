@@ -1,0 +1,22 @@
+PODS:
+  - ALActionBlocks (1.0.3)
+  - FXForms (1.2.12)
+  - KVOController (1.0.3)
+  - PNChart (0.8.3):
+    - UICountingLabel (~> 1.2.0)
+  - UICountingLabel (1.2.0)
+
+DEPENDENCIES:
+  - ALActionBlocks
+  - FXForms
+  - KVOController
+  - PNChart
+
+SPEC CHECKSUMS:
+  ALActionBlocks: ac91b1a37b60a8004fb687ddade0600446f3d3fa
+  FXForms: b6a78bac9f6b597ce704e34ac7c1ce9ff628b1d5
+  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
+  PNChart: 8d81e061ec4845915184755d8da84f385ca1cb28
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
+
+COCOAPODS: 0.37.1
