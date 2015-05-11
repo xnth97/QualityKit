@@ -8,13 +8,18 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "DataManager.h"
 
 @interface MasterViewController ()
 
 @property NSMutableArray *objects;
+
 @end
 
 @implementation MasterViewController
+
+@synthesize dataSourceSegmented;
+@synthesize objects;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -27,11 +32,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [dataSourceSegmented addTarget:self action:@selector(dataSourceChanged) forControlEvents:UIControlEventValueChanged];
+    dataSourceSegmented.selectedSegmentIndex = 0;
+    objects = [[NSMutableArray alloc] init];
+    [self dataSourceChanged];
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,12 +52,30 @@
 }
 
 - (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
+    if (!objects) {
+        objects = [[NSMutableArray alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
+    //[objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)dataSourceChanged {
+    [objects removeAllObjects];
+    if (dataSourceSegmented.selectedSegmentIndex == 0) {
+        // Excel
+        [DataManager loadLocalExcelFilesWithBlock:^(NSArray *excelFiles) {
+            objects = [excelFiles mutableCopy];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+    } else if (dataSourceSegmented.selectedSegmentIndex == 1) {
+        // Realm
+        [DataManager loadLocalRealmDatabasesWithBlock:^(NSArray *realmDatabases) {
+            objects = [realmDatabases mutableCopy];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+        
+    }
 }
 
 #pragma mark - Segues
@@ -53,9 +83,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:object];
+        [controller setDetailItem:objects[indexPath.row]];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
@@ -68,14 +97,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    return objects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSUInteger row = [indexPath row];
+    cell.textLabel.text = objects[row];
     return cell;
 }
 

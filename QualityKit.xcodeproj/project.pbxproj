@@ -26,8 +26,21 @@
 		E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDB1AFFAC4200F004F8 /* TSTabViewModel.m */; };
 		E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDE1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m */; };
 		E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */; };
-		E98C60D11AFFA19900710840 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C609A1AFFA19900710840 /* Realm.framework */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
+		E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */; };
+		E99A5DB61B00CDF500EA23E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DB51B00CDF500EA23E5 /* DataManager.m */; };
+		E99A5DB91B00DB2500EA23E5 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E99A5DB81B00DB2500EA23E5 /* test.jpg */; };
+		E99A5DBD1B00E5ED00EA23E5 /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DBC1B00E5ED00EA23E5 /* DataProcessor.m */; };
+		E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DC11B00ED2700EA23E5 /* XlsReader.cpp */; };
+		E99A5DDC1B00ED2700EA23E5 /* endian.c in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DCE1B00ED2700EA23E5 /* endian.c */; };
+		E99A5DDD1B00ED2700EA23E5 /* ole.c in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DCF1B00ED2700EA23E5 /* ole.c */; };
+		E99A5DDE1B00ED2700EA23E5 /* xls.c in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD01B00ED2700EA23E5 /* xls.c */; };
+		E99A5DDF1B00ED2700EA23E5 /* xlstool.c in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD11B00ED2700EA23E5 /* xlstool.c */; };
+		E99A5DE01B00ED2700EA23E5 /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = E99A5DD21B00ED2700EA23E5 /* Licenses */; };
+		E99A5DE11B00ED2700EA23E5 /* QZCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD41B00ED2700EA23E5 /* QZCell.m */; };
+		E99A5DE21B00ED2700EA23E5 /* QZWorkbook.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD61B00ED2700EA23E5 /* QZWorkbook.m */; };
+		E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */; };
+		E99A5DE51B00EE6F00EA23E5 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DE41B00EE6F00EA23E5 /* Realm.framework */; };
 		E9F3BD271AFF966900D998FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD261AFF966900D998FC /* main.m */; };
 		E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD291AFF966900D998FC /* AppDelegate.m */; };
 		E9F3BD2D1AFF966900D998FC /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD2C1AFF966900D998FC /* MasterViewController.m */; };
@@ -98,8 +111,41 @@
 		E91DEEDF1AFFAC4200F004F8 /* TSTabViewWithDropDownPanelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelDelegate.h; sourceTree = "<group>"; };
 		E91DEEE01AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelModel.h; sourceTree = "<group>"; };
 		E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabViewWithDropDownPanelModel.m; sourceTree = "<group>"; };
-		E98C609A1AFFA19900710840 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Resource/Realm.framework; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		E99A5DB21B00CD9400EA23E5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		E99A5DB31B00CD9400EA23E5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		E99A5DB41B00CDF500EA23E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		E99A5DB51B00CDF500EA23E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		E99A5DB81B00DB2500EA23E5 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
+		E99A5DBA1B00DB9A00EA23E5 /* data1.xls */ = {isa = PBXFileReference; lastKnownFileType = file; path = data1.xls; sourceTree = "<group>"; };
+		E99A5DBB1B00E5ED00EA23E5 /* DataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProcessor.h; sourceTree = "<group>"; };
+		E99A5DBC1B00E5ED00EA23E5 /* DataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataProcessor.m; sourceTree = "<group>"; };
+		E99A5DC11B00ED2700EA23E5 /* XlsReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XlsReader.cpp; sourceTree = "<group>"; };
+		E99A5DC21B00ED2700EA23E5 /* XlsReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XlsReader.h; sourceTree = "<group>"; };
+		E99A5DC31B00ED2700EA23E5 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		E99A5DC51B00ED2700EA23E5 /* brdb.c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brdb.c.h; sourceTree = "<group>"; };
+		E99A5DC61B00ED2700EA23E5 /* brdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brdb.h; sourceTree = "<group>"; };
+		E99A5DC71B00ED2700EA23E5 /* endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = endian.h; sourceTree = "<group>"; };
+		E99A5DC81B00ED2700EA23E5 /* ole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ole.h; sourceTree = "<group>"; };
+		E99A5DC91B00ED2700EA23E5 /* xls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xls.h; sourceTree = "<group>"; };
+		E99A5DCA1B00ED2700EA23E5 /* xlsstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xlsstruct.h; sourceTree = "<group>"; };
+		E99A5DCB1B00ED2700EA23E5 /* xlstool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xlstool.h; sourceTree = "<group>"; };
+		E99A5DCC1B00ED2700EA23E5 /* xlstypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xlstypes.h; sourceTree = "<group>"; };
+		E99A5DCE1B00ED2700EA23E5 /* endian.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = endian.c; sourceTree = "<group>"; };
+		E99A5DCF1B00ED2700EA23E5 /* ole.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ole.c; sourceTree = "<group>"; };
+		E99A5DD01B00ED2700EA23E5 /* xls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xls.c; sourceTree = "<group>"; };
+		E99A5DD11B00ED2700EA23E5 /* xlstool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xlstool.c; sourceTree = "<group>"; };
+		E99A5DD21B00ED2700EA23E5 /* Licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Licenses; sourceTree = "<group>"; };
+		E99A5DD31B00ED2700EA23E5 /* QZCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZCell.h; sourceTree = "<group>"; };
+		E99A5DD41B00ED2700EA23E5 /* QZCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QZCell.m; sourceTree = "<group>"; };
+		E99A5DD51B00ED2700EA23E5 /* QZWorkbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZWorkbook.h; sourceTree = "<group>"; };
+		E99A5DD61B00ED2700EA23E5 /* QZWorkbook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QZWorkbook.m; sourceTree = "<group>"; };
+		E99A5DD71B00ED2700EA23E5 /* QZWorkSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZWorkSheet.h; sourceTree = "<group>"; };
+		E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QZWorkSheet.m; sourceTree = "<group>"; };
+		E99A5DD91B00ED2700EA23E5 /* QZXLSReader-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QZXLSReader-Prefix.pch"; sourceTree = "<group>"; };
+		E99A5DDA1B00ED2700EA23E5 /* QZXLSReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZXLSReader.h; sourceTree = "<group>"; };
+		E99A5DE41B00EE6F00EA23E5 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E9F3BD211AFF966900D998FC /* QualityKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QualityKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F3BD251AFF966900D998FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9F3BD261AFF966900D998FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -123,10 +169,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */,
 				E91DEEAC1AFFAAC500F004F8 /* libc++.dylib in Frameworks */,
 				E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */,
-				E98C60D11AFFA19900710840 /* Realm.framework in Frameworks */,
 				FEBA09359E94001A00D39585 /* libPods.a in Frameworks */,
+				E99A5DE51B00EE6F00EA23E5 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +190,9 @@
 		5CA8AC4B39253730B6CDC4BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E99A5DE41B00EE6F00EA23E5 /* Realm.framework */,
 				E91DEEAB1AFFAAC500F004F8 /* libc++.dylib */,
-				E98C609A1AFFA19900710840 /* Realm.framework */,
+				E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */,
 				E98C60E51AFFA1DC00710840 /* QuartzCore.framework */,
 				5081CC4A0994217905D52E9B /* libPods.a */,
 			);
@@ -274,6 +322,11 @@
 		E98C60981AFFA19900710840 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E99A5DB41B00CDF500EA23E5 /* DataManager.h */,
+				E99A5DB51B00CDF500EA23E5 /* DataManager.m */,
+				E99A5DBB1B00E5ED00EA23E5 /* DataProcessor.h */,
+				E99A5DBC1B00E5ED00EA23E5 /* DataProcessor.m */,
+				E99A5DBE1B00ED2700EA23E5 /* QZXLSReader */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +334,8 @@
 		E98C60991AFFA19900710840 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E99A5DBA1B00DB9A00EA23E5 /* data1.xls */,
+				E99A5DB81B00DB2500EA23E5 /* test.jpg */,
 				E9F3BD341AFF966900D998FC /* Images.xcassets */,
 			);
 			path = Resource;
@@ -302,6 +357,69 @@
 				E9F3BD361AFF966900D998FC /* LaunchScreen.xib */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		E99A5DBE1B00ED2700EA23E5 /* QZXLSReader */ = {
+			isa = PBXGroup;
+			children = (
+				E99A5DBF1B00ED2700EA23E5 /* libxls */,
+				E99A5DD21B00ED2700EA23E5 /* Licenses */,
+				E99A5DD31B00ED2700EA23E5 /* QZCell.h */,
+				E99A5DD41B00ED2700EA23E5 /* QZCell.m */,
+				E99A5DD51B00ED2700EA23E5 /* QZWorkbook.h */,
+				E99A5DD61B00ED2700EA23E5 /* QZWorkbook.m */,
+				E99A5DD71B00ED2700EA23E5 /* QZWorkSheet.h */,
+				E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */,
+				E99A5DD91B00ED2700EA23E5 /* QZXLSReader-Prefix.pch */,
+				E99A5DDA1B00ED2700EA23E5 /* QZXLSReader.h */,
+			);
+			path = QZXLSReader;
+			sourceTree = "<group>";
+		};
+		E99A5DBF1B00ED2700EA23E5 /* libxls */ = {
+			isa = PBXGroup;
+			children = (
+				E99A5DC01B00ED2700EA23E5 /* C++ */,
+				E99A5DC31B00ED2700EA23E5 /* config.h */,
+				E99A5DC41B00ED2700EA23E5 /* include */,
+				E99A5DCD1B00ED2700EA23E5 /* src */,
+			);
+			path = libxls;
+			sourceTree = "<group>";
+		};
+		E99A5DC01B00ED2700EA23E5 /* C++ */ = {
+			isa = PBXGroup;
+			children = (
+				E99A5DC11B00ED2700EA23E5 /* XlsReader.cpp */,
+				E99A5DC21B00ED2700EA23E5 /* XlsReader.h */,
+			);
+			path = "C++";
+			sourceTree = "<group>";
+		};
+		E99A5DC41B00ED2700EA23E5 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				E99A5DC51B00ED2700EA23E5 /* brdb.c.h */,
+				E99A5DC61B00ED2700EA23E5 /* brdb.h */,
+				E99A5DC71B00ED2700EA23E5 /* endian.h */,
+				E99A5DC81B00ED2700EA23E5 /* ole.h */,
+				E99A5DC91B00ED2700EA23E5 /* xls.h */,
+				E99A5DCA1B00ED2700EA23E5 /* xlsstruct.h */,
+				E99A5DCB1B00ED2700EA23E5 /* xlstool.h */,
+				E99A5DCC1B00ED2700EA23E5 /* xlstypes.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		E99A5DCD1B00ED2700EA23E5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E99A5DCE1B00ED2700EA23E5 /* endian.c */,
+				E99A5DCF1B00ED2700EA23E5 /* ole.c */,
+				E99A5DD01B00ED2700EA23E5 /* xls.c */,
+				E99A5DD11B00ED2700EA23E5 /* xlstool.c */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		E9F3BD181AFF966800D998FC = {
@@ -457,6 +575,8 @@
 				E9F3BD331AFF966900D998FC /* Main.storyboard in Resources */,
 				E9F3BD381AFF966900D998FC /* LaunchScreen.xib in Resources */,
 				E9F3BD351AFF966900D998FC /* Images.xcassets in Resources */,
+				E99A5DE01B00ED2700EA23E5 /* Licenses in Resources */,
+				E99A5DB91B00DB2500EA23E5 /* test.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,17 +627,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */,
+				E99A5DDE1B00ED2700EA23E5 /* xls.c in Sources */,
 				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
 				E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */,
 				E91DEEEF1AFFAC4200F004F8 /* TSTableViewModel.m in Sources */,
 				E91DEEEE1AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m in Sources */,
+				E99A5DBD1B00E5ED00EA23E5 /* DataProcessor.m in Sources */,
 				E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */,
+				E99A5DE11B00ED2700EA23E5 /* QZCell.m in Sources */,
 				E91DEEEB1AFFAC4200F004F8 /* TSTableViewRow.m in Sources */,
 				E91DEEEC1AFFAC4200F004F8 /* TSTableView.m in Sources */,
 				E91DEEE51AFFAC4200F004F8 /* TSScrollView.m in Sources */,
 				E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */,
 				E91DEEED1AFFAC4200F004F8 /* TSTableViewCell.m in Sources */,
+				E99A5DDC1B00ED2700EA23E5 /* endian.c in Sources */,
+				E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */,
 				E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */,
+				E99A5DB61B00CDF500EA23E5 /* DataManager.m in Sources */,
 				E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */,
 				E9F3BD2D1AFF966900D998FC /* MasterViewController.m in Sources */,
 				E91DEEE61AFFAC4200F004F8 /* TSTableViewContentHolder.m in Sources */,
@@ -525,9 +652,12 @@
 				E91DEEF01AFFAC4200F004F8 /* TSTabView.m in Sources */,
 				E91DEEEA1AFFAC4200F004F8 /* TSTableViewHeaderSection.m in Sources */,
 				E91DEEE31AFFAC4200F004F8 /* TSNavigationStripModel.m in Sources */,
+				E99A5DDF1B00ED2700EA23E5 /* xlstool.c in Sources */,
 				E91DEEE71AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m in Sources */,
 				E9F3BD271AFF966900D998FC /* main.m in Sources */,
+				E99A5DDD1B00ED2700EA23E5 /* ole.c in Sources */,
 				E91DEEE91AFFAC4200F004F8 /* TSTableViewHeaderPanel.m in Sources */,
+				E99A5DE21B00ED2700EA23E5 /* QZWorkbook.m in Sources */,
 				E9F3BD301AFF966900D998FC /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +685,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E9F3BD321AFF966900D998FC /* Base */,
+				E99A5DB31B00CD9400EA23E5 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			path = ..;
@@ -564,6 +695,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E9F3BD371AFF966900D998FC /* Base */,
+				E99A5DB21B00CD9400EA23E5 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -661,6 +793,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QualityKit/Resource",
+					"$(PROJECT_DIR)/QualityKit/Framework",
 				);
 				INFOPLIST_FILE = QualityKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -676,6 +809,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QualityKit/Resource",
+					"$(PROJECT_DIR)/QualityKit/Framework",
 				);
 				INFOPLIST_FILE = QualityKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

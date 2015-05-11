@@ -1,0 +1,21 @@
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "Master";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Arm-wq-HPj"; */
+"Arm-wq-HPj.text" = "Title";
+
+/* Class = "UIViewController"; title = "Detail"; ObjectID = "JEX-9P-axG"; */
+"JEX-9P-axG.title" = "Detail";
+
+/* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
+"RMx-3f-FxP.title" = "Master";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "mOI-FS-AaM"; */
+"mOI-FS-AaM.title" = "Detail";
+
+/* Class = "UISegmentedControl"; w3C-yx-JoM.segmentTitles[0] = "Excel"; ObjectID = "w3C-yx-JoM"; */
+"w3C-yx-JoM.segmentTitles[0]" = "Excel";
+
+/* Class = "UISegmentedControl"; w3C-yx-JoM.segmentTitles[1] = "Realm"; ObjectID = "w3C-yx-JoM"; */
+"w3C-yx-JoM.segmentTitles[1]" = "Realm";

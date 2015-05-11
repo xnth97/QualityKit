@@ -12,8 +12,8 @@
 
 @interface MasterViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataSourceSegmented;
 @property (strong, nonatomic) DetailViewController *detailViewController;
-
 
 @end
 
