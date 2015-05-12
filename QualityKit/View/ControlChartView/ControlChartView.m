@@ -47,7 +47,7 @@
         CGContextMoveToPoint(context, 50, 15);
         CGContextAddLineToPoint(context, 50, height - 30);
         CGContextMoveToPoint(context, 50, height - 30);
-        CGContextAddLineToPoint(context, width - 60, height - 30);
+        CGContextAddLineToPoint(context, width - 100, height - 30);
         
         CGContextStrokePath(context);
         
@@ -60,7 +60,7 @@
         
         float CLHeight = 15 + 0.5 * (height - 15 - 30);
         CGContextMoveToPoint(context, 50, CLHeight);
-        CGContextAddLineToPoint(context, width - 60, CLHeight);
+        CGContextAddLineToPoint(context, width - 100, CLHeight);
         CGContextStrokePath(context);
         
         // 确定 y 轴上下限及单位高度
@@ -107,15 +107,15 @@
         CGContextBeginPath(context);
         
         CGContextMoveToPoint(context, 50, zeroHeight - UCLValue * unitHeight);
-        CGContextAddLineToPoint(context, width - 60, zeroHeight - UCLValue * unitHeight);
+        CGContextAddLineToPoint(context, width - 100, zeroHeight - UCLValue * unitHeight);
         
         CGContextMoveToPoint(context, 50, zeroHeight - LCLValue * unitHeight);
-        CGContextAddLineToPoint(context, width - 60, zeroHeight - LCLValue * unitHeight);
+        CGContextAddLineToPoint(context, width - 100, zeroHeight - LCLValue * unitHeight);
         
         CGContextStrokePath(context);
         
         // 确定每点坐标
-        float unitWidth = (width - 50 - 60)/(dataArr.count + 1);
+        float unitWidth = (width - 50 - 100)/(dataArr.count + 1);
         NSMutableArray *coordinatesArr = [[NSMutableArray alloc] init];
         for (int i = 0; i < dataArr.count; i ++) {
             float tmpFloat = [(NSNumber *)dataArr[i] floatValue];
@@ -161,6 +161,38 @@
             CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
             CGContextFillPath(context);
         }
+        
+        // 绘制 x 坐标值
+        
+        
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.alignment = NSTextAlignmentCenter;
+        NSDictionary *dict = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+                               NSParagraphStyleAttributeName: paragraph,
+                               NSForegroundColorAttributeName: [UIColor blackColor]};
+        for (int i = 0; i < coordinatesArr.count; i ++) {
+            NSString *tStr = [NSString stringWithFormat:@"%d", i + 1];
+            CGPoint tmpPoint = [coordinatesArr[i] CGPointValue];
+            [tStr drawInRect:CGRectMake(tmpPoint.x - 0.5 * 16, height - 26, 16, 20) withAttributes:dict];
+        }
+        
+        // 绘制 UCL, LCL, CL 值
+        NSString *tStr2 = [NSString stringWithFormat:@"UCL=%.3f", UCLValue];
+        NSMutableParagraphStyle *paragraph2 = [[NSMutableParagraphStyle alloc] init];
+        paragraph2.alignment = NSTextAlignmentLeft;
+        NSDictionary *dict2 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+                                NSParagraphStyleAttributeName: paragraph2,
+                                NSForegroundColorAttributeName: [UIColor redColor]};
+        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - UCLValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        
+        tStr2 = [NSString stringWithFormat:@"LCL=%.3f", LCLValue];
+        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - LCLValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        
+        NSDictionary *dict3 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
+                                NSParagraphStyleAttributeName: paragraph2,
+                                NSForegroundColorAttributeName: [UIColor colorWithRed:0.000 green:0.400 blue:0.000 alpha:1.000]};
+        tStr2 = [NSString stringWithFormat:@"CL=%.3f", CLValue];
+        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - CLValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict3];
     }
     
     [super drawRect:rect];
