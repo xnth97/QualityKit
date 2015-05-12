@@ -17,6 +17,7 @@
 
 @implementation ControlChartViewController {
     ControlChartView *chartView;
+    ControlChartView *subChartView;
 }
 
 @synthesize chartType;
@@ -26,7 +27,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if ([chartType isEqualToString:QKControlChartTypeXBarR]) {
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        
+        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         /*
         chartView.UCLValue = 10.0f;
@@ -35,7 +37,7 @@
         chartView.dataArr = @[@6, @10, @8, @9, @7, @9.6, @5.8, @7.75, @6.9];
         chartView.indexesOfErrorPoints = @[@1, @2, @5];
          */
-        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:@[] controlChartType:QKControlChartTypeR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:@[] controlChartType:QKControlChartTypeXBar withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
             chartView.CLValue = _CLValue;
@@ -44,13 +46,28 @@
         }];
         [self.view addSubview:chartView];
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(chartView);
+        subChartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        subChartView.translatesAutoresizingMaskIntoConstraints = NO;
+        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:@[] controlChartType:QKControlChartTypeR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+            subChartView.UCLValue = _UCLValue;
+            subChartView.LCLValue = _LCLValue;
+            subChartView.CLValue = _CLValue;
+            subChartView.dataArr = _plotArr;
+            subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+        }];
+        [self.view addSubview:subChartView];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView);
         NSDictionary *metrics = @{@"lowerDist": @240};
         NSString *vfl = @"|-16-[chartView]-16-|";
-        NSString *vfl2 = @"V:|-64-[chartView]-lowerDist-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:metrics views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vfl2 options:0 metrics:metrics views:views]];
+        NSString *vfl2 = @"V:|-64-[chartView]-32-[subChartView(chartView)]-lowerDist-|";
+        NSString *vfl3 = @"|-16-[subChartView]-16-|";
+        for (NSString *tmpVFL in @[vfl, vfl2, vfl3]) {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
+        }
     }
+    
+    self.title = [NSString stringWithFormat:@"%@ 控制图", chartType];
 }
 
 - (void)didReceiveMemoryWarning {

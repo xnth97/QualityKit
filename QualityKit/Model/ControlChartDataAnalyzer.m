@@ -16,16 +16,29 @@
     __block float UCLValue;
     __block float LCLValue;
     __block float CLValue;
-    __block NSArray *plotArr;
+    __block NSMutableArray *plotArr = [[NSMutableArray alloc] init];
+    __block NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+    __block NSString *errorDescription = @"";
     
     [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
         UCLValue = _UCLValue;
         LCLValue = _LCLValue;
         CLValue = _CLValue;
-        plotArr = _plotArr;
+        plotArr = [_plotArr mutableCopy];
     }];
     
-    block(UCLValue, LCLValue, CLValue, plotArr, @[], @"");
+    for (NSString *rule in rulesArr) {
+        [self checkData:dataArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+            for (id tmp in _indexesOfErrorPoints) {
+                if (![indexesOfErrorPoints containsObject:tmp]) {
+                    [indexesOfErrorPoints addObject:tmp];
+                }
+            }
+            errorDescription = [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
+        }];
+    }
+    
+    block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
 }
 
 + (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void (^)(float, float, float, NSArray *))block {
@@ -47,7 +60,16 @@
         }
         float CLValue = xBarSum/(xBarArr.count);
         
+        __block float rBar;
+        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeR block:^(float _UCLR, float _LCLR, float _CLR, NSArray *_rArr) {
+            rBar = _CLR;
+        }];
         
+        float A2 = [QualityKitDef QKConstantA2:xBarArr.count];
+        float UCLValue = CLValue + A2 * rBar;
+        float LCLValue = CLValue - A2 * rBar;
+        
+        block(UCLValue, LCLValue, CLValue, xBarArr);
     }
     
     if ([type isEqualToString:QKControlChartTypeR]) {
@@ -82,8 +104,11 @@
     }
 }
 
-+ (void)checkData:(NSArray *)dataArray withRule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
++ (void)checkData:(NSArray *)dataArray UCLValue:(float)UCL LCLValue:(float)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
     
+    if ([checkRule isEqualToString:QKCheckRuleOutsideControlLine]) {
+        
+    }
 }
 
 @end

@@ -10,19 +10,20 @@
 
 // Control Chart Type Definitions
 
-#define QKControlChartTypeXBar @"TypeXBar"
-#define QKControlChartTypeR @"TypeR"
-#define QKControlChartTypeXBarR @"TypeXBar-R"
-#define QKControlChartTypeCChart @"TypeCChart"
+#define QKControlChartTypeXBar @"XBar"
+#define QKControlChartTypeR @"R"
+#define QKControlChartTypeXBarR @"XBar-R"
+#define QKControlChartTypeCChart @"C"
 
 // Check Rule Definitions
 
-
+#define QKCheckRuleOutsideControlLine @"OutsideControlLine"
 
 @interface QualityKitDef : NSObject
 
 + (float)QKConstant_d3:(NSInteger)n;
 + (float)QKConstantD4:(NSInteger)n;
 + (float)QKConstantD3:(NSInteger)n;
++ (float)QKConstantA2:(NSInteger)n;
 
 @end

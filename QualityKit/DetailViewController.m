@@ -71,9 +71,12 @@
         ControlChartViewController *chart = [[ControlChartViewController alloc] init];
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXBarR;
-        [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
-            chart.dataArr = _dataArr;
-        }];
+        if ([[detailItem pathExtension] isEqualToString:@"xls"]) {
+            [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
+                chart.dataArr = _dataArr;
+            }];
+        }
+        
     }];
     UIAlertAction *RSheet = [UIAlertAction actionWithTitle:@"R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
