@@ -28,7 +28,7 @@
     }];
     
     for (NSString *rule in rulesArr) {
-        [self checkData:dataArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+        [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
             for (id tmp in _indexesOfErrorPoints) {
                 if (![indexesOfErrorPoints containsObject:tmp]) {
                     [indexesOfErrorPoints addObject:tmp];
@@ -104,10 +104,28 @@
     }
 }
 
-+ (void)checkData:(NSArray *)dataArray UCLValue:(float)UCL LCLValue:(float)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
++ (void)checkData:(NSArray *)plotArray UCLValue:(float)UCL LCLValue:(float)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
     
     if ([checkRule isEqualToString:QKCheckRuleOutsideControlLine]) {
+        NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+        for (int i = 0; i < plotArray.count; i ++) {
+            float tmpFloat = [plotArray[i] floatValue];
+            if (tmpFloat > UCL || tmpFloat < LCL) {
+                [indexesOfErrorPoints addObject:[NSNumber numberWithInt:i]];
+            }
+        }
         
+        NSString *errorDescription = @"点";
+        for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+            if (j == 0) {
+                errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue]];
+            } else {
+                errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue]];
+            }
+        }
+        errorDescription = [NSString stringWithFormat:@"%@在控制线外部。可能原因：测量误差、设备出错等。", errorDescription];
+        
+        block(indexesOfErrorPoints, errorDescription);
     }
 }
 
