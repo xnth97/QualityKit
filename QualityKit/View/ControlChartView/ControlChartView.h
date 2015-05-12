@@ -8,15 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-// Control Chart Type Definitions
-
-#define ControlChartTypeXBarR @"XBar-R"
-#define ControlChartTypeCChart @"CChart"
-
-// Check Rule Definitions
-
-
-
 @interface ControlChartView : UIView
 
 @property (strong, nonatomic) NSArray *dataArr;

@@ -10,4 +10,7 @@
 
 @interface ControlChartViewController : UIViewController
 
+@property (strong, nonatomic) NSString *chartType;
+@property (strong, nonatomic) NSArray *dataArr;
+
 @end

@@ -16,11 +16,11 @@
  *  @param dataArr  原数据数组
  *  @param rulesArr 对数据进行检测所应用的规则
  *  @param type     数据统计类型，如 C 图，XBar-R等
- *  @param block    回调 block，回调 UCL 值、LCL 值、CL 值、出错点在原数组中下标的数组及错误描述
+ *  @param block    回调 block，回调 UCL 值、LCL 值、CL 值、画图数组、出错点在画图数组中下标的数组及错误描述
  */
-+ (void)getStatisticalValuesOfDoubleArray:(NSArray *)dataArr checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void(^)(float UCLValue, float LCLValue, float CLValue, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
++ (void)getStatisticalValuesOfDoubleArray:(NSArray *)dataArr checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void(^)(float UCLValue, float LCLValue, float CLValue, NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
-+ (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void(^)(float UCLValue, float LCLValue, float CLValue))block;
++ (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void(^)(float UCLValue, float LCLValue, float CLValue, NSArray *plotArr))block;
 + (void)checkData:(NSArray *)dataArray withRule:(NSString *)checkRule block:(void(^)(NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
 @end

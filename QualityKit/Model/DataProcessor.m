@@ -48,9 +48,11 @@
     
     NSMutableArray *doubleArr = [[NSMutableArray alloc] init];
     for (NSArray *tmpRow in firstWorkSheet.rows) {
+        NSMutableArray *rowArr = [[NSMutableArray alloc] init];
         for (QZCell *tmpCell in tmpRow) {
-            [doubleArr addObject:[NSNumber numberWithDouble:[tmpCell.content doubleValue]]];
+            [rowArr addObject:[NSNumber numberWithDouble:[tmpCell.content doubleValue]]];
         }
+        [doubleArr addObject:rowArr];
     }
     
     block(doubleArr);

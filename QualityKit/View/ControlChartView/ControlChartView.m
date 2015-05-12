@@ -7,6 +7,7 @@
 //
 
 #import "ControlChartView.h"
+#import "QualityKitDef.h"
 
 @implementation ControlChartView
 

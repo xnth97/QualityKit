@@ -12,6 +12,7 @@
 #import "DataProcessor.h"
 #import "TSTableViewModel.h"
 #import "ControlChartViewController.h"
+#import "QualityKitDef.h"
 
 @interface DetailViewController () {
     TSTableViewModel *tableModel;
@@ -69,6 +70,10 @@
     UIAlertAction *xBarR = [UIAlertAction actionWithTitle:@"XBar-R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         ControlChartViewController *chart = [[ControlChartViewController alloc] init];
         [self.navigationController pushViewController:chart animated:YES];
+        chart.chartType = QKControlChartTypeXBarR;
+        [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
+            chart.dataArr = _dataArr;
+        }];
     }];
     UIAlertAction *RSheet = [UIAlertAction actionWithTitle:@"R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         

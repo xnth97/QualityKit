@@ -28,6 +28,7 @@
 		E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */; };
 		E966D0B81B01C4E20070AA69 /* ControlChartDataAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0B71B01C4E20070AA69 /* ControlChartDataAnalyzer.m */; };
 		E966D0BB1B01E89F0070AA69 /* ControlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */; };
+		E966D0C31B022A890070AA69 /* QualityKitDef.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C21B022A890070AA69 /* QualityKitDef.m */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
 		E98DD9AC1B0100480040C4BE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98DD9AB1B0100470040C4BE /* Realm.framework */; };
 		E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */; };
@@ -122,6 +123,8 @@
 		E966D0B71B01C4E20070AA69 /* ControlChartDataAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlChartDataAnalyzer.m; sourceTree = "<group>"; };
 		E966D0B91B01E89F0070AA69 /* ControlChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlChartViewController.h; sourceTree = "<group>"; };
 		E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlChartViewController.m; sourceTree = "<group>"; };
+		E966D0C11B022A890070AA69 /* QualityKitDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QualityKitDef.h; sourceTree = "<group>"; };
+		E966D0C21B022A890070AA69 /* QualityKitDef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QualityKitDef.m; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E98DD9AB1B0100470040C4BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -357,6 +360,8 @@
 		E98C60981AFFA19900710840 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E966D0C11B022A890070AA69 /* QualityKitDef.h */,
+				E966D0C21B022A890070AA69 /* QualityKitDef.m */,
 				E966D0B51B01C4B40070AA69 /* ControlChartDataAnalyzer */,
 				E9F6B8B51B01991B00435FB4 /* DataModel */,
 				E99A5DB41B00CDF500EA23E5 /* DataManager.h */,
@@ -701,6 +706,7 @@
 				E966D0B81B01C4E20070AA69 /* ControlChartDataAnalyzer.m in Sources */,
 				E91DEEED1AFFAC4200F004F8 /* TSTableViewCell.m in Sources */,
 				E966D0BB1B01E89F0070AA69 /* ControlChartViewController.m in Sources */,
+				E966D0C31B022A890070AA69 /* QualityKitDef.m in Sources */,
 				E99A5DDC1B00ED2700EA23E5 /* endian.c in Sources */,
 				E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */,
 				E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */,

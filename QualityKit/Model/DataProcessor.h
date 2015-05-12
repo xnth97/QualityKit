@@ -11,6 +11,13 @@
 @interface DataProcessor : NSObject
 
 + (void)convertXLSFile:(NSString *)filePath toTableModelWithBlock:(void(^)(NSArray *columns, NSArray *rows))block;
+
+/**
+ *  将 XLS 数据模型转化为便于计算的 double 数组
+ *
+ *  @param filePath XLS 文件路径
+ *  @param block    回调 block，回调数组结构为：@[@[rowArray], @[rowArray]]
+ */
 + (void)convertXLSFile:(NSString *)filePath toDoubleArrayWithBlock:(void(^)(NSArray *doubleArr))block;
 
 @end
