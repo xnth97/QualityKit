@@ -12,6 +12,7 @@
 #import "DataProcessor.h"
 #import "TSTableViewModel.h"
 #import "ControlChartViewController.h"
+#import "RulesTableViewController.h"
 #import "QualityKitDef.h"
 
 @interface DetailViewController () {
@@ -33,12 +34,6 @@
     }
 }
 
-- (void)configureView {
-    // Update the user interface for the detail item.
-    
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,10 +41,13 @@
     self.title = detailItem;
     
     if (detailItem) {
-        UIBarButtonItem *controlSheetStyles = [[UIBarButtonItem alloc] initWithTitle:@"样式" style:UIBarButtonItemStylePlain block:^(id weakSender) {
+        UIBarButtonItem *checkRules = [[UIBarButtonItem alloc] initWithTitle:@"规则" style:UIBarButtonItemStylePlain block:^(id weakSender) {
+            [self chooseCheckRules];
+        }];
+        UIBarButtonItem *controlSheetStyles = [[UIBarButtonItem alloc] initWithTitle:@"控制图" style:UIBarButtonItemStylePlain block:^(id weakSender) {
             [self chooseControlSheetStyle];
         }];
-        self.navigationItem.rightBarButtonItems = @[controlSheetStyles];
+        self.navigationItem.rightBarButtonItems = @[checkRules, controlSheetStyles];
         
         dataTableView.hidden = NO;
         
@@ -59,7 +57,6 @@
                 [tableModel setColumns:columns andRows:rows];
                 [dataTableView resetColumnSelectionWithAnimtaion:YES];
                 [dataTableView resetRowSelectionWithAnimtaion:YES];
-                [self configureView];
             }];
         }
     }
@@ -85,8 +82,16 @@
     [styleController addAction:RSheet];
     styleController.modalPresentationStyle = UIModalPresentationPopover;
     styleController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    styleController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
+    styleController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[1];
     [self presentViewController:styleController animated:YES completion:nil];
+}
+
+- (void)chooseCheckRules {
+    RulesTableViewController *rulesTableController = [[RulesTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    rulesTableController.modalPresentationStyle = UIModalPresentationPopover;
+    rulesTableController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    rulesTableController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
+    [self presentViewController:rulesTableController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -19,6 +19,9 @@
 
 #define QKCheckRuleOutsideControlLine @"OutsideControlLine"
 
+// Check Rules In NSUserDefaults
+#define QKCheckRules @"QKCheckRules"
+
 @interface QualityKitDef : NSObject
 
 + (float)QKConstant_d3:(NSInteger)n;

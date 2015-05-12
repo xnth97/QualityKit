@@ -44,7 +44,7 @@
         errorMsgView.font = [UIFont systemFontOfSize:14.0];
         [self.view addSubview:errorMsgView];
         
-        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:@[QKCheckRuleOutsideControlLine] controlChartType:QKControlChartTypeXBar withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBar withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
             chartView.CLValue = _CLValue;
@@ -56,7 +56,7 @@
         
         subChartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         subChartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:@[QKCheckRuleOutsideControlLine] controlChartType:QKControlChartTypeR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+        [ControlChartDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             subChartView.UCLValue = _UCLValue;
             subChartView.LCLValue = _LCLValue;
             subChartView.CLValue = _CLValue;
