@@ -11,5 +11,6 @@
 @interface DataProcessor : NSObject
 
 + (void)convertXLSFile:(NSString *)filePath toTableModelWithBlock:(void(^)(NSArray *columns, NSArray *rows))block;
++ (void)convertXLSFile:(NSString *)filePath toDoubleArrayWithBlock:(void(^)(NSArray *doubleArr))block;
 
 @end

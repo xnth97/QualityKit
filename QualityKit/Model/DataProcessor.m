@@ -40,4 +40,20 @@
     block(columns, rows);
 }
 
++ (void)convertXLSFile:(NSString *)filePath toDoubleArrayWithBlock:(void (^)(NSArray *))block {
+    NSURL *xlsURL = [NSURL fileURLWithPath:[DataManager fullPathOfFile:filePath]];
+    QZWorkbook *excelReader = [[QZWorkbook alloc] initWithContentsOfXLS:xlsURL];
+    QZWorkSheet *firstWorkSheet = excelReader.workSheets.firstObject;
+    [firstWorkSheet open];
+    
+    NSMutableArray *doubleArr = [[NSMutableArray alloc] init];
+    for (NSArray *tmpRow in firstWorkSheet.rows) {
+        for (QZCell *tmpCell in tmpRow) {
+            [doubleArr addObject:[NSNumber numberWithDouble:[tmpCell.content doubleValue]]];
+        }
+    }
+    
+    block(doubleArr);
+}
+
 @end

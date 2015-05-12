@@ -11,6 +11,7 @@
 #import "DataManager.h"
 #import "DataProcessor.h"
 #import "TSTableViewModel.h"
+#import "ControlChartViewController.h"
 
 @interface DetailViewController () {
     TSTableViewModel *tableModel;
@@ -41,6 +42,7 @@
     [super viewDidLoad];
     
     dataTableView.hidden = YES;
+    self.title = @"详情";
     
     if (detailItem) {
         UIBarButtonItem *controlSheetStyles = [[UIBarButtonItem alloc] initWithTitle:@"样式" style:UIBarButtonItemStylePlain block:^(id weakSender) {
@@ -58,41 +60,15 @@
                 [dataTableView resetRowSelectionWithAnimtaion:YES];
                 [self configureView];
             }];
-            
         }
     }
-    
-    
-    // Do any additional setup after loading the view, typically from a nib.
-    /*
-    tableModel = [[TSTableViewModel alloc]initWithTableView:dataTableView andStyle:kTSTableViewStyleLight];
-    NSArray *columns = @[[TSColumn columnWithDictionary:@{@"title": @"Title",
-                                                          @"subtitle": @"Test subtitle",
-                                                          @"minWidth": @120,
-                                                          @"defWidth": @240}],
-                         [TSColumn columnWithDictionary:@{@"title": @"Title 2",
-                                                          @"subcolumns": @[@{@"title": @"Sub 1",
-                                                                             @"defWidth": @120},
-                                                                           @{@"title": @"Sub 2",
-                                                                             @"defWidth": @120}]}]];
-    NSArray *rows = @[[TSRow rowWithDictionary:@{@"cells": @[@{@"value": @"test"},
-                                                             @{@"value": @1},
-                                                             @{@"value": @1.46}],
-                                                 @"subrows": @[]}],
-                      [TSRow rowWithDictionary:@{@"cells": @[@{@"value": @"Fuck?"},
-                                                             @{@"value": @"This"},
-                                                             @{@"value": @163.50}]}]];
-    [tableModel setColumns:columns andRows:rows];
-    [dataTableView resetColumnSelectionWithAnimtaion:YES];
-    [dataTableView resetRowSelectionWithAnimtaion:YES];
-     */
-    //[self configureView];
 }
 
 - (void)chooseControlSheetStyle {
     UIAlertController *styleController = [UIAlertController alertControllerWithTitle:@"选择控制图类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *xBarR = [UIAlertAction actionWithTitle:@"XBar-R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
+        ControlChartViewController *chart = [[ControlChartViewController alloc] initWithNibName:@"ControlChartViewController" bundle:nil];
+        [self.navigationController pushViewController:chart animated:YES];
     }];
     UIAlertAction *RSheet = [UIAlertAction actionWithTitle:@"R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         

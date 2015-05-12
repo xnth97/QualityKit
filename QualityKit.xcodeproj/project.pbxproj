@@ -27,6 +27,7 @@
 		E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDE1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m */; };
 		E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
+		E98DD9AC1B0100480040C4BE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98DD9AB1B0100470040C4BE /* Realm.framework */; };
 		E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */; };
 		E99A5DB61B00CDF500EA23E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DB51B00CDF500EA23E5 /* DataManager.m */; };
 		E99A5DB91B00DB2500EA23E5 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E99A5DB81B00DB2500EA23E5 /* test.jpg */; };
@@ -40,7 +41,6 @@
 		E99A5DE11B00ED2700EA23E5 /* QZCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD41B00ED2700EA23E5 /* QZCell.m */; };
 		E99A5DE21B00ED2700EA23E5 /* QZWorkbook.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD61B00ED2700EA23E5 /* QZWorkbook.m */; };
 		E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */; };
-		E99A5DE51B00EE6F00EA23E5 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DE41B00EE6F00EA23E5 /* Realm.framework */; };
 		E9F3BD271AFF966900D998FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD261AFF966900D998FC /* main.m */; };
 		E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD291AFF966900D998FC /* AppDelegate.m */; };
 		E9F3BD2D1AFF966900D998FC /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD2C1AFF966900D998FC /* MasterViewController.m */; };
@@ -49,6 +49,13 @@
 		E9F3BD351AFF966900D998FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9F3BD341AFF966900D998FC /* Images.xcassets */; };
 		E9F3BD381AFF966900D998FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F3BD361AFF966900D998FC /* LaunchScreen.xib */; };
 		E9F3BD441AFF966900D998FC /* QualityKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD431AFF966900D998FC /* QualityKitTests.m */; };
+		E9F6B8B41B01964900435FB4 /* QualityData.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6B8B31B01964900435FB4 /* QualityData.m */; };
+		E9F6B8B81B01A0A700435FB4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F6B8B71B01A0A700435FB4 /* CoreGraphics.framework */; };
+		E9F6B8BA1B01A0B300435FB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F6B8B91B01A0B300435FB4 /* Foundation.framework */; };
+		E9F6B8BC1B01A0BA00435FB4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F6B8BB1B01A0BA00435FB4 /* UIKit.framework */; };
+		E9F6B8BF1B01A1EF00435FB4 /* ControlChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6B8BE1B01A1EF00435FB4 /* ControlChartView.m */; };
+		E9F6B8CA1B01A4A200435FB4 /* ControlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6B8C81B01A4A200435FB4 /* ControlChartViewController.m */; };
+		E9F6B8CB1B01A4A200435FB4 /* ControlChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F6B8C91B01A4A200435FB4 /* ControlChartViewController.xib */; };
 		FEBA09359E94001A00D39585 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5081CC4A0994217905D52E9B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +119,7 @@
 		E91DEEE01AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelModel.h; sourceTree = "<group>"; };
 		E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabViewWithDropDownPanelModel.m; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E98DD9AB1B0100470040C4BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		E99A5DB21B00CD9400EA23E5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		E99A5DB31B00CD9400EA23E5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -145,7 +153,6 @@
 		E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QZWorkSheet.m; sourceTree = "<group>"; };
 		E99A5DD91B00ED2700EA23E5 /* QZXLSReader-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QZXLSReader-Prefix.pch"; sourceTree = "<group>"; };
 		E99A5DDA1B00ED2700EA23E5 /* QZXLSReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZXLSReader.h; sourceTree = "<group>"; };
-		E99A5DE41B00EE6F00EA23E5 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E9F3BD211AFF966900D998FC /* QualityKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QualityKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F3BD251AFF966900D998FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9F3BD261AFF966900D998FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -162,6 +169,16 @@
 		E9F3BD421AFF966900D998FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9F3BD431AFF966900D998FC /* QualityKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityKitTests.m; sourceTree = "<group>"; };
 		E9F67036A77CC2AE85D32639 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E9F6B8B21B01964900435FB4 /* QualityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QualityData.h; sourceTree = "<group>"; };
+		E9F6B8B31B01964900435FB4 /* QualityData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QualityData.m; sourceTree = "<group>"; };
+		E9F6B8B71B01A0A700435FB4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E9F6B8B91B01A0B300435FB4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E9F6B8BB1B01A0BA00435FB4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E9F6B8BD1B01A1EF00435FB4 /* ControlChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlChartView.h; path = ControlChartView/ControlChartView.h; sourceTree = "<group>"; };
+		E9F6B8BE1B01A1EF00435FB4 /* ControlChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlChartView.m; path = ControlChartView/ControlChartView.m; sourceTree = "<group>"; };
+		E9F6B8C71B01A4A200435FB4 /* ControlChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlChartViewController.h; sourceTree = "<group>"; };
+		E9F6B8C81B01A4A200435FB4 /* ControlChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlChartViewController.m; sourceTree = "<group>"; };
+		E9F6B8C91B01A4A200435FB4 /* ControlChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlChartViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,11 +186,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F6B8BC1B01A0BA00435FB4 /* UIKit.framework in Frameworks */,
+				E9F6B8BA1B01A0B300435FB4 /* Foundation.framework in Frameworks */,
+				E9F6B8B81B01A0A700435FB4 /* CoreGraphics.framework in Frameworks */,
 				E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */,
 				E91DEEAC1AFFAAC500F004F8 /* libc++.dylib in Frameworks */,
 				E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */,
 				FEBA09359E94001A00D39585 /* libPods.a in Frameworks */,
-				E99A5DE51B00EE6F00EA23E5 /* Realm.framework in Frameworks */,
+				E98DD9AC1B0100480040C4BE /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +210,10 @@
 		5CA8AC4B39253730B6CDC4BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E99A5DE41B00EE6F00EA23E5 /* Realm.framework */,
+				E9F6B8BB1B01A0BA00435FB4 /* UIKit.framework */,
+				E9F6B8B91B01A0B300435FB4 /* Foundation.framework */,
+				E9F6B8B71B01A0A700435FB4 /* CoreGraphics.framework */,
+				E98DD9AB1B0100470040C4BE /* Realm.framework */,
 				E91DEEAB1AFFAAC500F004F8 /* libc++.dylib */,
 				E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */,
 				E98C60E51AFFA1DC00710840 /* QuartzCore.framework */,
@@ -315,6 +338,9 @@
 				E9F3BD2C1AFF966900D998FC /* MasterViewController.m */,
 				E9F3BD2E1AFF966900D998FC /* DetailViewController.h */,
 				E9F3BD2F1AFF966900D998FC /* DetailViewController.m */,
+				E9F6B8C71B01A4A200435FB4 /* ControlChartViewController.h */,
+				E9F6B8C81B01A4A200435FB4 /* ControlChartViewController.m */,
+				E9F6B8C91B01A4A200435FB4 /* ControlChartViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +348,7 @@
 		E98C60981AFFA19900710840 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E9F6B8B51B01991B00435FB4 /* DataModel */,
 				E99A5DB41B00CDF500EA23E5 /* DataManager.h */,
 				E99A5DB51B00CDF500EA23E5 /* DataManager.m */,
 				E99A5DBB1B00E5ED00EA23E5 /* DataProcessor.h */,
@@ -344,6 +371,7 @@
 		E98C60D01AFFA19900710840 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E9F6B8B61B0199C200435FB4 /* ControlChartView */,
 				E91DEEAD1AFFAC4200F004F8 /* TSUIKit */,
 			);
 			path = View;
@@ -481,6 +509,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E9F6B8B51B01991B00435FB4 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				E9F6B8B21B01964900435FB4 /* QualityData.h */,
+				E9F6B8B31B01964900435FB4 /* QualityData.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		E9F6B8B61B0199C200435FB4 /* ControlChartView */ = {
+			isa = PBXGroup;
+			children = (
+				E9F6B8BD1B01A1EF00435FB4 /* ControlChartView.h */,
+				E9F6B8BE1B01A1EF00435FB4 /* ControlChartView.m */,
+			);
+			name = ControlChartView;
+			sourceTree = "<group>";
+		};
 		F776C3D722BAA7A8FC7CF43C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,6 +621,7 @@
 				E9F3BD331AFF966900D998FC /* Main.storyboard in Resources */,
 				E9F3BD381AFF966900D998FC /* LaunchScreen.xib in Resources */,
 				E9F3BD351AFF966900D998FC /* Images.xcassets in Resources */,
+				E9F6B8CB1B01A4A200435FB4 /* ControlChartViewController.xib in Resources */,
 				E99A5DE01B00ED2700EA23E5 /* Licenses in Resources */,
 				E99A5DB91B00DB2500EA23E5 /* test.jpg in Resources */,
 			);
@@ -630,8 +677,11 @@
 				E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */,
 				E99A5DDE1B00ED2700EA23E5 /* xls.c in Sources */,
 				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
+				E9F6B8BF1B01A1EF00435FB4 /* ControlChartView.m in Sources */,
 				E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */,
+				E9F6B8B41B01964900435FB4 /* QualityData.m in Sources */,
 				E91DEEEF1AFFAC4200F004F8 /* TSTableViewModel.m in Sources */,
+				E9F6B8CA1B01A4A200435FB4 /* ControlChartViewController.m in Sources */,
 				E91DEEEE1AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m in Sources */,
 				E99A5DBD1B00E5ED00EA23E5 /* DataProcessor.m in Sources */,
 				E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */,
@@ -794,6 +844,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/QualityKit/Resource",
 					"$(PROJECT_DIR)/QualityKit/Framework",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QualityKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -810,6 +861,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/QualityKit/Resource",
 					"$(PROJECT_DIR)/QualityKit/Framework",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QualityKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

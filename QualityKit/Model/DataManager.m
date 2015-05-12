@@ -7,6 +7,7 @@
 //
 
 #import "DataManager.h"
+#import <Realm/Realm.h>
 
 @implementation DataManager
 
@@ -34,6 +35,7 @@
 
 + (NSArray *)allFilesInDocumentDirectory {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSLog(@"%@", path);
     NSArray *fileArr = [[NSFileManager defaultManager] subpathsAtPath:path];
     return fileArr;
 }
@@ -41,6 +43,14 @@
 + (NSString *)fullPathOfFile:(NSString *)file {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     return [path stringByAppendingPathComponent:file];
+}
+
++ (void)removeLocalFile:(NSString *)filePath {
+    NSString *path = [self fullPathOfFile:filePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path]) {
+        [fileManager removeItemAtPath:path error:nil];
+    }
 }
 
 @end

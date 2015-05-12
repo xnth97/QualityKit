@@ -1,0 +1,16 @@
+//
+//  ControlChartViewController.h
+//  QualityKit
+//
+//  Created by 秦昱博 on 15/5/12.
+//  Copyright (c) 2015年 Qin Yubo. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "ControlChartView.h"
+
+@interface ControlChartViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet ControlChartView *chartView;
+
+@end
