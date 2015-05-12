@@ -42,7 +42,7 @@
     [super viewDidLoad];
     
     dataTableView.hidden = YES;
-    self.title = @"详情";
+    self.title = detailItem;
     
     if (detailItem) {
         UIBarButtonItem *controlSheetStyles = [[UIBarButtonItem alloc] initWithTitle:@"样式" style:UIBarButtonItemStylePlain block:^(id weakSender) {
@@ -67,7 +67,7 @@
 - (void)chooseControlSheetStyle {
     UIAlertController *styleController = [UIAlertController alertControllerWithTitle:@"选择控制图类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *xBarR = [UIAlertAction actionWithTitle:@"XBar-R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        ControlChartViewController *chart = [[ControlChartViewController alloc] initWithNibName:@"ControlChartViewController" bundle:nil];
+        ControlChartViewController *chart = [[ControlChartViewController alloc] init];
         [self.navigationController pushViewController:chart animated:YES];
     }];
     UIAlertAction *RSheet = [UIAlertAction actionWithTitle:@"R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

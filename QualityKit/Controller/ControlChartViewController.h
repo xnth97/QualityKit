@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ControlChartView.h"
 
 @interface ControlChartViewController : UIViewController
-
-@property (weak, nonatomic) IBOutlet ControlChartView *chartView;
 
 @end
