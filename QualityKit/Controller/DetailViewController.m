@@ -40,6 +40,7 @@
     dataTableView.hidden = YES;
     self.title = detailItem;
     
+    
     if (detailItem) {
         UIBarButtonItem *checkRules = [[UIBarButtonItem alloc] initWithTitle:@"规则" style:UIBarButtonItemStylePlain block:^(id weakSender) {
             [self chooseCheckRules];
@@ -75,11 +76,19 @@
         }
         
     }];
-    UIAlertAction *RSheet = [UIAlertAction actionWithTitle:@"R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *xBarS = [UIAlertAction actionWithTitle:@"XBar-S" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+        [self.navigationController pushViewController:chart animated:YES];
+        chart.chartType = QKControlChartTypeXBarS;
+        if ([[detailItem pathExtension] isEqualToString:@"xls"]) {
+            [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
+                chart.dataArr = _dataArr;
+            }];
+        }
         
     }];
     [styleController addAction:xBarR];
-    [styleController addAction:RSheet];
+    [styleController addAction:xBarS];
     styleController.modalPresentationStyle = UIModalPresentationPopover;
     styleController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
     styleController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];

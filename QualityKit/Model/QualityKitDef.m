@@ -54,4 +54,31 @@
     }
 }
 
++ (float)QKConstantA3:(NSInteger)n {
+    NSArray *A3Arr = @[@0, @2.659, @1.954, @1.628, @1.427, @1.287, @1.182, @1.099, @1.032, @0.973];
+    if (n <= 10) {
+        return [A3Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
++ (float)QKConstantB3:(NSInteger)n {
+    NSArray *B3Arr = @[@0, @0, @0, @0, @0, @0.03, @0.118, @0.185, @0.239, @0.284];
+    if (n <= 10) {
+        return [B3Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
++ (float)QKConstantB4:(NSInteger)n {
+    NSArray *B4Arr = @[@0, @3.267, @2.568, @2.266, @2.089, @1.97, @1.882, @1.815, @1.761, @1.716];
+    if (n <= 10) {
+        return [B4Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
 @end

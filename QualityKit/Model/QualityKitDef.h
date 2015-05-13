@@ -14,6 +14,9 @@
 #define QKControlChartTypeR @"R"
 #define QKControlChartTypeXBarR @"XBar-R"
 #define QKControlChartTypeCChart @"C"
+#define QKControlChartTypeXBarUsingS @"XBar_S"
+#define QKControlChartTypeS @"S"
+#define QKControlChartTypeXBarS @"XBar-S"
 
 // Check Rule Definitions
 
@@ -29,5 +32,8 @@
 + (float)QKConstantD4:(NSInteger)n;
 + (float)QKConstantD3:(NSInteger)n;
 + (float)QKConstantA2:(NSInteger)n;
++ (float)QKConstantA3:(NSInteger)n;
++ (float)QKConstantB3:(NSInteger)n;
++ (float)QKConstantB4:(NSInteger)n;
 
 @end

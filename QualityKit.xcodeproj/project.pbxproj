@@ -30,11 +30,12 @@
 		E966D0BB1B01E89F0070AA69 /* ControlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */; };
 		E966D0C31B022A890070AA69 /* QualityKitDef.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C21B022A890070AA69 /* QualityKitDef.m */; };
 		E966D0C61B024F5B0070AA69 /* RulesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C51B024F5B0070AA69 /* RulesTableViewController.m */; };
+		E966D0CB1B034FD40070AA69 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C81B034FD40070AA69 /* DetailViewController.m */; };
+		E966D0CC1B034FD40070AA69 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0CA1B034FD40070AA69 /* MasterViewController.m */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
 		E98DD9AC1B0100480040C4BE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98DD9AB1B0100470040C4BE /* Realm.framework */; };
 		E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */; };
 		E99A5DB61B00CDF500EA23E5 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DB51B00CDF500EA23E5 /* DataManager.m */; };
-		E99A5DB91B00DB2500EA23E5 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E99A5DB81B00DB2500EA23E5 /* test.jpg */; };
 		E99A5DBD1B00E5ED00EA23E5 /* DataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DBC1B00E5ED00EA23E5 /* DataProcessor.m */; };
 		E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DC11B00ED2700EA23E5 /* XlsReader.cpp */; };
 		E99A5DDC1B00ED2700EA23E5 /* endian.c in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DCE1B00ED2700EA23E5 /* endian.c */; };
@@ -47,8 +48,6 @@
 		E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */; };
 		E9F3BD271AFF966900D998FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD261AFF966900D998FC /* main.m */; };
 		E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD291AFF966900D998FC /* AppDelegate.m */; };
-		E9F3BD2D1AFF966900D998FC /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD2C1AFF966900D998FC /* MasterViewController.m */; };
-		E9F3BD301AFF966900D998FC /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD2F1AFF966900D998FC /* DetailViewController.m */; };
 		E9F3BD331AFF966900D998FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9F3BD311AFF966900D998FC /* Main.storyboard */; };
 		E9F3BD351AFF966900D998FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9F3BD341AFF966900D998FC /* Images.xcassets */; };
 		E9F3BD381AFF966900D998FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F3BD361AFF966900D998FC /* LaunchScreen.xib */; };
@@ -128,6 +127,10 @@
 		E966D0C21B022A890070AA69 /* QualityKitDef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QualityKitDef.m; sourceTree = "<group>"; };
 		E966D0C41B024F5B0070AA69 /* RulesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesTableViewController.h; sourceTree = "<group>"; };
 		E966D0C51B024F5B0070AA69 /* RulesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesTableViewController.m; sourceTree = "<group>"; };
+		E966D0C71B034FD40070AA69 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		E966D0C81B034FD40070AA69 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		E966D0C91B034FD40070AA69 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		E966D0CA1B034FD40070AA69 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E98DD9AB1B0100470040C4BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -135,8 +138,6 @@
 		E99A5DB31B00CD9400EA23E5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		E99A5DB41B00CDF500EA23E5 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		E99A5DB51B00CDF500EA23E5 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
-		E99A5DB81B00DB2500EA23E5 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
-		E99A5DBA1B00DB9A00EA23E5 /* data1.xls */ = {isa = PBXFileReference; lastKnownFileType = file; path = data1.xls; sourceTree = "<group>"; };
 		E99A5DBB1B00E5ED00EA23E5 /* DataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProcessor.h; sourceTree = "<group>"; };
 		E99A5DBC1B00E5ED00EA23E5 /* DataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataProcessor.m; sourceTree = "<group>"; };
 		E99A5DC11B00ED2700EA23E5 /* XlsReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XlsReader.cpp; sourceTree = "<group>"; };
@@ -168,10 +169,6 @@
 		E9F3BD261AFF966900D998FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E9F3BD281AFF966900D998FC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E9F3BD291AFF966900D998FC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E9F3BD2B1AFF966900D998FC /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MasterViewController.h; path = ../MasterViewController.h; sourceTree = "<group>"; };
-		E9F3BD2C1AFF966900D998FC /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MasterViewController.m; path = ../MasterViewController.m; sourceTree = "<group>"; };
-		E9F3BD2E1AFF966900D998FC /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = ../DetailViewController.h; sourceTree = "<group>"; };
-		E9F3BD2F1AFF966900D998FC /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = ../DetailViewController.m; sourceTree = "<group>"; };
 		E9F3BD321AFF966900D998FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9F3BD341AFF966900D998FC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		E9F3BD371AFF966900D998FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -350,10 +347,10 @@
 			isa = PBXGroup;
 			children = (
 				E9F3BD311AFF966900D998FC /* Main.storyboard */,
-				E9F3BD2B1AFF966900D998FC /* MasterViewController.h */,
-				E9F3BD2C1AFF966900D998FC /* MasterViewController.m */,
-				E9F3BD2E1AFF966900D998FC /* DetailViewController.h */,
-				E9F3BD2F1AFF966900D998FC /* DetailViewController.m */,
+				E966D0C91B034FD40070AA69 /* MasterViewController.h */,
+				E966D0CA1B034FD40070AA69 /* MasterViewController.m */,
+				E966D0C71B034FD40070AA69 /* DetailViewController.h */,
+				E966D0C81B034FD40070AA69 /* DetailViewController.m */,
 				E966D0B91B01E89F0070AA69 /* ControlChartViewController.h */,
 				E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */,
 				E966D0C41B024F5B0070AA69 /* RulesTableViewController.h */,
@@ -381,8 +378,6 @@
 		E98C60991AFFA19900710840 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				E99A5DBA1B00DB9A00EA23E5 /* data1.xls */,
-				E99A5DB81B00DB2500EA23E5 /* test.jpg */,
 				E9F3BD341AFF966900D998FC /* Images.xcassets */,
 			);
 			path = Resource;
@@ -642,7 +637,6 @@
 				E9F3BD381AFF966900D998FC /* LaunchScreen.xib in Resources */,
 				E9F3BD351AFF966900D998FC /* Images.xcassets in Resources */,
 				E99A5DE01B00ED2700EA23E5 /* Licenses in Resources */,
-				E99A5DB91B00DB2500EA23E5 /* test.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,14 +705,15 @@
 				E966D0B81B01C4E20070AA69 /* ControlChartDataAnalyzer.m in Sources */,
 				E91DEEED1AFFAC4200F004F8 /* TSTableViewCell.m in Sources */,
 				E966D0BB1B01E89F0070AA69 /* ControlChartViewController.m in Sources */,
+				E966D0CC1B034FD40070AA69 /* MasterViewController.m in Sources */,
 				E966D0C31B022A890070AA69 /* QualityKitDef.m in Sources */,
 				E99A5DDC1B00ED2700EA23E5 /* endian.c in Sources */,
 				E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */,
 				E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */,
 				E99A5DB61B00CDF500EA23E5 /* DataManager.m in Sources */,
 				E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */,
-				E9F3BD2D1AFF966900D998FC /* MasterViewController.m in Sources */,
 				E91DEEE61AFFAC4200F004F8 /* TSTableViewContentHolder.m in Sources */,
+				E966D0CB1B034FD40070AA69 /* DetailViewController.m in Sources */,
 				E91DEEE21AFFAC4200F004F8 /* TSUtils.m in Sources */,
 				E91DEEF01AFFAC4200F004F8 /* TSTabView.m in Sources */,
 				E91DEEEA1AFFAC4200F004F8 /* TSTableViewHeaderSection.m in Sources */,
@@ -730,7 +725,6 @@
 				E91DEEE91AFFAC4200F004F8 /* TSTableViewHeaderPanel.m in Sources */,
 				E966D0C61B024F5B0070AA69 /* RulesTableViewController.m in Sources */,
 				E99A5DE21B00ED2700EA23E5 /* QZWorkbook.m in Sources */,
-				E9F3BD301AFF966900D998FC /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,7 +36,7 @@
                     [indexesOfErrorPoints addObject:tmp];
                 }
             }
-            errorDescription = [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
+            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
         }];
     }
     
@@ -121,6 +121,68 @@
         
         block(UCLValue, LCLValue, CLValue, rArr);
     }
+    
+    if ([type isEqualToString:QKControlChartTypeXBarUsingS]) {
+        NSMutableArray *xBarArr = [[NSMutableArray alloc] init];
+        
+        for (NSArray *rowArr in dataArray) {
+            float xSum = 0;
+            for (NSNumber *item in rowArr) {
+                xSum = xSum + [item floatValue];
+            }
+            [xBarArr addObject:[NSNumber numberWithFloat:xSum/(rowArr.count)]];
+        }
+        
+        float xBarSum = 0;
+        for (NSNumber *xBar in xBarArr) {
+            xBarSum = xBarSum + [xBar floatValue];
+        }
+        float CLValue = xBarSum / xBarArr.count;
+        
+        __block float sBar = 0;
+        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeS block:^(float _UCL, float _LCL, float _CL, NSArray *_sArr) {
+            sBar = _CL;
+        }];
+        
+        float A3 = [QualityKitDef QKConstantA3:xBarArr.count];
+        float UCLValue = CLValue + A3 * sBar;
+        float LCLValue = CLValue - A3 * sBar;
+        
+        block(UCLValue, LCLValue, CLValue, xBarArr);
+    }
+    
+    if ([type isEqualToString:QKControlChartTypeS]) {
+        NSMutableArray *sArr = [[NSMutableArray alloc] init];
+        
+        for (NSArray *rowArr in dataArray) {
+            float xSum = 0;
+            for (NSNumber *item in rowArr) {
+                xSum = xSum + [item floatValue];
+            }
+            float xBar = xSum/dataArray.count;
+            
+            float tmpSum = 0;
+            for (NSNumber *item in rowArr) {
+                tmpSum = tmpSum + ([item floatValue] - xBar) * (([item floatValue] - xBar));
+            }
+            float S = sqrtf(tmpSum/(rowArr.count - 1));
+            [sArr addObject:[NSNumber numberWithFloat:S]];
+        }
+        
+        float sSum = 0;
+        for (NSNumber *tmpS in sArr) {
+            sSum = sSum + [tmpS floatValue];
+        }
+        float sBar = sSum / sArr.count;
+        
+        float B3 = [QualityKitDef QKConstantB3:sArr.count];
+        float B4 = [QualityKitDef QKConstantB4:sArr.count];
+        
+        float UCLValue = B4 * sBar;
+        float LCLValue = B3 * sBar;
+        
+        block(UCLValue, LCLValue, sBar, sArr);
+    }
 }
 
 #pragma mark - check data
@@ -136,15 +198,18 @@
             }
         }
         
-        NSString *errorDescription = @"点";
-        for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
-            if (j == 0) {
-                errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue]];
-            } else {
-                errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue]];
+        NSString *errorDescription = @"";
+        if (indexesOfErrorPoints.count > 0) {
+            errorDescription = @"点";
+            for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+                if (j == 0) {
+                    errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                } else {
+                    errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                }
             }
+            errorDescription = [NSString stringWithFormat:@"%@在控制线外部。可能原因：测量误差、设备出错等。", errorDescription];
         }
-        errorDescription = [NSString stringWithFormat:@"%@在控制线外部。可能原因：测量误差、设备出错等。", errorDescription];
         
         block(indexesOfErrorPoints, errorDescription);
     }
@@ -197,7 +262,7 @@
                             [indexesOfErrorPoints addObject:tmp];
                         }
                     }
-                    errorDescription = [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
+                    errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
                 }];
             }
             
@@ -205,6 +270,8 @@
             
         } else {
             // 大于三直接返回
+            errorDescription = [NSString stringWithFormat:@"%@\n错误点个数大于3，无法修正", errorDescription];
+            
             flag = NO;
             break;
         }
