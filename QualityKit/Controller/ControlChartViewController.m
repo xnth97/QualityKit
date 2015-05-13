@@ -50,7 +50,7 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = [NSString stringWithFormat:@"X-bar 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         
@@ -62,7 +62,7 @@
             subChartView.CLValue = _CLValue;
             subChartView.dataArr = _plotArr;
             subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = [NSString stringWithFormat:@"%@\n\nR 图：%@", errorMsgView.text, _errDescription];
+            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n\nR 图：%@", errorMsgView.text, _errDescription];
         }];
         [self.view addSubview:subChartView];
         

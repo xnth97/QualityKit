@@ -79,18 +79,23 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger section = indexPath.section;
     NSUInteger row = indexPath.row;
-    NSDictionary *tmp = rulesArr[row];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSMutableArray *checkRules = [[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules];
-    if ([checkRules containsObject:tmp[@"key"]]) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        [checkRules removeObject:tmp[@"key"]];
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [checkRules addObject:tmp[@"key"]];
+    if (section == 0) {
+        NSDictionary *tmp = rulesArr[row];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSMutableArray *checkRules = [[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules];
+        if ([checkRules containsObject:tmp[@"key"]]) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [checkRules removeObject:tmp[@"key"]];
+            [[NSUserDefaults standardUserDefaults] setObject:checkRules forKey:QKCheckRules];
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [checkRules addObject:tmp[@"key"]];
+            [[NSUserDefaults standardUserDefaults] setObject:checkRules forKey:QKCheckRules];
+        }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)autoFixSwitchChanged:(UISwitch *)sender {

@@ -21,7 +21,7 @@
     // Override point for customization after application launch.
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if ([userDefaults objectForKey:QKCheckRules] == nil) {
-        [userDefaults setObject:[@[] mutableCopy] forKey:QKCheckRules];
+        [userDefaults setObject:[[NSMutableArray alloc] init] forKey:QKCheckRules];
     }
     if ([userDefaults objectForKey:QKAutoFix] == nil) {
         [userDefaults setBool:NO forKey:QKAutoFix];

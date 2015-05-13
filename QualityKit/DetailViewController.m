@@ -47,7 +47,7 @@
         UIBarButtonItem *controlSheetStyles = [[UIBarButtonItem alloc] initWithTitle:@"控制图" style:UIBarButtonItemStylePlain block:^(id weakSender) {
             [self chooseControlSheetStyle];
         }];
-        self.navigationItem.rightBarButtonItems = @[checkRules, controlSheetStyles];
+        self.navigationItem.rightBarButtonItems = @[controlSheetStyles, checkRules];
         
         dataTableView.hidden = NO;
         
@@ -82,7 +82,7 @@
     [styleController addAction:RSheet];
     styleController.modalPresentationStyle = UIModalPresentationPopover;
     styleController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    styleController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[1];
+    styleController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
     [self presentViewController:styleController animated:YES completion:nil];
 }
 
@@ -91,7 +91,7 @@
     UINavigationController *rulesTableController = [[UINavigationController alloc] initWithRootViewController:rulesTableViewController];
     rulesTableController.modalPresentationStyle = UIModalPresentationPopover;
     rulesTableController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    rulesTableController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
+    rulesTableController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[1];
     [self presentViewController:rulesTableController animated:YES completion:nil];
 }
 
