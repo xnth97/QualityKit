@@ -23,6 +23,9 @@
     if ([userDefaults objectForKey:QKCheckRules] == nil) {
         [userDefaults setObject:[@[] mutableCopy] forKey:QKCheckRules];
     }
+    if ([userDefaults objectForKey:QKAutoFix] == nil) {
+        [userDefaults setBool:NO forKey:QKAutoFix];
+    }
     
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];

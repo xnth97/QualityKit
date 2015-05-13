@@ -21,6 +21,7 @@
 
 // Check Rules In NSUserDefaults
 #define QKCheckRules @"QKCheckRules"
+#define QKAutoFix @"QKAutoFix"
 
 @interface QualityKitDef : NSObject
 

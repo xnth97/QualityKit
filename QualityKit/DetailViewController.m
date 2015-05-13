@@ -87,7 +87,8 @@
 }
 
 - (void)chooseCheckRules {
-    RulesTableViewController *rulesTableController = [[RulesTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    RulesTableViewController *rulesTableViewController = [[RulesTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *rulesTableController = [[UINavigationController alloc] initWithRootViewController:rulesTableViewController];
     rulesTableController.modalPresentationStyle = UIModalPresentationPopover;
     rulesTableController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
     rulesTableController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
