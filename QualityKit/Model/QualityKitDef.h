@@ -21,6 +21,7 @@
 // Check Rule Definitions
 
 #define QKCheckRuleOutsideControlLine @"OutsideControlLine"
+#define QKCheckRuleTwoOfThreeInAreaA @"TwoOfThreeInAreaA" 
 
 // Check Rules In NSUserDefaults
 #define QKCheckRules @"QKCheckRules"

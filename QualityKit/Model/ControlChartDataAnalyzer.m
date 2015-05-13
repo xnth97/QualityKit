@@ -213,6 +213,51 @@
         
         block(indexesOfErrorPoints, errorDescription);
     }
+    
+    if ([checkRule isEqualToString:QKCheckRuleTwoOfThreeInAreaA]) {
+        float unitArea = (UCL - LCL) / 6;
+        // 下 A 区上限
+        float lowerAreaAUpperLimit = LCL + unitArea;
+        // 上 A 区下限
+        float upperAreaALowerLimit = UCL - unitArea;
+        
+        NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < plotArray.count - 2; i ++) {
+            float inAreaAPointsNum = 0;
+            NSMutableArray *indexesOfCheckedPossibleErrorPoints = [[NSMutableArray alloc] init];
+            for (int j = i; j <= i + 2; j ++) {
+                float pointValue = [plotArray[j] floatValue];
+                if ((pointValue >= LCL && pointValue <= lowerAreaAUpperLimit) || (pointValue >= upperAreaALowerLimit && pointValue <= UCL)) {
+                    [indexesOfCheckedPossibleErrorPoints addObject:[NSNumber numberWithInteger:j]];
+                    inAreaAPointsNum ++;
+                }
+            }
+            if (inAreaAPointsNum >= 2) {
+                for (id tmp in indexesOfCheckedPossibleErrorPoints) {
+                    if (![indexesOfErrorPoints containsObject:tmp]) {
+                        [indexesOfErrorPoints addObject:tmp];
+                    }
+                }
+            }
+        }
+        
+        NSString *errorDescription = @"";
+        if (indexesOfErrorPoints.count > 0) {
+            errorDescription = @"点";
+            for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+                if (j == 0) {
+                    errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                } else {
+                    errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                }
+            }
+            errorDescription = [NSString stringWithFormat:@"%@在连续三个点中有两点位于 A 区。可能原因：设备不稳定、操作有误、设备调整等。", errorDescription];
+        }
+        
+        block(indexesOfErrorPoints, errorDescription);
+        
+    }
 }
 
 #pragma mark - fix data
@@ -240,8 +285,14 @@
         } else if (indexesOfErrorPoints.count <= 3) {
             // 小于等于三执行修正
             NSMutableArray *_dataArr = [dataArr mutableCopy];
-            for (NSNumber *tmpIndex in indexesOfErrorRows) {
-                [_dataArr removeObjectAtIndex:[tmpIndex integerValue]];
+            
+            // 按照下标去除 indexes 数组中的下标对应在 dataArr 中数据时，需要每删除一个数据，就把 indexes 数组中所有下标减一
+            NSMutableArray *indexesOfPointsToBeRemoved = [indexesOfErrorPoints mutableCopy];
+            for (int i = 0; i < indexesOfErrorPoints.count; i ++) {
+                [_dataArr removeObjectAtIndex:[indexesOfPointsToBeRemoved[i] integerValue]];
+                for (int j = 0; j < indexesOfPointsToBeRemoved.count; j ++) {
+                    indexesOfPointsToBeRemoved[j] = [NSNumber numberWithInteger:[indexesOfPointsToBeRemoved[j] integerValue] - 1];
+                }
             }
             
             [plotArr removeAllObjects];

@@ -23,7 +23,9 @@
     self.title = @"规则与设置";
     
     rulesArr = @[@{@"key": QKCheckRuleOutsideControlLine,
-                   @"value": @"点在控制线外部"}];
+                   @"value": @"点在控制线外部"},
+                 @{@"key": QKCheckRuleTwoOfThreeInAreaA,
+                   @"value": @"连续三点有两点在A区"}];
 }
 
 - (void)didReceiveMemoryWarning {
