@@ -32,7 +32,7 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     // NSLog(@"%f", rect.size.width);
-    if (dataArr != nil) {
+    if (dataArr != nil && dataArr.count > 0) {
         float width = rect.size.width;
         float height = rect.size.height;
         

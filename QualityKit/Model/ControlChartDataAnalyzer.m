@@ -11,6 +11,8 @@
 
 @implementation ControlChartDataAnalyzer
 
+#pragma mark - get statistical values
+
 + (void)getStatisticalValuesOfDoubleArray:(NSArray *)dataArr checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void (^)(float, float, float, NSArray *, NSArray *, NSString *))block {
     
     __block float UCLValue;
@@ -38,8 +40,25 @@
         }];
     }
     
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:QKAutoFix] == YES) {
+        // 【重要】
+        // 如果这里不判断是否为0，之后 fixData 会直接进入为0的环节，从而返回空值
+        if (indexesOfErrorPoints.count > 0) {
+            [self fixData:dataArr indexesOfErrorRows:indexesOfErrorPoints checkRules:rulesArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+                UCLValue = _UCLValue;
+                LCLValue = _LCLValue;
+                CLValue = _CLValue;
+                plotArr = [_plotArr mutableCopy];
+                indexesOfErrorPoints = [_indexesOfErrorPoints mutableCopy];
+                errorDescription = _errorDescription;
+            }];
+        }
+    }
+    
     block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
 }
+
+#pragma mark - calculate data
 
 + (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void (^)(float, float, float, NSArray *))block {
     
@@ -104,6 +123,8 @@
     }
 }
 
+#pragma mark - check data
+
 + (void)checkData:(NSArray *)plotArray UCLValue:(float)UCL LCLValue:(float)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
     
     if ([checkRule isEqualToString:QKCheckRuleOutsideControlLine]) {
@@ -127,6 +148,69 @@
         
         block(indexesOfErrorPoints, errorDescription);
     }
+}
+
+#pragma mark - fix data
+
++ (void)fixData:(NSArray *)dataArr indexesOfErrorRows:(NSArray *)indexesOfErrorRows checkRules:(NSArray *)rulesArr controlChartType:(NSString *)type block:(void (^)(float, float, float, NSArray *, NSArray *, NSString *))block {
+    
+    __block BOOL flag = YES;
+    __block float UCLValue = 0;
+    __block float LCLValue = 0;
+    __block float CLValue = 0;
+    __block NSMutableArray *plotArr = [[NSMutableArray alloc] init];
+    __block NSMutableArray *indexesOfErrorPoints = [indexesOfErrorRows mutableCopy];
+    __block NSString *errorDescription = @"";
+    
+    while (flag) {
+        
+        if (indexesOfErrorPoints.count == 0) {
+            // 没有错误点
+            // 此处直接返回执行修正后的 block
+            // 因此如果初始错误点数组长度为 0 会直接返回空
+            
+            flag = NO;
+            break;
+            
+        } else if (indexesOfErrorPoints.count <= 3) {
+            // 小于等于三执行修正
+            NSMutableArray *_dataArr = [dataArr mutableCopy];
+            for (NSNumber *tmpIndex in indexesOfErrorRows) {
+                [_dataArr removeObjectAtIndex:[tmpIndex integerValue]];
+            }
+            
+            [plotArr removeAllObjects];
+            [indexesOfErrorPoints removeAllObjects];
+            errorDescription = @"";
+            
+            [self calculateControlLineValuesOfData:_dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+                UCLValue = _UCLValue;
+                LCLValue = _LCLValue;
+                CLValue = _CLValue;
+                plotArr = [_plotArr mutableCopy];
+            }];
+            
+            for (NSString *rule in rulesArr) {
+                [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+                    for (id tmp in _indexesOfErrorPoints) {
+                        if (![indexesOfErrorPoints containsObject:tmp]) {
+                            [indexesOfErrorPoints addObject:tmp];
+                        }
+                    }
+                    errorDescription = [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
+                }];
+            }
+            
+            continue;
+            
+        } else {
+            // 大于三直接返回
+            flag = NO;
+            break;
+        }
+    }
+    
+    block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
 }
 
 @end

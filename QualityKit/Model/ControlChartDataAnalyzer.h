@@ -36,9 +36,20 @@
  *  @param UCL       UCL 值
  *  @param LCL       LCL 值
  *  @param CL        CL 值
- *  @param checkRule 检验规则
+ *  @param checkRule 检验规则，定义在 QKDef 里
  *  @param block     回调 block，回调出错点在绘图数组中的坐标、出错信息
  */
 + (void)checkData:(NSArray *)plotArray UCLValue:(float)UCL LCLValue:(float)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void(^)(NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
+
+/**
+ *  对出错点进行修正。初始出错点数组个数不能为 0
+ *
+ *  @param dataArr            原始数据
+ *  @param indexesOfErrorRows 出错点个数，即原始数据出错行数
+ *  @param rulesArr           应用检测规则，定义在 QualityKitDef 里
+ *  @param type               控制图类型
+ *  @param block              回调 block，回调 UCL 值、LCL 值、CL 值、画图数组、出错点在画图数组中下标的数组及错误描述
+ */
++ (void)fixData:(NSArray *)dataArr indexesOfErrorRows:(NSArray *)indexesOfErrorRows checkRules:(NSArray *)rulesArr controlChartType:(NSString *)type block:(void(^)(float UCLValue, float LCLValue, float CLValue, NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
 @end

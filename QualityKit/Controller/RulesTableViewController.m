@@ -84,7 +84,7 @@
     if (section == 0) {
         NSDictionary *tmp = rulesArr[row];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        NSMutableArray *checkRules = [[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules];
+        NSMutableArray *checkRules = [[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] mutableCopy];
         if ([checkRules containsObject:tmp[@"key"]]) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             [checkRules removeObject:tmp[@"key"]];
