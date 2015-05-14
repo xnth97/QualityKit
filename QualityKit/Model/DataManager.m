@@ -7,8 +7,8 @@
 //
 
 #import "DataManager.h"
-#import "RSworkBook.h"
 #import <Realm/Realm.h>
+#import <JXLS/JXLS.h>
 
 @implementation DataManager
 
@@ -56,22 +56,42 @@
 
 + (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:extension]];
     if ([extension isEqualToString:@"xls"]) {
-        RSworkBook *workBook = [[RSworkBook alloc] init];
-        workBook.author = @"Qin Yubo";
-        workBook.version = 1.0;
-        RSworkSheet *workSheet = [[RSworkSheet alloc] init];
-        RSworkSheetRow *row = [[RSworkSheetRow alloc] initWithHeight:20];
-        [row addCellNumber:0];
-        [workSheet addWorkSheetRow:row];
-        [workBook addWorkSheet:workSheet];
-        [workBook writeWithName:fileName toPath:path];
+        
+        JXLSCell *cell;
+        JXLSWorkBook *workBook = [JXLSWorkBook new];
+        JXLSWorkSheet *workSheet = [workBook workSheetWithName:@"SHEET1"];
+        
+        [workSheet setWidth:2500 forColumn:0 defaultFormat:NULL];
+        
+        for(uint32_t idx = 0; idx < 1; idx ++) {
+            cell = [workSheet setCellAtRow:idx column:0 toDoubleValue:0];
+        }
+        
+        [workBook writeToFile:filePath];
+        
     } else {
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *filePath = [path stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:extension]];
         [fileManager createFileAtPath:filePath contents:nil attributes:nil];
     }
     
+}
+
++ (void)createLocalXLSFile:(NSString *)fileName columnNumber:(NSInteger)num {
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"xls"]];
+    
+    JXLSCell *cell;
+    JXLSWorkBook *workBook = [JXLSWorkBook new];
+    JXLSWorkSheet *workSheet = [workBook workSheetWithName:@"SHEET1"];
+    
+    for(uint32_t idx = 0; idx < num; idx ++) {
+        [workSheet setWidth:2500 forColumn:idx defaultFormat:NULL];
+        cell = [workSheet setCellAtRow:0 column:idx toDoubleValue:0];
+    }
+    
+    [workBook writeToFile:filePath];
 }
 
 @end

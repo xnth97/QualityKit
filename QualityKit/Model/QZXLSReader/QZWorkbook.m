@@ -54,9 +54,9 @@
 	xlsSummaryInfo *summary = xls_summaryInfo(_workBook);
     
     //Get the info out of it.
-    _excelVersion = [NSString stringWithCString:(char *)summary->appName encoding:NSUTF8StringEncoding];
-    _createdBy = [NSString stringWithCString:(char *)summary->author encoding:NSUTF8StringEncoding];
-    _modifiedBy = [NSString stringWithCString:(char *)summary->lastAuthor encoding:NSUTF8StringEncoding];
+    //_excelVersion = [NSString stringWithCString:(char *)summary->appName encoding:NSUTF8StringEncoding];
+    //_createdBy = [NSString stringWithCString:(char *)summary->author encoding:NSUTF8StringEncoding];
+    //_modifiedBy = [NSString stringWithCString:(char *)summary->lastAuthor encoding:NSUTF8StringEncoding];
     xls_close_summaryInfo(summary);
     
     //Parse its worksheets.

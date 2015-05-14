@@ -14,6 +14,7 @@
 + (void)loadLocalRealmDatabasesWithBlock:(void(^)(NSArray *realmDatabases))block;
 + (NSString *)fullPathOfFile:(NSString *)file;
 + (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension;
++ (void)createLocalXLSFile:(NSString *)fileName columnNumber:(NSInteger)num;
 + (void)removeLocalFile:(NSString *)filePath;
 
 @end
