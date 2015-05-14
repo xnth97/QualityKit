@@ -183,6 +183,50 @@
         
         block(UCLValue, LCLValue, sBar, sArr);
     }
+    
+    if ([type isEqualToString:QKControlChartTypeX]) {
+        NSMutableArray *xArr = [[NSMutableArray alloc] init];
+        for (int i = 0; i < dataArray.count; i ++) {
+            double xValue = [(dataArray[i])[0] doubleValue];
+            [xArr addObject:[NSNumber numberWithDouble:xValue]];
+        }
+        
+        float xSum = 0;
+        for (NSNumber *tmp in xArr) {
+            xSum = xSum + [tmp floatValue];
+        }
+        float CLValue = xSum / xArr.count;
+        
+        __block float rBar = 0;
+        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeMR block:^(float _UCL, float _LCL, float _CLR, NSArray *_rArr) {
+            rBar = _CLR;
+        }];
+        float UCLValue = CLValue + [QualityKitDef QKConstantE2:xArr.count] * rBar;
+        float LCLValue = CLValue - [QualityKitDef QKConstantE2:xArr.count] * rBar;
+        
+        block(UCLValue, LCLValue, CLValue, xArr);
+    }
+    
+    if ([type isEqualToString:QKControlChartTypeMR]) {
+        NSMutableArray *rArr = [[NSMutableArray alloc] init];
+        for (int i = 0; i < dataArray.count - 1; i ++) {
+            double xi = [(dataArray[i])[0] doubleValue];
+            double xi1 = [(dataArray[i + 1])[0] doubleValue];
+            double RValue = fabs(xi - xi1);
+            [rArr addObject:[NSNumber numberWithDouble:RValue]];
+        }
+        
+        float rSum = 0;
+        for (NSNumber *tmpR in rArr) {
+            rSum = rSum + [tmpR floatValue];
+        }
+        float CLValue = rSum / rArr.count;
+        
+        float UCLValue = [QualityKitDef QKConstantD4:rArr.count] * CLValue;
+        float LCLValue = [QualityKitDef QKConstantD3:rArr.count] * CLValue;
+        
+        block(UCLValue, LCLValue, CLValue, rArr);
+    }
 }
 
 #pragma mark - check data

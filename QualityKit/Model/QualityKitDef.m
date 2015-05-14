@@ -81,4 +81,13 @@
     }
 }
 
++ (float)QKConstantE2:(NSInteger)n {
+    NSArray *E2Arr = @[@0, @2.66, @1.77, @1.46, @1.29, @1.18, @1.11, @1.05, @1.01, @0.98];
+    if (n <= 10) {
+        return [E2Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
 @end
