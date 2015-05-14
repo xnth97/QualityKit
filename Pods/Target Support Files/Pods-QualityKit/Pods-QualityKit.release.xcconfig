@@ -1,0 +1,6 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ALActionBlocks" "${PODS_ROOT}/Headers/Public/FXForms" "${PODS_ROOT}/Headers/Public/JXLS" "${PODS_ROOT}/Headers/Public/KVOController" "${PODS_ROOT}/Headers/Public/PNChart" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/UICountingLabel" ${PODS_ROOT}/JXLS/External/xlslib/xlslib/src/**
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ALActionBlocks" -isystem "${PODS_ROOT}/Headers/Public/FXForms" -isystem "${PODS_ROOT}/Headers/Public/JXLS" -isystem "${PODS_ROOT}/Headers/Public/KVOController" -isystem "${PODS_ROOT}/Headers/Public/PNChart" -isystem "${PODS_ROOT}/Headers/Public/SVProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/UICountingLabel"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-QualityKit-ALActionBlocks" -l"Pods-QualityKit-FXForms" -l"Pods-QualityKit-JXLS" -l"Pods-QualityKit-KVOController" -l"Pods-QualityKit-PNChart" -l"Pods-QualityKit-SVProgressHUD" -l"Pods-QualityKit-UICountingLabel" -l"c++" -framework "CoreGraphics" -framework "Foundation" -framework "QuartzCore" -framework "UIKit"
+OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+PODS_ROOT = ${SRCROOT}/Pods

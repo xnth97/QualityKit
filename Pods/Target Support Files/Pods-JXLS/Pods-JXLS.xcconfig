@@ -1,0 +1,2 @@
+PODS_JXLS_HEADER_SEARCH_PATHS = ${PODS_ROOT}/JXLS/External/xlslib/xlslib/src/**
+PODS_JXLS_OTHER_LDFLAGS = -l"c++"
