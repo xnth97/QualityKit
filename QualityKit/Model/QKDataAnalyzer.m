@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 Qin Yubo. All rights reserved.
 //
 
-#import "ControlChartDataAnalyzer.h"
+#import "QKDataAnalyzer.h"
 #import "QualityKitDef.h"
 
-@implementation ControlChartDataAnalyzer
+@implementation QKDataAnalyzer
 
 #pragma mark - get statistical values
 

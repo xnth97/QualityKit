@@ -56,8 +56,34 @@
         objects = [[NSMutableArray alloc] init];
     }
     //[objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    if (dataSourceSegmented.selectedSegmentIndex == 0) {
+        UIAlertController *inputTitleController = [UIAlertController alertControllerWithTitle:@"请输入标题" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [inputTitleController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"请输入文件标题";
+            textField.keyboardAppearance = UIKeyboardAppearanceDefault;
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UITextField *titleField = inputTitleController.textFields[0];
+            if ([titleField.text isEqualToString:@""]) {
+                NSLog(@"Cannot be nil");
+            } else {
+                
+                [DataManager createLocalFile:titleField.text extension:@"xls"];
+                [objects insertObject:[titleField.text stringByAppendingPathExtension:@"xls"] atIndex:0];
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            
+            
+        }];
+        [inputTitleController addAction:cancelAction];
+        [inputTitleController addAction:okAction];
+        [self presentViewController:inputTitleController animated:YES completion:nil];
+    }
+    
 }
 
 - (void)dataSourceChanged {

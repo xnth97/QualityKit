@@ -26,7 +26,15 @@
 		E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDB1AFFAC4200F004F8 /* TSTabViewModel.m */; };
 		E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEDE1AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m */; };
 		E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */; };
-		E966D0B81B01C4E20070AA69 /* ControlChartDataAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0B71B01C4E20070AA69 /* ControlChartDataAnalyzer.m */; };
+		E92C930A1B0490490026BD3A /* data.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C93091B0490490026BD3A /* data.m */; };
+		E92C93101B0490F20026BD3A /* QKDataAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C930F1B0490F20026BD3A /* QKDataAnalyzer.m */; };
+		E92C93201B0492BA0026BD3A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E92C93131B0492BA0026BD3A /* README.md */; };
+		E92C93211B0492BA0026BD3A /* RSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C93151B0492BA0026BD3A /* RSCell.m */; };
+		E92C93221B0492BA0026BD3A /* RSStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C93171B0492BA0026BD3A /* RSStyle.m */; };
+		E92C93231B0492BA0026BD3A /* RSworkBook.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C93191B0492BA0026BD3A /* RSworkBook.m */; };
+		E92C93241B0492BA0026BD3A /* RSworkSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C931B1B0492BA0026BD3A /* RSworkSheet.m */; };
+		E92C93251B0492BA0026BD3A /* RSworkSheetRow.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C931D1B0492BA0026BD3A /* RSworkSheetRow.m */; };
+		E92C93261B0492BA0026BD3A /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = E92C931F1B0492BA0026BD3A /* UIColor-Expanded.m */; };
 		E966D0BB1B01E89F0070AA69 /* ControlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */; };
 		E966D0C31B022A890070AA69 /* QualityKitDef.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C21B022A890070AA69 /* QualityKitDef.m */; };
 		E966D0C61B024F5B0070AA69 /* RulesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C51B024F5B0070AA69 /* RulesTableViewController.m */; };
@@ -119,8 +127,23 @@
 		E91DEEDF1AFFAC4200F004F8 /* TSTabViewWithDropDownPanelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelDelegate.h; sourceTree = "<group>"; };
 		E91DEEE01AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTabViewWithDropDownPanelModel.h; sourceTree = "<group>"; };
 		E91DEEE11AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTabViewWithDropDownPanelModel.m; sourceTree = "<group>"; };
-		E966D0B61B01C4E20070AA69 /* ControlChartDataAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlChartDataAnalyzer.h; sourceTree = "<group>"; };
-		E966D0B71B01C4E20070AA69 /* ControlChartDataAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlChartDataAnalyzer.m; sourceTree = "<group>"; };
+		E92C93081B0490490026BD3A /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
+		E92C93091B0490490026BD3A /* data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = data.m; sourceTree = "<group>"; };
+		E92C930E1B0490F20026BD3A /* QKDataAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKDataAnalyzer.h; sourceTree = "<group>"; };
+		E92C930F1B0490F20026BD3A /* QKDataAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKDataAnalyzer.m; sourceTree = "<group>"; };
+		E92C93131B0492BA0026BD3A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E92C93141B0492BA0026BD3A /* RSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSCell.h; sourceTree = "<group>"; };
+		E92C93151B0492BA0026BD3A /* RSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSCell.m; sourceTree = "<group>"; };
+		E92C93161B0492BA0026BD3A /* RSStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSStyle.h; sourceTree = "<group>"; };
+		E92C93171B0492BA0026BD3A /* RSStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSStyle.m; sourceTree = "<group>"; };
+		E92C93181B0492BA0026BD3A /* RSworkBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSworkBook.h; sourceTree = "<group>"; };
+		E92C93191B0492BA0026BD3A /* RSworkBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSworkBook.m; sourceTree = "<group>"; };
+		E92C931A1B0492BA0026BD3A /* RSworkSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSworkSheet.h; sourceTree = "<group>"; };
+		E92C931B1B0492BA0026BD3A /* RSworkSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSworkSheet.m; sourceTree = "<group>"; };
+		E92C931C1B0492BA0026BD3A /* RSworkSheetRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSworkSheetRow.h; sourceTree = "<group>"; };
+		E92C931D1B0492BA0026BD3A /* RSworkSheetRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSworkSheetRow.m; sourceTree = "<group>"; };
+		E92C931E1B0492BA0026BD3A /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		E92C931F1B0492BA0026BD3A /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		E966D0B91B01E89F0070AA69 /* ControlChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlChartViewController.h; sourceTree = "<group>"; };
 		E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlChartViewController.m; sourceTree = "<group>"; };
 		E966D0C11B022A890070AA69 /* QualityKitDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QualityKitDef.h; sourceTree = "<group>"; };
@@ -334,13 +357,33 @@
 			path = TSTabViewWithDropDownPanel;
 			sourceTree = "<group>";
 		};
-		E966D0B51B01C4B40070AA69 /* ControlChartDataAnalyzer */ = {
+		E92C93071B0490490026BD3A /* shareInstance */ = {
 			isa = PBXGroup;
 			children = (
-				E966D0B61B01C4E20070AA69 /* ControlChartDataAnalyzer.h */,
-				E966D0B71B01C4E20070AA69 /* ControlChartDataAnalyzer.m */,
+				E92C93081B0490490026BD3A /* data.h */,
+				E92C93091B0490490026BD3A /* data.m */,
 			);
-			name = ControlChartDataAnalyzer;
+			path = shareInstance;
+			sourceTree = "<group>";
+		};
+		E92C93121B0492BA0026BD3A /* RSSheet */ = {
+			isa = PBXGroup;
+			children = (
+				E92C93131B0492BA0026BD3A /* README.md */,
+				E92C93141B0492BA0026BD3A /* RSCell.h */,
+				E92C93151B0492BA0026BD3A /* RSCell.m */,
+				E92C93161B0492BA0026BD3A /* RSStyle.h */,
+				E92C93171B0492BA0026BD3A /* RSStyle.m */,
+				E92C93181B0492BA0026BD3A /* RSworkBook.h */,
+				E92C93191B0492BA0026BD3A /* RSworkBook.m */,
+				E92C931A1B0492BA0026BD3A /* RSworkSheet.h */,
+				E92C931B1B0492BA0026BD3A /* RSworkSheet.m */,
+				E92C931C1B0492BA0026BD3A /* RSworkSheetRow.h */,
+				E92C931D1B0492BA0026BD3A /* RSworkSheetRow.m */,
+				E92C931E1B0492BA0026BD3A /* UIColor-Expanded.h */,
+				E92C931F1B0492BA0026BD3A /* UIColor-Expanded.m */,
+			);
+			path = RSSheet;
 			sourceTree = "<group>";
 		};
 		E98C60971AFFA19900710840 /* Controller */ = {
@@ -364,13 +407,16 @@
 			children = (
 				E966D0C11B022A890070AA69 /* QualityKitDef.h */,
 				E966D0C21B022A890070AA69 /* QualityKitDef.m */,
-				E966D0B51B01C4B40070AA69 /* ControlChartDataAnalyzer */,
+				E92C930E1B0490F20026BD3A /* QKDataAnalyzer.h */,
+				E92C930F1B0490F20026BD3A /* QKDataAnalyzer.m */,
 				E9F6B8B51B01991B00435FB4 /* DataModel */,
 				E99A5DB41B00CDF500EA23E5 /* DataManager.h */,
 				E99A5DB51B00CDF500EA23E5 /* DataManager.m */,
 				E99A5DBB1B00E5ED00EA23E5 /* DataProcessor.h */,
 				E99A5DBC1B00E5ED00EA23E5 /* DataProcessor.m */,
 				E99A5DBE1B00ED2700EA23E5 /* QZXLSReader */,
+				E92C93121B0492BA0026BD3A /* RSSheet */,
+				E92C93071B0490490026BD3A /* shareInstance */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -689,6 +735,7 @@
 			files = (
 				E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */,
 				E99A5DDE1B00ED2700EA23E5 /* xls.c in Sources */,
+				E92C93221B0492BA0026BD3A /* RSStyle.m in Sources */,
 				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
 				E9F6B8BF1B01A1EF00435FB4 /* ControlChartView.m in Sources */,
 				E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */,
@@ -700,28 +747,35 @@
 				E99A5DE11B00ED2700EA23E5 /* QZCell.m in Sources */,
 				E91DEEEB1AFFAC4200F004F8 /* TSTableViewRow.m in Sources */,
 				E91DEEEC1AFFAC4200F004F8 /* TSTableView.m in Sources */,
+				E92C930A1B0490490026BD3A /* data.m in Sources */,
 				E91DEEE51AFFAC4200F004F8 /* TSScrollView.m in Sources */,
 				E91DEEF21AFFAC4200F004F8 /* TSTabViewWithDropDownPanel.m in Sources */,
-				E966D0B81B01C4E20070AA69 /* ControlChartDataAnalyzer.m in Sources */,
 				E91DEEED1AFFAC4200F004F8 /* TSTableViewCell.m in Sources */,
 				E966D0BB1B01E89F0070AA69 /* ControlChartViewController.m in Sources */,
 				E966D0CC1B034FD40070AA69 /* MasterViewController.m in Sources */,
 				E966D0C31B022A890070AA69 /* QualityKitDef.m in Sources */,
+				E92C93251B0492BA0026BD3A /* RSworkSheetRow.m in Sources */,
+				E92C93261B0492BA0026BD3A /* UIColor-Expanded.m in Sources */,
 				E99A5DDC1B00ED2700EA23E5 /* endian.c in Sources */,
 				E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */,
+				E92C93201B0492BA0026BD3A /* README.md in Sources */,
 				E91DEEF11AFFAC4200F004F8 /* TSTabViewModel.m in Sources */,
 				E99A5DB61B00CDF500EA23E5 /* DataManager.m in Sources */,
 				E91DEEF31AFFAC4200F004F8 /* TSTabViewWithDropDownPanelModel.m in Sources */,
+				E92C93231B0492BA0026BD3A /* RSworkBook.m in Sources */,
 				E91DEEE61AFFAC4200F004F8 /* TSTableViewContentHolder.m in Sources */,
 				E966D0CB1B034FD40070AA69 /* DetailViewController.m in Sources */,
 				E91DEEE21AFFAC4200F004F8 /* TSUtils.m in Sources */,
+				E92C93101B0490F20026BD3A /* QKDataAnalyzer.m in Sources */,
 				E91DEEF01AFFAC4200F004F8 /* TSTabView.m in Sources */,
 				E91DEEEA1AFFAC4200F004F8 /* TSTableViewHeaderSection.m in Sources */,
 				E91DEEE31AFFAC4200F004F8 /* TSNavigationStripModel.m in Sources */,
 				E99A5DDF1B00ED2700EA23E5 /* xlstool.c in Sources */,
 				E91DEEE71AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m in Sources */,
+				E92C93241B0492BA0026BD3A /* RSworkSheet.m in Sources */,
 				E9F3BD271AFF966900D998FC /* main.m in Sources */,
 				E99A5DDD1B00ED2700EA23E5 /* ole.c in Sources */,
+				E92C93211B0492BA0026BD3A /* RSCell.m in Sources */,
 				E91DEEE91AFFAC4200F004F8 /* TSTableViewHeaderPanel.m in Sources */,
 				E966D0C61B024F5B0070AA69 /* RulesTableViewController.m in Sources */,
 				E99A5DE21B00ED2700EA23E5 /* QZWorkbook.m in Sources */,

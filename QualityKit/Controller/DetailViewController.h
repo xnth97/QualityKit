@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TSTableView.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController<TSTableViewDelegate>
 
 @property (strong, nonatomic) NSString *detailItem;
 @property (weak, nonatomic) IBOutlet TSTableView *dataTableView;

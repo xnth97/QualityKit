@@ -13,6 +13,7 @@
 + (void)loadLocalExcelFilesWithBlock:(void(^)(NSArray *excelFiles))block;
 + (void)loadLocalRealmDatabasesWithBlock:(void(^)(NSArray *realmDatabases))block;
 + (NSString *)fullPathOfFile:(NSString *)file;
++ (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension;
 + (void)removeLocalFile:(NSString *)filePath;
 
 @end

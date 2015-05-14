@@ -7,6 +7,7 @@
 //
 
 #import "DataManager.h"
+#import "RSworkBook.h"
 #import <Realm/Realm.h>
 
 @implementation DataManager
@@ -51,6 +52,26 @@
     if ([fileManager fileExistsAtPath:path]) {
         [fileManager removeItemAtPath:path error:nil];
     }
+}
+
++ (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension {
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    if ([extension isEqualToString:@"xls"]) {
+        RSworkBook *workBook = [[RSworkBook alloc] init];
+        workBook.author = @"Qin Yubo";
+        workBook.version = 1.0;
+        RSworkSheet *workSheet = [[RSworkSheet alloc] init];
+        RSworkSheetRow *row = [[RSworkSheetRow alloc] initWithHeight:20];
+        [row addCellNumber:0];
+        [workSheet addWorkSheetRow:row];
+        [workBook addWorkSheet:workSheet];
+        [workBook writeWithName:fileName toPath:path];
+    } else {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *filePath = [path stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:extension]];
+        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
+    }
+    
 }
 
 @end

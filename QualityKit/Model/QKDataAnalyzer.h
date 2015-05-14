@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ControlChartDataAnalyzer : NSObject
+@interface QKDataAnalyzer : NSObject
 
 /**
  *  获取数组的统计学特征数据
