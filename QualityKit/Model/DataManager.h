@@ -15,6 +15,7 @@
 + (NSString *)fullPathOfFile:(NSString *)file;
 + (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension;
 + (void)createLocalXLSFile:(NSString *)fileName columnNumber:(NSInteger)num;
++ (void)saveLocalXLSFile:(NSString *)fileName withDataArray:(NSArray *)dataArr;
 + (void)removeLocalFile:(NSString *)filePath;
 
 @end

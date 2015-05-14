@@ -116,7 +116,7 @@
 #pragma mark - Data Edit
 
 - (void)saveDataWithModel:(TSTableViewModel *)model {
-    
+    [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
 }
 
 #pragma mark - TSTableViewDelegate

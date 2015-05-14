@@ -58,4 +58,20 @@
     block(doubleArr);
 }
 
++ (NSArray *)convertTableModelToFloatArray:(TSTableViewModel *)model {
+    
+    NSMutableArray *dataArr = [[NSMutableArray alloc] init];
+    
+    NSArray *modelRows = model.rows;
+    for (TSRow *tmpRow in modelRows) {
+        NSArray *cells = tmpRow.cells;
+        NSMutableArray *rowArr = [[NSMutableArray alloc] init];
+        for (TSCell *tmpCell in cells) {
+            [rowArr addObject:[NSNumber numberWithDouble:[[[tmpCell value] description] doubleValue]]];
+        }
+        [dataArr addObject:rowArr];
+    }
+    return dataArr;
+}
+
 @end

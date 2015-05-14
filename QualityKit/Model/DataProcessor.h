@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSTableViewModel.h"
 
 @interface DataProcessor : NSObject
 
@@ -19,5 +20,7 @@
  *  @param block    回调 block，回调数组结构为：@[@[rowArray], @[rowArray]]
  */
 + (void)convertXLSFile:(NSString *)filePath toDoubleArrayWithBlock:(void(^)(NSArray *doubleArr))block;
+
++ (NSArray *)convertTableModelToFloatArray:(TSTableViewModel *)model;
 
 @end

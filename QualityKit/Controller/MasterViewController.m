@@ -82,7 +82,7 @@
                     [MsgDisplay showErrorMsg:@"列数出错"];
                     return;
                 } else {
-                    [DataManager createLocalXLSFile:titleField.text columnNumber:[numStr integerValue]];
+                    [DataManager createLocalXLSFile:[titleField.text stringByAppendingPathExtension:@"xls"] columnNumber:[numStr integerValue]];
                     [objects insertObject:[titleField.text stringByAppendingPathExtension:@"xls"] atIndex:0];
                     
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];

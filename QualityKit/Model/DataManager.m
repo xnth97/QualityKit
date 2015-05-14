@@ -80,7 +80,7 @@
 
 + (void)createLocalXLSFile:(NSString *)fileName columnNumber:(NSInteger)num {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [path stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"xls"]];
+    NSString *filePath = [path stringByAppendingPathComponent:fileName];
     
     JXLSCell *cell;
     JXLSWorkBook *workBook = [JXLSWorkBook new];
@@ -89,6 +89,27 @@
     for(uint32_t idx = 0; idx < num; idx ++) {
         [workSheet setWidth:2500 forColumn:idx defaultFormat:NULL];
         cell = [workSheet setCellAtRow:0 column:idx toDoubleValue:0];
+    }
+    
+    [workBook writeToFile:filePath];
+}
+
++ (void)saveLocalXLSFile:(NSString *)fileName withDataArray:(NSArray *)dataArr {
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:fileName];
+    
+    JXLSCell *cell;
+    JXLSWorkBook *workBook = [JXLSWorkBook new];
+    JXLSWorkSheet *workSheet = [workBook workSheetWithName:@"SHEET1"];
+    
+    for (uint32_t i = 0; i < dataArr.count; i ++) {
+        NSArray *rowArr = dataArr[i];
+        for (uint32_t j = 0; j < rowArr.count; j ++) {
+            if (i == 0) {
+                [workSheet setWidth:2500 forColumn:j defaultFormat:NULL];
+            }
+            cell = [workSheet setCellAtRow:i column:j toDoubleValue:[rowArr[j] doubleValue]];
+        }
     }
     
     [workBook writeToFile:filePath];
