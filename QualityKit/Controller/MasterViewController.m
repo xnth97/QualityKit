@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "DataManager.h"
 #import "MsgDisplay.h"
+#import "QKData5.h"
 
 @interface MasterViewController ()
 
@@ -59,6 +60,7 @@
     //[objects insertObject:[NSDate date] atIndex:0];
     
     if (dataSourceSegmented.selectedSegmentIndex == 0) {
+        
         UIAlertController *inputTitleController = [UIAlertController alertControllerWithTitle:@"创建文件" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [inputTitleController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
             textField.placeholder = @"请输入文件标题";
@@ -93,6 +95,46 @@
         [inputTitleController addAction:cancelAction];
         [inputTitleController addAction:okAction];
         [self presentViewController:inputTitleController animated:YES completion:nil];
+        
+    } else if (dataSourceSegmented.selectedSegmentIndex == 1) {
+        
+        UIAlertController *selectRealmTypeController = [UIAlertController alertControllerWithTitle:@"新建数据库" message:@"请输入数据库名称并选择数据类型" preferredStyle:UIAlertControllerStyleAlert];
+        [selectRealmTypeController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"输入数据库名称";
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *qkData5Action = [UIAlertAction actionWithTitle:@"每组5个样本" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            UITextField *field = selectRealmTypeController.textFields[0];
+            if ([field.text isEqualToString:@""]) {
+                [MsgDisplay showErrorMsg:@"数据库名不能为空"];
+            } else {
+                QKData5 *data = [[QKData5 alloc] init];
+                [DataManager createLocalFile:field.text extension:@"realm"];
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    RLMRealm *realm = [RLMRealm realmWithPath:[DataManager fullPathOfFile:[field.text stringByAppendingPathExtension:@"realm"]]];
+                    [realm beginWriteTransaction];
+                    [realm addObject:data];
+                    [realm commitWriteTransaction];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [objects insertObject:[field.text stringByAppendingPathExtension:@"realm"] atIndex:0];
+                        
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    });
+                    
+                });
+            }
+            
+        }];
+        for (UIAlertAction *action in @[cancelAction, qkData5Action]) {
+            [selectRealmTypeController addAction:action];
+        }
+        [self presentViewController:selectRealmTypeController animated:YES completion:nil];
+        
     }
     
 }

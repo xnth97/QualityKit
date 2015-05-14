@@ -302,6 +302,54 @@
         block(indexesOfErrorPoints, errorDescription);
         
     }
+    
+    if ([checkRule isEqualToString:QKCheckRuleFourOfFiveInAreaB]) {
+        float unitArea = (UCL - LCL) / 6;
+        // 下 B 区下限
+        float lowerAreaBLowerLimit = LCL + unitArea;
+        // 下 B 区上限
+        float lowerAreaBUpperLimit = LCL + 2 * unitArea;
+        // 上 B 区下限
+        float upperAreaBLowerLimit = UCL - 2 * unitArea;
+        // 上 B 区上限
+        float upperAreaBUpperLimit = UCL - unitArea;
+        
+        NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < plotArray.count - 4; i ++) {
+            float inAreaAPointsNum = 0;
+            NSMutableArray *indexesOfCheckedPossibleErrorPoints = [[NSMutableArray alloc] init];
+            for (int j = i; j <= i + 4; j ++) {
+                float pointValue = [plotArray[j] floatValue];
+                if ((pointValue >= lowerAreaBLowerLimit && pointValue <= lowerAreaBUpperLimit) || (pointValue >= upperAreaBLowerLimit && pointValue <= upperAreaBUpperLimit)) {
+                    [indexesOfCheckedPossibleErrorPoints addObject:[NSNumber numberWithInteger:j]];
+                    inAreaAPointsNum ++;
+                }
+            }
+            if (inAreaAPointsNum >= 4) {
+                for (id tmp in indexesOfCheckedPossibleErrorPoints) {
+                    if (![indexesOfErrorPoints containsObject:tmp]) {
+                        [indexesOfErrorPoints addObject:tmp];
+                    }
+                }
+            }
+        }
+        
+        NSString *errorDescription = @"";
+        if (indexesOfErrorPoints.count > 0) {
+            errorDescription = @"点";
+            for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+                if (j == 0) {
+                    errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                } else {
+                    errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                }
+            }
+            errorDescription = [NSString stringWithFormat:@"%@在连续五个点中有四点位于 B 区。可能原因：过程偏倚、量具需要调整、设备不稳定等。", errorDescription];
+        }
+        
+        block(indexesOfErrorPoints, errorDescription);
+    }
 }
 
 #pragma mark - fix data

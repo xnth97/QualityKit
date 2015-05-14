@@ -29,18 +29,14 @@
 }
 
 // standalone initializer
-- (instancetype)initWithValue:(id)value schema:(RLMSchema *)schema;
+- (instancetype)initWithObject:(id)value schema:(RLMSchema *)schema;
 
 // live accessor initializer
-- (instancetype)initWithRealm:(RLMRealm *)realm
-                       schema:(RLMObjectSchema *)schema;
+- (instancetype)initWithRealm:(__unsafe_unretained RLMRealm *const)realm
+                       schema:(__unsafe_unretained RLMObjectSchema *const)schema;
 
 // shared schema for this class
 + (RLMObjectSchema *)sharedSchema;
-
-@end
-
-@interface RLMDynamicObject : RLMObject
 
 @end
 

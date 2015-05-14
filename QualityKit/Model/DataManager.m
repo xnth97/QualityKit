@@ -52,6 +52,15 @@
     if ([fileManager fileExistsAtPath:path]) {
         [fileManager removeItemAtPath:path error:nil];
     }
+    
+    if ([[filePath pathExtension] isEqualToString:@"realm"]) {
+        NSArray *allFiles = [self allFilesInDocumentDirectory];
+        for (NSString *tmpPath in allFiles) {
+            if ([tmpPath hasPrefix:filePath]) {
+                [fileManager removeItemAtPath:tmpPath error:nil];
+            }
+        }
+    }
 }
 
 + (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension {

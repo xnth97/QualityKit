@@ -87,9 +87,7 @@
  
  @see [RLMRealm addObject:]:
  */
-- (instancetype)initWithValue:(id)value;
-
-- (instancetype)initWithObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use initWithValue:");
+- (instancetype)initWithObject:(id)object;
 
 
 /**
@@ -105,10 +103,10 @@
  Creates an instance of this object and adds it to the default Realm populating
  the object with the given object.
  
- If nested objects are included in the argument, `createInDefaultRealmWithValue:` will be called
+ If nested objects are included in the argument, `createInDefaultRealmWithObject:` will be called
  on them.
 
- @param value   The value used to populate the object. This can be any key/value coding compliant
+ @param object  The object used to populate the object. This can be any key/value coding compliant
                 object, or a JSON object such as those returned from the methods in NSJSONSerialization, or
                 an NSArray with one object for each persisted property. An exception will be
                 thrown if any required properties are not present and no default is set.
@@ -117,9 +115,7 @@
 
  @see   defaultPropertyValues
  */
-+ (instancetype)createInDefaultRealmWithValue:(id)value;
-
-+ (instancetype)createInDefaultRealmWithObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createInDefaultRealmWithValue:");
++ (instancetype)createInDefaultRealmWithObject:(id)object;
 
 /**
  Create an RLMObject in a Realm with a given object.
@@ -127,11 +123,11 @@
  Creates an instance of this object and adds it to the given Realm populating
  the object with the given object.
  
- If nested objects are included in the argument, `createInRealm:withValue:` will be called
+ If nested objects are included in the argument, `createInRealm:withObject:` will be called
  on them.
  
  @param realm   The Realm in which this object is persisted.
- @param value   The value used to populate the object. This can be any key/value coding compliant
+ @param object  The object used to populate the object. This can be any key/value coding compliant
                 object, or a JSON object such as those returned from the methods in NSJSONSerialization, or
                 an NSArray with one object for each persisted property. An exception will be
                 thrown if any required properties are not present and no default is set.
@@ -140,9 +136,7 @@
  
  @see   defaultPropertyValues
  */
-+ (instancetype)createInRealm:(RLMRealm *)realm withValue:(id)value;
-
-+ (instancetype)createInRealm:(RLMRealm *)realm withObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createInRealm:withValue:");
++ (instancetype)createInRealm:(RLMRealm *)realm withObject:(id)object;
 
 /**
  Create or update an RLMObject in the default Realm with a given object.
@@ -151,12 +145,12 @@
  an object with the same primary key value in the default RLMRealm its values are updated and the object
  is returned. Otherwise this creates and populates a new instance of this object in the default Realm.
  
- If nested objects are included in the argument, `createOrUpdateInDefaultRealmWithValue:` will be
- called on them if have a primary key (`createInDefaultRealmWithValue:` otherwise).
+ If nested objects are included in the argument, `createOrUpdateInDefaultRealmWithObject:` will be
+ called on them if have a primary key (`createInDefaultRealmWithObject:` otherwise).
  
  This is a no-op if the argument is an RLMObject of the same type already backed by the target realm.
 
- @param value   The value used to populate the object. This can be any key/value coding compliant
+ @param object  The object used to populate the object. This can be any key/value coding compliant
                 object, or a JSON object such as those returned from the methods in NSJSONSerialization, or
                 an NSArray with one object for each persisted property. An exception will be
                 thrown if any required properties are not present and no default is set.
@@ -165,9 +159,7 @@
 
  @see   defaultPropertyValues, primaryKey
  */
-+ (instancetype)createOrUpdateInDefaultRealmWithValue:(id)value;
-
-+ (instancetype)createOrUpdateInDefaultRealmWithObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createOrUpdateInDefaultRealmWithValue:");
++ (instancetype)createOrUpdateInDefaultRealmWithObject:(id)object;
 
 /**
  Create or update an RLMObject with a given object.
@@ -176,13 +168,13 @@
  an object with the same primary key value in the provided RLMRealm its values are updated and the object
  is returned. Otherwise this creates and populates a new instance of this object in the provided Realm.
  
- If nested objects are included in the argument, `createOrUpdateInRealm:withValue:` will be
- called on them if have a primary key (`createInRealm:withValue:` otherwise).
+ If nested objects are included in the argument, `createOrUpdateInRealm:withObject:` will be
+ called on them if have a primary key (`createInRealm:withObject:` otherwise).
 
  This is a no-op if the argument is an RLMObject of the same type already backed by the target realm.
 
  @param realm   The Realm in which this object is persisted.
- @param value   The value used to populate the object. This can be any key/value coding compliant
+ @param object  The object used to populate the object. This can be any key/value coding compliant
                 object, or a JSON object such as those returned from the methods in NSJSONSerialization, or
                 an NSArray with one object for each persisted property. An exception will be
                 thrown if any required properties are not present and no default is set.
@@ -191,9 +183,7 @@
 
  @see   defaultPropertyValues, primaryKey
  */
-+ (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withValue:(id)value;
-
-+ (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createOrUpdateInRealm:withValue:");
++ (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withObject:(id)object;
 
 /**
  The Realm in which this object is persisted. Returns nil for standalone objects.

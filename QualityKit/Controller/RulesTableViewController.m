@@ -25,7 +25,9 @@
     rulesArr = @[@{@"key": QKCheckRuleOutsideControlLine,
                    @"value": @"点在控制线外部"},
                  @{@"key": QKCheckRuleTwoOfThreeInAreaA,
-                   @"value": @"连续三点有两点在A区"}];
+                   @"value": @"连续三点有两点在A区"},
+                 @{@"key": QKCheckRuleFourOfFiveInAreaB,
+                   @"value": @"连续五点有四点在B区"}];
 }
 
 - (void)didReceiveMemoryWarning {
