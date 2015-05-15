@@ -27,7 +27,9 @@
                  @{@"key": QKCheckRuleTwoOfThreeInAreaA,
                    @"value": @"连续三点有两点在A区"},
                  @{@"key": QKCheckRuleFourOfFiveInAreaB,
-                   @"value": @"连续五点有四点在B区"}];
+                   @"value": @"连续五点有四点在B区"},
+                 @{@"key": QKCheckRuleConsecutiveSixPointsChangeInSameWay,
+                   @"value": @"连续六点稳定上升或下降"}];
 }
 
 - (void)didReceiveMemoryWarning {

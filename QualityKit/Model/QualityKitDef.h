@@ -29,6 +29,7 @@
 #define QKCheckRuleOutsideControlLine @"OutsideControlLine"
 #define QKCheckRuleTwoOfThreeInAreaA @"TwoOfThreeInAreaA" 
 #define QKCheckRuleFourOfFiveInAreaB @"FourOfFiveInAreaB"
+#define QKCheckRuleConsecutiveSixPointsChangeInSameWay @"ConsecutiveSixPointsChangeInSameWay"
 
 // Check Rules In NSUserDefaults
 #define QKCheckRules @"QKCheckRules"

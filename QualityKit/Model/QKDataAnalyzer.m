@@ -399,6 +399,78 @@
         }
         
     }
+    
+    if ([checkRule isEqualToString:QKCheckRuleConsecutiveSixPointsChangeInSameWay]) {
+        
+        if (plotArray.count >= 6) {
+            NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+            
+            for (int i = 0; i < plotArray.count - 5; i ++) {
+                
+                BOOL trendChanged = NO;
+                BOOL increasingFlag = YES;
+                
+                for (int j = i + 1; j < i + 6; j ++) {
+                    float diff = [plotArray[j] floatValue] - [plotArray[j - 1] floatValue];
+                    if (j == i) {
+                        if (diff >= 0) {
+                            increasingFlag = YES;
+                        } else {
+                            increasingFlag = NO;
+                        }
+                    } else {
+                        if ((diff > 0 && increasingFlag == NO) || (diff < 0 && increasingFlag == YES)) {
+                            trendChanged = YES;
+                            break;
+                        } else {
+                            trendChanged = NO;
+                            if (diff >= 0) {
+                                increasingFlag = YES;
+                            } else {
+                                increasingFlag = NO;
+                            }
+                            continue;
+                        }
+                    }
+                }
+                
+                if (trendChanged == YES) {
+                    continue;
+                } else {
+                    NSArray *possibleErrorPoints = @[[NSNumber numberWithInt:i],
+                                                     [NSNumber numberWithInt:i + 1],
+                                                     [NSNumber numberWithInt:i + 2],
+                                                     [NSNumber numberWithInt:i + 3],
+                                                     [NSNumber numberWithInt:i + 4],
+                                                     [NSNumber numberWithInt:i + 5]];
+                    for (NSNumber *index in possibleErrorPoints) {
+                        if (![indexesOfErrorPoints containsObject:index]) {
+                            [indexesOfErrorPoints addObject:index];
+                        }
+                    }
+                }
+            }
+            
+            NSString *errorDescription = @"";
+            if (indexesOfErrorPoints.count > 0) {
+                errorDescription = @"点";
+                for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+                    if (j == 0) {
+                        errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                    } else {
+                        errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                    }
+                }
+                errorDescription = [NSString stringWithFormat:@"%@连续六个点稳定上升或下降。可能原因：设备逐渐损坏、操作者的疲劳、工具的磨损等。", errorDescription];
+            }
+            
+            block(indexesOfErrorPoints, errorDescription);
+            
+        } else {
+            block(@[], @"");
+        }
+        
+    }
 }
 
 #pragma mark - fix data
