@@ -158,6 +158,68 @@
         }
     }
     
+    if ([chartType isEqualToString:QKControlChartTypeP]) {
+        
+        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
+        errorMsgView.font = [UIFont systemFontOfSize:14.0];
+        [self.view addSubview:errorMsgView];
+        
+        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeP withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+            chartView.UCLValue = _UCLValue;
+            chartView.LCLValue = _LCLValue;
+            chartView.CLValue = _CLValue;
+            chartView.dataArr = _plotArr;
+            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"P 图：%@", _errDescription];
+        }];
+        [self.view addSubview:chartView];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
+        NSDictionary *metrics = @{@"lowerDist": @240};
+        NSString *vfl = @"|-16-[chartView]-16-|";
+        NSString *vfl2 = @"V:|-64-[chartView]-32-[errorMsgView(240)]-16-|";
+        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
+        for (NSString *tmpVFL in @[vfl, vfl2, vfl4]) {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
+        }
+        
+    }
+    
+    if ([chartType isEqualToString:QKControlChartTypePn]) {
+        
+        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
+        errorMsgView.font = [UIFont systemFontOfSize:14.0];
+        [self.view addSubview:errorMsgView];
+        
+        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypePn withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+            chartView.UCLValue = _UCLValue;
+            chartView.LCLValue = _LCLValue;
+            chartView.CLValue = _CLValue;
+            chartView.dataArr = _plotArr;
+            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"Pn 图：%@", _errDescription];
+        }];
+        [self.view addSubview:chartView];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
+        NSDictionary *metrics = @{@"lowerDist": @240};
+        NSString *vfl = @"|-16-[chartView]-16-|";
+        NSString *vfl2 = @"V:|-64-[chartView]-32-[errorMsgView(240)]-16-|";
+        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
+        for (NSString *tmpVFL in @[vfl, vfl2, vfl4]) {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
+        }
+        
+    }
+    
     self.title = [NSString stringWithFormat:@"%@ 控制图", chartType];
 }
 

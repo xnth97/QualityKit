@@ -174,7 +174,7 @@
         for (int i = 0; i < coordinatesArr.count; i ++) {
             NSString *tStr = [NSString stringWithFormat:@"%d", i + 1];
             CGPoint tmpPoint = [coordinatesArr[i] CGPointValue];
-            [tStr drawInRect:CGRectMake(tmpPoint.x - 0.5 * 16, height - 26, 16, 20) withAttributes:dict];
+            [tStr drawInRect:CGRectMake(tmpPoint.x - 0.5 * 20, height - 26, 20, 20) withAttributes:dict];
         }
         
         // 绘制 UCL, LCL, CL 值

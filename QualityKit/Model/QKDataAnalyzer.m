@@ -227,6 +227,48 @@
         
         block(UCLValue, LCLValue, CLValue, rArr);
     }
+    
+    if ([type isEqualToString:QKControlChartTypeP]) {
+        NSMutableArray *pArr = [[NSMutableArray alloc] init];
+        
+        float nSum = 0;
+        float pniSum = 0;
+        
+        for (int i = 0; i < dataArray.count; i ++) {
+            NSArray *tmp = dataArray[i];
+            float ni = [tmp[0] floatValue];
+            float pni = [tmp[1] floatValue];
+            float pi = pni / ni;
+            [pArr addObject:[NSNumber numberWithFloat:pi]];
+            nSum = nSum + ni;
+            pniSum = pniSum + pni;
+        }
+        
+        float CLValue = pniSum / nSum;
+        
+        float UCLValue = CLValue + 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(nSum / dataArray.count);
+        float LCLValue = CLValue - 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(nSum / dataArray.count);
+        
+        block(UCLValue, LCLValue, CLValue, pArr);
+    }
+    
+    if ([type isEqualToString:QKControlChartTypePn]) {
+        NSMutableArray *pArr = [[NSMutableArray alloc] init];
+        
+        float pSum = 0;
+        
+        for (NSArray *tmpP in dataArray) {
+            pSum = pSum + [tmpP[1] floatValue];
+            [pArr addObject:tmpP[1]];
+        }
+        float pBar = pSum / (dataArray.count * [(dataArray[0])[0] integerValue]);
+        float CLValue = pSum / dataArray.count;
+        
+        float UCLValue = CLValue + 3 * sqrt(CLValue * (1 - pBar));
+        float LCLValue = CLValue - 3 * sqrt(CLValue * (1 - pBar));
+        
+        block(UCLValue, LCLValue, CLValue, pArr);
+    }
 }
 
 #pragma mark - check data

@@ -21,6 +21,8 @@
 #define QKControlChartTypeX @"X"
 #define QKControlChartTypeMR @"MR"
 #define QKControlChartTypeXMR @"X-MR"
+#define QKControlChartTypeP @"P"
+#define QKControlChartTypePn @"Pn"
 
 // Check Rule Definitions
 
