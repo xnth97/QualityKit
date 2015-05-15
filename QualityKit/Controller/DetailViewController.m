@@ -134,7 +134,29 @@
         }
         
     }];
-    for (UIAlertAction *action in @[xBarR, xBarS, xMR, P, Pn]) {
+    UIAlertAction *C = [UIAlertAction actionWithTitle:@"C" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+        [self.navigationController pushViewController:chart animated:YES];
+        chart.chartType = QKControlChartTypeC;
+        if (detailIsXLS) {
+            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+        } else if (detailIsRealm) {
+            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+        }
+        
+    }];
+    UIAlertAction *U = [UIAlertAction actionWithTitle:@"U" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+        [self.navigationController pushViewController:chart animated:YES];
+        chart.chartType = QKControlChartTypeU;
+        if (detailIsXLS) {
+            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+        } else if (detailIsRealm) {
+            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+        }
+        
+    }];
+    for (UIAlertAction *action in @[xBarR, xBarS, xMR, P, Pn, C, U]) {
         [styleController addAction:action];
     }
     styleController.modalPresentationStyle = UIModalPresentationPopover;

@@ -269,6 +269,41 @@
         
         block(UCLValue, LCLValue, CLValue, pArr);
     }
+    
+    if ([type isEqualToString:QKControlChartTypeC]) {
+        NSMutableArray *cArr = [[NSMutableArray alloc] init];
+        
+        float cSum = 0;
+        
+        for (NSArray *tmpC in dataArray) {
+            cSum = cSum + [tmpC[1] floatValue];
+            [cArr addObject:tmpC[1]];
+        }
+        float CLValue = cSum / dataArray.count;
+        float UCLValue = CLValue + 3 * sqrt(CLValue);
+        float LCLValue = CLValue - 3 * sqrt(CLValue);
+        
+        block(UCLValue, LCLValue, CLValue, cArr);
+    }
+    
+    if ([type isEqualToString:QKControlChartTypeU]) {
+        NSMutableArray *uArr = [[NSMutableArray alloc] init];
+        
+        float uSum = 0;
+        float nSum = 0;
+        for (NSArray *tmp in dataArray) {
+            float U = [tmp[1] floatValue] / [tmp[0] floatValue];
+            uSum = uSum + U;
+            nSum = nSum + [tmp[0] floatValue];
+            [uArr addObject:[NSNumber numberWithFloat:U]];
+        }
+        float CLValue = uSum / dataArray.count;
+        
+        float UCLValue = CLValue + 3 * sqrt(CLValue) / sqrt(nSum / dataArray.count);
+        float LCLValue = CLValue - 3 * sqrt(CLValue) / sqrt(nSum / dataArray.count);
+        
+        block(UCLValue, LCLValue, CLValue, uArr);
+    }
 }
 
 #pragma mark - check data

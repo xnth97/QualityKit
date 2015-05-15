@@ -14,7 +14,7 @@
 #define QKControlChartTypeXBar @"XBar"
 #define QKControlChartTypeR @"R"
 #define QKControlChartTypeXBarR @"XBar-R"
-#define QKControlChartTypeCChart @"C"
+#define QKControlChartTypeC @"C"
 #define QKControlChartTypeXBarUsingS @"XBar_S"
 #define QKControlChartTypeS @"S"
 #define QKControlChartTypeXBarS @"XBar-S"
@@ -23,6 +23,7 @@
 #define QKControlChartTypeXMR @"X-MR"
 #define QKControlChartTypeP @"P"
 #define QKControlChartTypePn @"Pn"
+#define QKControlChartTypeU @"U"
 
 // Check Rule Definitions
 
