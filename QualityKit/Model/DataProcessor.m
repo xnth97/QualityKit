@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "QZXLSReader.h"
 #import "TSTableViewModel.h"
+#import "QualityKitDef.h"
 
 @implementation DataProcessor
 
@@ -40,7 +41,7 @@
     block(columns, rows);
 }
 
-+ (void)convertXLSFile:(NSString *)filePath toDoubleArrayWithBlock:(void (^)(NSArray *))block {
++ (NSArray *)convertXLSFileToDoubleArray:(NSString *)filePath {
     NSURL *xlsURL = [NSURL fileURLWithPath:[DataManager fullPathOfFile:filePath]];
     QZWorkbook *excelReader = [[QZWorkbook alloc] initWithContentsOfXLS:xlsURL];
     QZWorkSheet *firstWorkSheet = excelReader.workSheets.firstObject;
@@ -55,7 +56,7 @@
         [doubleArr addObject:rowArr];
     }
     
-    block(doubleArr);
+    return doubleArr;
 }
 
 + (NSArray *)convertTableModelToFloatArray:(TSTableViewModel *)model {
@@ -72,6 +73,57 @@
         [dataArr addObject:rowArr];
     }
     return dataArr;
+}
+
++ (void)convertRealm:(NSString *)filePath dataModelClass:(NSString *)dataModelClass toTableModelWithBlock:(void (^)(NSArray *, NSArray *))block {
+    
+    NSString *realmPath = [DataManager fullPathOfFile:filePath];
+    RLMRealm *realm = [RLMRealm realmWithPath:realmPath];
+    
+    NSMutableArray *columns = [[NSMutableArray alloc] init];
+    NSMutableArray *rows = [[NSMutableArray alloc] init];
+    
+    if ([dataModelClass isEqualToString:[[QKData5 class] description]]) {
+        for (int i = 0; i < 5; i ++) {
+            NSDictionary *tmpDic = @{@"title": [NSString stringWithFormat:@"%d", i + 1],
+                                     @"defWidth": @80};
+            [columns addObject:[TSColumn columnWithDictionary:tmpDic]];
+        }
+        
+        RLMResults *allQKData5 = [QKData5 allObjectsInRealm:realm];
+        for (QKData5 *tmp in allQKData5) {
+            TSRow *row = [TSRow rowWithDictionary:@{
+                @"cells": @[
+                        @{@"value": [NSNumber numberWithDouble:tmp.value1]},
+                        @{@"value": [NSNumber numberWithDouble:tmp.value2]},
+                        @{@"value": [NSNumber numberWithDouble:tmp.value3]},
+                        @{@"value": [NSNumber numberWithDouble:tmp.value4]},
+                        @{@"value": [NSNumber numberWithDouble:tmp.value5]}
+                ]}];
+            [rows addObject:row];
+        }
+        block(columns, rows);
+    }
+}
+
++ (NSArray *)convertRealmToDoubleArray:(NSString *)filePath dataModelClass:(NSString *)dataModelClass {
+    NSString *realmPath = [DataManager fullPathOfFile:filePath];
+    RLMRealm *realm = [RLMRealm realmWithPath:realmPath];
+    
+    NSMutableArray *doubleArray = [[NSMutableArray alloc] init];
+    
+    if ([dataModelClass isEqualToString:[QKData5 className]]) {
+        RLMResults *allQKData5 = [QKData5 allObjectsInRealm:realm];
+        for (QKData5 *tmp in allQKData5) {
+            [doubleArray addObject:@[[NSNumber numberWithDouble:tmp.value1],
+                                     [NSNumber numberWithDouble:tmp.value2],
+                                     [NSNumber numberWithDouble:tmp.value3],
+                                     [NSNumber numberWithDouble:tmp.value4],
+                                     [NSNumber numberWithDouble:tmp.value5]]];
+        }
+    }
+    
+    return doubleArray;
 }
 
 @end

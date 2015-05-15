@@ -10,11 +10,11 @@
 
 @interface QKData5 : RLMObject
 
-@property float value1;
-@property float value2;
-@property float value3;
-@property float value4;
-@property float value5;
+@property double value1;
+@property double value2;
+@property double value3;
+@property double value4;
+@property double value5;
 
 @end
 

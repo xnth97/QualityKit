@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QKData5.h"
 
 // Control Chart Type Definitions
 

@@ -8,19 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "TSTableViewModel.h"
+#import <Realm/Realm.h>
 
 @interface DataProcessor : NSObject
 
 + (void)convertXLSFile:(NSString *)filePath toTableModelWithBlock:(void(^)(NSArray *columns, NSArray *rows))block;
 
 /**
- *  将 XLS 数据模型转化为便于计算的 double 数组
+ *  将 XLS 数据模型转化为便于计算的 double 数组，数组结构为：@[@[rowArray], @[rowArray]]
  *
  *  @param filePath XLS 文件路径
- *  @param block    回调 block，回调数组结构为：@[@[rowArray], @[rowArray]]
  */
-+ (void)convertXLSFile:(NSString *)filePath toDoubleArrayWithBlock:(void(^)(NSArray *doubleArr))block;
++ (NSArray *)convertXLSFileToDoubleArray:(NSString *)filePath;
 
 + (NSArray *)convertTableModelToFloatArray:(TSTableViewModel *)model;
+
++ (void)convertRealm:(NSString *)filePath dataModelClass:(NSString *)dataModelClass toTableModelWithBlock:(void(^)(NSArray *columns, NSArray *rows))block;
+
++ (NSArray *)convertRealmToDoubleArray:(NSString *)filePath dataModelClass:(NSString *)dataModelClass;
 
 @end

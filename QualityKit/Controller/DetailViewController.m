@@ -15,6 +15,9 @@
 #import "RulesTableViewController.h"
 #import "QualityKitDef.h"
 
+#define detailIsXLS [[detailItem pathExtension] isEqualToString:@"xls"]
+#define detailIsRealm [[detailItem pathExtension] isEqualToString:@"realm"]
+
 @interface DetailViewController () {
     TSTableViewModel *tableModel;
 }
@@ -64,6 +67,13 @@
             [dataTableView resetColumnSelectionWithAnimtaion:YES];
             [dataTableView resetRowSelectionWithAnimtaion:YES];
         }];
+    } else if ([[detailItem pathExtension] isEqualToString:@"realm"]) {
+        [DataProcessor convertRealm:detailItem dataModelClass:[[QKData5 class] description] toTableModelWithBlock:^(NSArray *columns, NSArray *rows) {
+            tableModel = [[TSTableViewModel alloc] initWithTableView:dataTableView andStyle:kTSTableViewStyleLight];
+            [tableModel setColumns:columns andRows:rows];
+            [dataTableView resetColumnSelectionWithAnimtaion:YES];
+            [dataTableView resetRowSelectionWithAnimtaion:YES];
+        }];
     }
 }
 
@@ -73,10 +83,10 @@
         ControlChartViewController *chart = [[ControlChartViewController alloc] init];
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXBarR;
-        if ([[detailItem pathExtension] isEqualToString:@"xls"]) {
-            [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
-                chart.dataArr = _dataArr;
-            }];
+        if (detailIsXLS) {
+            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+        } else if (detailIsRealm) {
+            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -84,10 +94,10 @@
         ControlChartViewController *chart = [[ControlChartViewController alloc] init];
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXBarS;
-        if ([[detailItem pathExtension] isEqualToString:@"xls"]) {
-            [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
-                chart.dataArr = _dataArr;
-            }];
+        if (detailIsXLS) {
+            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+        } else if (detailIsRealm) {
+            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -95,10 +105,10 @@
         ControlChartViewController *chart = [[ControlChartViewController alloc] init];
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXMR;
-        if ([[detailItem pathExtension] isEqualToString:@"xls"]) {
-            [DataProcessor convertXLSFile:detailItem toDoubleArrayWithBlock:^(NSArray *_dataArr) {
-                chart.dataArr = _dataArr;
-            }];
+        if (detailIsXLS) {
+            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+        } else if (detailIsRealm) {
+            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -123,12 +133,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Data Edit
-
-- (void)saveDataWithModel:(TSTableViewModel *)model {
-    [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
 }
 
 #pragma mark - TSTableViewDelegate
@@ -172,7 +176,9 @@
             [tableModel removeRowAtPath:rowPath];
             [tableModel insertRow:newRow atPath:rowPath];
             
-            [self saveDataWithModel:tableModel];
+            if (detailIsXLS) {
+                [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
+            }
         }];
         
         [editAlert addAction:cancelAction];
@@ -206,7 +212,9 @@
             TSRow *newRow = [TSRow rowWithDictionary:@{@"cells": newRowArr}];
             [tableModel insertRow:newRow atPath:rowPath];
             
-            [self saveDataWithModel:tableModel];
+            if (detailIsXLS) {
+                [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
+            }
             
             [tableView resetRowSelectionWithAnimtaion:YES];
         }];
@@ -218,7 +226,11 @@
     UIAlertAction *removeRowAction = [UIAlertAction actionWithTitle:@"删除此行" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         
         [tableModel removeRowAtPath:rowPath];
-        [self saveDataWithModel:tableModel];
+        if (detailIsXLS) {
+            [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
+        } else if (detailIsRealm) {
+            
+        }
         
         [tableView resetRowSelectionWithAnimtaion:YES];
         

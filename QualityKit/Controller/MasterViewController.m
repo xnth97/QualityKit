@@ -110,23 +110,12 @@
                 [MsgDisplay showErrorMsg:@"数据库名不能为空"];
             } else {
                 QKData5 *data = [[QKData5 alloc] init];
-                [DataManager createLocalFile:field.text extension:@"realm"];
-                
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    RLMRealm *realm = [RLMRealm realmWithPath:[DataManager fullPathOfFile:[field.text stringByAppendingPathExtension:@"realm"]]];
-                    [realm beginWriteTransaction];
-                    [realm addObject:data];
-                    [realm commitWriteTransaction];
+                [DataManager createLocalRealm:field.text dataModel:data finishBlock:^{
+                    [objects insertObject:[field.text stringByAppendingPathExtension:@"realm"] atIndex:0];
                     
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [objects insertObject:[field.text stringByAppendingPathExtension:@"realm"] atIndex:0];
-                        
-                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                    });
-                    
-                });
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }];
             }
             
         }];

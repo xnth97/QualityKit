@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
 @interface DataManager : NSObject
 
@@ -15,7 +16,10 @@
 + (NSString *)fullPathOfFile:(NSString *)file;
 + (void)createLocalFile:(NSString *)fileName extension:(NSString *)extension;
 + (void)createLocalXLSFile:(NSString *)fileName columnNumber:(NSInteger)num;
++ (void)createLocalRealm:(NSString *)fileName dataModel:(RLMObject *)data finishBlock:(void(^)())block;
 + (void)saveLocalXLSFile:(NSString *)fileName withDataArray:(NSArray *)dataArr;
 + (void)removeLocalFile:(NSString *)filePath;
++ (void)addData:(RLMObject *)data ToRealm:(NSString *)realmName;
++ (void)removeData:(RLMObject *)data InRealm:(NSString *)realmName;
 
 @end

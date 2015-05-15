@@ -18,11 +18,11 @@
 		</data>
 		<key>Headers/RLMMigration.h</key>
 		<data>
-		zQW2Oiv1JWMkKijrrZ445Ua7cYg=
+		D0EJvNIyYpSZCLAhJkhoq5w2noM=
 		</data>
 		<key>Headers/RLMObject.h</key>
 		<data>
-		brqGKTYkhYeyylTbVN4tQe0EfQc=
+		raLghq7ZvIbf0TKmfkA528ULSPA=
 		</data>
 		<key>Headers/RLMObjectBase.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/RLMRealm.h</key>
 		<data>
-		OL6qNA/9NmQCNczqtFkpwO13gxw=
+		/uZYk2UiowG5CF0Bk6NxcTpwMjM=
 		</data>
 		<key>Headers/RLMResults.h</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		XPS5EKm60erzyUmvlfGPdN6y1LM=
+		Gvak7fnN6eGw1mMnOmC2T9NK1SE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -82,11 +82,11 @@
 		</data>
 		<key>PrivateHeaders/RLMObjectStore.h</key>
 		<data>
-		pmoedSpp/TC0I7yZ6hq9HnnZIGQ=
+		9HjSlQg7dUlzKawXvmbd6hEdefk=
 		</data>
 		<key>PrivateHeaders/RLMObject_Private.h</key>
 		<data>
-		U3oJ3PZPrFXKBDE+0FG/v/K4fqQ=
+		auBEsEf+I05lawC78X6AOaSk1vM=
 		</data>
 		<key>PrivateHeaders/RLMProperty_Private.h</key>
 		<data>
@@ -98,11 +98,11 @@
 		</data>
 		<key>PrivateHeaders/RLMRealm_Dynamic.h</key>
 		<data>
-		76Wsb0QNWXQZgw3yVJZ3wq4A5X0=
+		07T2zHtqp2mM2US3p9Gb5K7v5jE=
 		</data>
 		<key>PrivateHeaders/RLMRealm_Private.h</key>
 		<data>
-		42ZsmwI5igxW+sYUbNiR5s5SWXo=
+		jLyQNhFvWEe2PKKTgeFN5UquSQM=
 		</data>
 		<key>PrivateHeaders/RLMResults_Private.h</key>
 		<data>
@@ -129,11 +129,11 @@
 		</data>
 		<key>Headers/RLMMigration.h</key>
 		<data>
-		zQW2Oiv1JWMkKijrrZ445Ua7cYg=
+		D0EJvNIyYpSZCLAhJkhoq5w2noM=
 		</data>
 		<key>Headers/RLMObject.h</key>
 		<data>
-		brqGKTYkhYeyylTbVN4tQe0EfQc=
+		raLghq7ZvIbf0TKmfkA528ULSPA=
 		</data>
 		<key>Headers/RLMObjectBase.h</key>
 		<data>
@@ -153,7 +153,7 @@
 		</data>
 		<key>Headers/RLMRealm.h</key>
 		<data>
-		OL6qNA/9NmQCNczqtFkpwO13gxw=
+		/uZYk2UiowG5CF0Bk6NxcTpwMjM=
 		</data>
 		<key>Headers/RLMResults.h</key>
 		<data>
@@ -189,11 +189,11 @@
 		</data>
 		<key>PrivateHeaders/RLMObjectStore.h</key>
 		<data>
-		pmoedSpp/TC0I7yZ6hq9HnnZIGQ=
+		9HjSlQg7dUlzKawXvmbd6hEdefk=
 		</data>
 		<key>PrivateHeaders/RLMObject_Private.h</key>
 		<data>
-		U3oJ3PZPrFXKBDE+0FG/v/K4fqQ=
+		auBEsEf+I05lawC78X6AOaSk1vM=
 		</data>
 		<key>PrivateHeaders/RLMProperty_Private.h</key>
 		<data>
@@ -205,11 +205,11 @@
 		</data>
 		<key>PrivateHeaders/RLMRealm_Dynamic.h</key>
 		<data>
-		76Wsb0QNWXQZgw3yVJZ3wq4A5X0=
+		07T2zHtqp2mM2US3p9Gb5K7v5jE=
 		</data>
 		<key>PrivateHeaders/RLMRealm_Private.h</key>
 		<data>
-		42ZsmwI5igxW+sYUbNiR5s5SWXo=
+		jLyQNhFvWEe2PKKTgeFN5UquSQM=
 		</data>
 		<key>PrivateHeaders/RLMResults_Private.h</key>
 		<data>

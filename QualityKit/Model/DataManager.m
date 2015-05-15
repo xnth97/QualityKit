@@ -124,4 +124,36 @@
     [workBook writeToFile:filePath];
 }
 
++ (void)createLocalRealm:(NSString *)fileName dataModel:(RLMObject *)data finishBlock:(void (^)())block {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        RLMRealm *realm = [RLMRealm realmWithPath:[self fullPathOfFile:[fileName stringByAppendingPathExtension:@"realm"]]];
+        [realm beginWriteTransaction];
+        [realm addObject:data];
+        [realm commitWriteTransaction];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block();
+        });
+        
+    });
+}
+
++ (void)addData:(RLMObject *)data ToRealm:(NSString *)realmName {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        RLMRealm *realm = [RLMRealm realmWithPath:[self fullPathOfFile:realmName]];
+        [realm beginWriteTransaction];
+        [realm addObject:data];
+        [realm commitWriteTransaction];
+    });
+}
+
++ (void)removeData:(RLMObject *)data InRealm:(NSString *)realmName {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        RLMRealm *realm = [RLMRealm realmWithPath:[self fullPathOfFile:realmName]];
+        [realm beginWriteTransaction];
+        [realm deleteObject:data];
+        [realm commitWriteTransaction];
+    });
+}
+
 @end

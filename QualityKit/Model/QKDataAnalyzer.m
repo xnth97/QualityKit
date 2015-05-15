@@ -304,51 +304,58 @@
     }
     
     if ([checkRule isEqualToString:QKCheckRuleFourOfFiveInAreaB]) {
-        float unitArea = (UCL - LCL) / 6;
-        // 下 B 区下限
-        float lowerAreaBLowerLimit = LCL + unitArea;
-        // 下 B 区上限
-        float lowerAreaBUpperLimit = LCL + 2 * unitArea;
-        // 上 B 区下限
-        float upperAreaBLowerLimit = UCL - 2 * unitArea;
-        // 上 B 区上限
-        float upperAreaBUpperLimit = UCL - unitArea;
         
-        NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < plotArray.count - 4; i ++) {
-            float inAreaAPointsNum = 0;
-            NSMutableArray *indexesOfCheckedPossibleErrorPoints = [[NSMutableArray alloc] init];
-            for (int j = i; j <= i + 4; j ++) {
-                float pointValue = [plotArray[j] floatValue];
-                if ((pointValue >= lowerAreaBLowerLimit && pointValue <= lowerAreaBUpperLimit) || (pointValue >= upperAreaBLowerLimit && pointValue <= upperAreaBUpperLimit)) {
-                    [indexesOfCheckedPossibleErrorPoints addObject:[NSNumber numberWithInteger:j]];
-                    inAreaAPointsNum ++;
+        if (plotArray.count >= 5) {
+            float unitArea = (UCL - LCL) / 6;
+            // 下 B 区下限
+            float lowerAreaBLowerLimit = LCL + unitArea;
+            // 下 B 区上限
+            float lowerAreaBUpperLimit = LCL + 2 * unitArea;
+            // 上 B 区下限
+            float upperAreaBLowerLimit = UCL - 2 * unitArea;
+            // 上 B 区上限
+            float upperAreaBUpperLimit = UCL - unitArea;
+            
+            NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+            
+            for (int i = 0; i < plotArray.count - 4; i ++) {
+                float inAreaAPointsNum = 0;
+                NSMutableArray *indexesOfCheckedPossibleErrorPoints = [[NSMutableArray alloc] init];
+                for (int j = i; j <= i + 4; j ++) {
+                    float pointValue = [plotArray[j] floatValue];
+                    if ((pointValue >= lowerAreaBLowerLimit && pointValue <= lowerAreaBUpperLimit) || (pointValue >= upperAreaBLowerLimit && pointValue <= upperAreaBUpperLimit)) {
+                        [indexesOfCheckedPossibleErrorPoints addObject:[NSNumber numberWithInteger:j]];
+                        inAreaAPointsNum ++;
+                    }
                 }
-            }
-            if (inAreaAPointsNum >= 4) {
-                for (id tmp in indexesOfCheckedPossibleErrorPoints) {
-                    if (![indexesOfErrorPoints containsObject:tmp]) {
-                        [indexesOfErrorPoints addObject:tmp];
+                if (inAreaAPointsNum >= 4) {
+                    for (id tmp in indexesOfCheckedPossibleErrorPoints) {
+                        if (![indexesOfErrorPoints containsObject:tmp]) {
+                            [indexesOfErrorPoints addObject:tmp];
+                        }
                     }
                 }
             }
-        }
-        
-        NSString *errorDescription = @"";
-        if (indexesOfErrorPoints.count > 0) {
-            errorDescription = @"点";
-            for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
-                if (j == 0) {
-                    errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
-                } else {
-                    errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+            
+            NSString *errorDescription = @"";
+            if (indexesOfErrorPoints.count > 0) {
+                errorDescription = @"点";
+                for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+                    if (j == 0) {
+                        errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                    } else {
+                        errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                    }
                 }
+                errorDescription = [NSString stringWithFormat:@"%@在连续五个点中有四点位于 B 区。可能原因：过程偏倚、量具需要调整、设备不稳定等。", errorDescription];
             }
-            errorDescription = [NSString stringWithFormat:@"%@在连续五个点中有四点位于 B 区。可能原因：过程偏倚、量具需要调整、设备不稳定等。", errorDescription];
+            
+            block(indexesOfErrorPoints, errorDescription);
+            
+        } else {
+            block(@[], @"");
         }
         
-        block(indexesOfErrorPoints, errorDescription);
     }
 }
 
@@ -372,9 +379,10 @@
             // 因此如果初始错误点数组长度为 0 会直接返回空
             
             flag = NO;
+            block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
             break;
             
-        } else if (indexesOfErrorPoints.count <= 3) {
+        } else if (indexesOfErrorPoints.count <= 3 && indexesOfErrorPoints.count > 0) {
             // 小于等于三执行修正
             NSMutableArray *_dataArr = [dataArr mutableCopy];
             
@@ -409,18 +417,25 @@
                 }];
             }
             
-            continue;
             
         } else {
             // 大于三直接返回
             errorDescription = [NSString stringWithFormat:@"%@\n错误点个数大于3，无法修正", errorDescription];
             
+            [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+                UCLValue = _UCLValue;
+                LCLValue = _LCLValue;
+                CLValue = _CLValue;
+                plotArr = [_plotArr mutableCopy];
+            }];
+            
             flag = NO;
+            block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
             break;
         }
     }
     
-    block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
+    
 }
 
 @end
