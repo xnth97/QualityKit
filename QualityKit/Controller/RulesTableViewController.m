@@ -29,7 +29,9 @@
                  @{@"key": QKCheckRuleFourOfFiveInAreaB,
                    @"value": @"连续五点有四点在B区"},
                  @{@"key": QKCheckRuleConsecutiveSixPointsChangeInSameWay,
-                   @"value": @"连续六点稳定上升或下降"}];
+                   @"value": @"连续六点稳定上升或下降"},
+                 @{@"key": QKCheckRuleConsecutiveNinePointsOneSide,
+                   @"value": @"连续九点在中心线一侧"}];
 }
 
 - (void)didReceiveMemoryWarning {

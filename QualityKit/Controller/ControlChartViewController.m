@@ -29,16 +29,16 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
+    errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
+    errorMsgView.font = [UIFont systemFontOfSize:14.0];
+    errorMsgView.editable = NO;
+    [self.view addSubview:errorMsgView];
+    
     if ([chartType isEqualToString:QKControlChartTypeXBarR]) {
         
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBar withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
@@ -76,12 +76,6 @@
         
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBarUsingS withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
@@ -119,12 +113,6 @@
         
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeX withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
@@ -162,12 +150,6 @@
         
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeP withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
@@ -193,12 +175,6 @@
         
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypePn withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
@@ -223,12 +199,6 @@
     if ([chartType isEqualToString:QKControlChartTypeC]) {
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeC withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;
@@ -252,12 +222,6 @@
     if ([chartType isEqualToString:QKControlChartTypeU]) {
         chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
-        errorMsgView.font = [UIFont systemFontOfSize:14.0];
-        [self.view addSubview:errorMsgView];
-        
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeU withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
             chartView.LCLValue = _LCLValue;

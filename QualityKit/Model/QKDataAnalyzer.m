@@ -506,6 +506,55 @@
         }
         
     }
+    
+    if ([checkRule isEqualToString:QKCheckRuleConsecutiveSixPointsChangeInSameWay]) {
+        if (plotArray.count >= 9) {
+            NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+            for (int i = 0; i < plotArray.count - 8; i ++) {
+                float plot0 = [plotArray[0] floatValue];
+                BOOL point0GreaterThanCL = (plot0 >= CL) ? YES : NO;
+                for (int j = i; j < i + 9; j ++) {
+                    BOOL thisPointGreaterThanCL = ([plotArray[j] floatValue] >= CL) ? YES : NO;
+                    if (thisPointGreaterThanCL == point0GreaterThanCL) {
+                        if (j == i + 8) {
+                            NSArray *possibleErrorPoints = @[[NSNumber numberWithInt:i],
+                                                             [NSNumber numberWithInt:i + 1],
+                                                             [NSNumber numberWithInt:i + 2],
+                                                             [NSNumber numberWithInt:i + 3],
+                                                             [NSNumber numberWithInt:i + 4],
+                                                             [NSNumber numberWithInt:i + 5],
+                                                             [NSNumber numberWithInt:i + 6],
+                                                             [NSNumber numberWithInt:i + 7],
+                                                             [NSNumber numberWithInt:i + 8]];
+                            for (NSNumber *index in possibleErrorPoints) {
+                                if (![indexesOfErrorPoints containsObject:index]) {
+                                    [indexesOfErrorPoints addObject:index];
+                                }
+                            }
+                        }
+                        continue;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            NSString *errorDescription = @"";
+            if (indexesOfErrorPoints.count > 0) {
+                errorDescription = @"点";
+                for (int j = 0; j < indexesOfErrorPoints.count; j ++) {
+                    if (j == 0) {
+                        errorDescription = [NSString stringWithFormat:@"%@%ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                    } else {
+                        errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
+                    }
+                }
+                errorDescription = [NSString stringWithFormat:@"%@连续九个点在中心线一侧。可能原因：不变的量具、旧的钢模、漂移等。", errorDescription];
+            }
+        } else {
+            block(@[], @"");
+        }
+    }
 }
 
 #pragma mark - fix data
