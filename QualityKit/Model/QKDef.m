@@ -135,4 +135,13 @@
     }
 }
 
++ (float)shapiroWilkAValue:(NSInteger)n {
+    NSArray *aArr = @[@0.3789, @0.2604, @0.2281, @0.2045, @0.1855, @0.1693, @0.1551, @0.1423, @0.1306, @0.1197, @0.1095, @0.0998, @0.0906, @0.0817, @0.0731];
+    if (n <= 15) {
+        return [aArr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
 @end

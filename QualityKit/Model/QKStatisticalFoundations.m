@@ -60,7 +60,7 @@
 
 + (NSArray *)ascendingArray:(NSArray *)array {
     return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 floatValue] >= [obj2 floatValue]) {
+        if ([obj1 floatValue] <= [obj2 floatValue]) {
             return NSOrderedAscending;
         } else {
             return NSOrderedDescending;
@@ -70,7 +70,7 @@
 
 + (NSArray *)descendingArray:(NSArray *)array {
     return [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 floatValue] <= [obj2 floatValue]) {
+        if ([obj1 floatValue] >= [obj2 floatValue]) {
             return NSOrderedAscending;
         } else {
             return NSOrderedDescending;
@@ -87,12 +87,21 @@
         denominator = denominator + ([tmp floatValue] - xBar) * ([tmp floatValue] - xBar);
     }
     
-    float numerator = 0;
-    for (int i = 0; i < array.count; i ++) {
-        
+    float numeratorSum = 0;
+    for (int i = 1; i <= array.count; i ++) {
+        float a = [QKDef shapiroWilkAValue:i];
+        float xi = [array[i - 1] floatValue];
+        numeratorSum = numeratorSum + a * xi;
     }
+    float numerator = numeratorSum * numeratorSum;
     
-    return YES;
+    float W = numerator / denominator;
+    
+    if (W >= [QKDef shapiroWilkWValue:array.count alpha:0.1]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

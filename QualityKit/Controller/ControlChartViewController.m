@@ -12,6 +12,7 @@
 #import "QKDef.h"
 #import "QKDataAnalyzer.h"
 #import "MsgDisplay.h"
+#import "QKStatisticalFoundations.h"
 
 @interface ControlChartViewController ()
 
@@ -37,10 +38,18 @@
             [MsgDisplay showErrorMsg:@"过程不受控\n无法进行过程能力分析"];
         } else if (chartView != nil && subChartView != nil) {
             // 有两个图
-            
+            if ([QKStatisticalFoundations shapiroWilkTest:chartView.dataArr]) {
+                [self processCapabilityAnalysis];
+            } else {
+                [MsgDisplay showErrorMsg:@"数据不满足正态分布"];
+            }
         } else if (chartView != nil) {
             // 有一个图
-            
+            if ([QKStatisticalFoundations shapiroWilkTest:chartView.dataArr]) {
+                [self processCapabilityAnalysis];
+            } else {
+                [MsgDisplay showErrorMsg:@"数据不满足正态分布"];
+            }
         }
     }];
     [self.navigationItem setRightBarButtonItems:@[processAnalysisBtn]];
@@ -264,6 +273,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)processCapabilityAnalysis {
+    NSLog(@"Fuck the PCA");
 }
 
 /*

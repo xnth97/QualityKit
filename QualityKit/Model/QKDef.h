@@ -57,5 +57,6 @@
 + (float)QKConstantE2:(NSInteger)n;
 
 + (float)shapiroWilkWValue:(NSInteger)n alpha:(float)alpha;
++ (float)shapiroWilkAValue:(NSInteger)n;
 
 @end
