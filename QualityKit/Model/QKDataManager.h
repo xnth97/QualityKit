@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Realm/Realm.h>
 
-@interface DataManager : NSObject
+@interface QKDataManager : NSObject
 
 + (void)loadLocalExcelFilesWithBlock:(void(^)(NSArray *excelFiles))block;
 + (void)loadLocalRealmDatabasesWithBlock:(void(^)(NSArray *realmDatabases))block;

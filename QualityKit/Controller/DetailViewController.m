@@ -8,12 +8,12 @@
 
 #import "DetailViewController.h"
 #import "ALActionBlocks.h"
-#import "DataManager.h"
-#import "DataProcessor.h"
+#import "QKDataManager.h"
+#import "QKDataProcessor.h"
 #import "TSTableViewModel.h"
 #import "ControlChartViewController.h"
 #import "RulesTableViewController.h"
-#import "QualityKitDef.h"
+#import "QKDef.h"
 
 #define detailIsXLS [[detailItem pathExtension] isEqualToString:@"xls"]
 #define detailIsRealm [[detailItem pathExtension] isEqualToString:@"realm"]
@@ -61,14 +61,14 @@
 
 - (void)updateData {
     if ([[detailItem pathExtension] isEqualToString:@"xls"]) {
-        [DataProcessor convertXLSFile:detailItem toTableModelWithBlock:^(NSArray *columns, NSArray *rows) {
+        [QKDataProcessor convertXLSFile:detailItem toTableModelWithBlock:^(NSArray *columns, NSArray *rows) {
             tableModel = [[TSTableViewModel alloc] initWithTableView:dataTableView andStyle:kTSTableViewStyleLight];
             [tableModel setColumns:columns andRows:rows];
             [dataTableView resetColumnSelectionWithAnimtaion:YES];
             [dataTableView resetRowSelectionWithAnimtaion:YES];
         }];
     } else if ([[detailItem pathExtension] isEqualToString:@"realm"]) {
-        [DataProcessor convertRealm:detailItem dataModelClass:[[QKData5 class] description] toTableModelWithBlock:^(NSArray *columns, NSArray *rows) {
+        [QKDataProcessor convertRealm:detailItem dataModelClass:[[QKData5 class] description] toTableModelWithBlock:^(NSArray *columns, NSArray *rows) {
             tableModel = [[TSTableViewModel alloc] initWithTableView:dataTableView andStyle:kTSTableViewStyleLight];
             [tableModel setColumns:columns andRows:rows];
             [dataTableView resetColumnSelectionWithAnimtaion:YES];
@@ -84,9 +84,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXBarR;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -95,9 +95,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXBarS;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -106,9 +106,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeXMR;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -117,9 +117,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeP;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -128,9 +128,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypePn;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -139,9 +139,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeC;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -150,9 +150,9 @@
         [self.navigationController pushViewController:chart animated:YES];
         chart.chartType = QKControlChartTypeU;
         if (detailIsXLS) {
-            chart.dataArr = [DataProcessor convertXLSFileToDoubleArray:detailItem];
+            chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
         } else if (detailIsRealm) {
-            chart.dataArr = [DataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+            chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
         }
         
     }];
@@ -221,7 +221,7 @@
             [tableModel insertRow:newRow atPath:rowPath];
             
             if (detailIsXLS) {
-                [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
+                [QKDataManager saveLocalXLSFile:detailItem withDataArray:[QKDataProcessor convertTableModelToFloatArray:tableModel]];
             }
         }];
         
@@ -257,7 +257,7 @@
             [tableModel insertRow:newRow atPath:rowPath];
             
             if (detailIsXLS) {
-                [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
+                [QKDataManager saveLocalXLSFile:detailItem withDataArray:[QKDataProcessor convertTableModelToFloatArray:tableModel]];
             }
             
             [tableView resetRowSelectionWithAnimtaion:YES];
@@ -271,7 +271,7 @@
         
         [tableModel removeRowAtPath:rowPath];
         if (detailIsXLS) {
-            [DataManager saveLocalXLSFile:detailItem withDataArray:[DataProcessor convertTableModelToFloatArray:tableModel]];
+            [QKDataManager saveLocalXLSFile:detailItem withDataArray:[QKDataProcessor convertTableModelToFloatArray:tableModel]];
         } else if (detailIsRealm) {
             
         }

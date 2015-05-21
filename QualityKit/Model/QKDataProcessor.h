@@ -10,7 +10,7 @@
 #import "TSTableViewModel.h"
 #import <Realm/Realm.h>
 
-@interface DataProcessor : NSObject
+@interface QKDataProcessor : NSObject
 
 + (void)convertXLSFile:(NSString *)filePath toTableModelWithBlock:(void(^)(NSArray *columns, NSArray *rows))block;
 

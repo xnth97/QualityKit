@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 Qin Yubo. All rights reserved.
 //
 
-#import "ControlChartView.h"
-#import "QualityKitDef.h"
+#import "QKControlChartView.h"
+#import "QKDef.h"
 
-@implementation ControlChartView
+@implementation QKControlChartView
 
 @synthesize dataArr;
 @synthesize indexesOfErrorPoints;

@@ -1,3 +1,5 @@
+# QualityKit Podfile
+
 platform :ios, '7.0'
 
 # pod 'TSUIKit'
@@ -16,4 +18,3 @@ end
 target 'QualityKitTests' do
 
 end
-

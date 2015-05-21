@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ControlChartView : UIView
+@interface QKControlChartView : UIView
 
 @property (strong, nonatomic) NSArray *dataArr;
 @property (nonatomic) float UCLValue;

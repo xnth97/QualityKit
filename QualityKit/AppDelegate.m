@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DetailViewController.h"
-#import "QualityKitDef.h"
+#import "QKDef.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 

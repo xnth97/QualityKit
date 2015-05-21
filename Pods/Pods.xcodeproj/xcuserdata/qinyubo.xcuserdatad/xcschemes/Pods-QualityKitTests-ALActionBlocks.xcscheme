@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9C6E843252C30E477BBC119D"
+               BlueprintIdentifier = "4674ECCA26AB58C550994F0C"
                BuildableName = "libPods-QualityKitTests-ALActionBlocks.a"
                BlueprintName = "Pods-QualityKitTests-ALActionBlocks"
                ReferencedContainer = "container:Pods.xcodeproj">

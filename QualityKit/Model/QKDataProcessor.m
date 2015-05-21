@@ -6,16 +6,16 @@
 //  Copyright (c) 2015年 Qin Yubo. All rights reserved.
 //
 
-#import "DataProcessor.h"
-#import "DataManager.h"
+#import "QKDataProcessor.h"
+#import "QKDataManager.h"
 #import "QZXLSReader.h"
 #import "TSTableViewModel.h"
-#import "QualityKitDef.h"
+#import "QKDef.h"
 
-@implementation DataProcessor
+@implementation QKDataProcessor
 
 + (void)convertXLSFile:(NSString *)filePath toTableModelWithBlock:(void (^)(NSArray *, NSArray *))block {
-    NSURL *xlsURL = [NSURL fileURLWithPath:[DataManager fullPathOfFile:filePath]];
+    NSURL *xlsURL = [NSURL fileURLWithPath:[QKDataManager fullPathOfFile:filePath]];
     QZWorkbook *excelReader = [[QZWorkbook alloc] initWithContentsOfXLS:xlsURL];
     QZWorkSheet *firstWorkSheet = excelReader.workSheets.firstObject;
     [firstWorkSheet open];
@@ -42,7 +42,7 @@
 }
 
 + (NSArray *)convertXLSFileToDoubleArray:(NSString *)filePath {
-    NSURL *xlsURL = [NSURL fileURLWithPath:[DataManager fullPathOfFile:filePath]];
+    NSURL *xlsURL = [NSURL fileURLWithPath:[QKDataManager fullPathOfFile:filePath]];
     QZWorkbook *excelReader = [[QZWorkbook alloc] initWithContentsOfXLS:xlsURL];
     QZWorkSheet *firstWorkSheet = excelReader.workSheets.firstObject;
     [firstWorkSheet open];
@@ -77,7 +77,7 @@
 
 + (void)convertRealm:(NSString *)filePath dataModelClass:(NSString *)dataModelClass toTableModelWithBlock:(void (^)(NSArray *, NSArray *))block {
     
-    NSString *realmPath = [DataManager fullPathOfFile:filePath];
+    NSString *realmPath = [QKDataManager fullPathOfFile:filePath];
     RLMRealm *realm = [RLMRealm realmWithPath:realmPath];
     
     NSMutableArray *columns = [[NSMutableArray alloc] init];
@@ -107,7 +107,7 @@
 }
 
 + (NSArray *)convertRealmToDoubleArray:(NSString *)filePath dataModelClass:(NSString *)dataModelClass {
-    NSString *realmPath = [DataManager fullPathOfFile:filePath];
+    NSString *realmPath = [QKDataManager fullPathOfFile:filePath];
     RLMRealm *realm = [RLMRealm realmWithPath:realmPath];
     
     NSMutableArray *doubleArray = [[NSMutableArray alloc] init];

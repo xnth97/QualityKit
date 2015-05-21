@@ -7,17 +7,19 @@
 //
 
 #import "ControlChartViewController.h"
-#import "ControlChartView.h"
-#import "QualityKitDef.h"
+#import "ALActionBlocks.h"
+#import "QKControlChartView.h"
+#import "QKDef.h"
 #import "QKDataAnalyzer.h"
+#import "MsgDisplay.h"
 
 @interface ControlChartViewController ()
 
 @end
 
 @implementation ControlChartViewController {
-    ControlChartView *chartView;
-    ControlChartView *subChartView;
+    QKControlChartView *chartView;
+    QKControlChartView *subChartView;
     UITextView *errorMsgView;
 }
 
@@ -29,6 +31,20 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIBarButtonItem *processAnalysisBtn = [[UIBarButtonItem alloc] initWithTitle:@"过程能力分析" style:UIBarButtonItemStylePlain block:^(id weakSender) {
+        if ((chartView != nil && chartView.indexesOfErrorPoints.count != 0) || (chartView != nil && chartView.indexesOfErrorPoints.count != 0 && subChartView != nil && subChartView.indexesOfErrorPoints.count != 0)) {
+            // 控制图不受控
+            [MsgDisplay showErrorMsg:@"过程不受控\n无法进行过程能力分析"];
+        } else if (chartView != nil && subChartView != nil) {
+            // 有两个图
+            
+        } else if (chartView != nil) {
+            // 有一个图
+            
+        }
+    }];
+    [self.navigationItem setRightBarButtonItems:@[processAnalysisBtn]];
+    
     errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
     errorMsgView.font = [UIFont systemFontOfSize:14.0];
@@ -37,7 +53,7 @@
     
     if ([chartType isEqualToString:QKControlChartTypeXBarR]) {
         
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBar withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -45,11 +61,11 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：\n%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         
-        subChartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         subChartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             subChartView.UCLValue = _UCLValue;
@@ -57,7 +73,7 @@
             subChartView.CLValue = _CLValue;
             subChartView.dataArr = _plotArr;
             subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n\nR 图：%@", errorMsgView.text, _errDescription];
+            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nR 图：\n%@", errorMsgView.text, _errDescription];
         }];
         [self.view addSubview:subChartView];
         
@@ -74,7 +90,7 @@
     
     if ([chartType isEqualToString:QKControlChartTypeXBarS]) {
         
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBarUsingS withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -82,11 +98,11 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：\n%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         
-        subChartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         subChartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeS withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             subChartView.UCLValue = _UCLValue;
@@ -94,7 +110,7 @@
             subChartView.CLValue = _CLValue;
             subChartView.dataArr = _plotArr;
             subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n\nS 图：%@", errorMsgView.text, _errDescription];
+            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nS 图：\n%@", errorMsgView.text, _errDescription];
         }];
         [self.view addSubview:subChartView];
         
@@ -111,7 +127,7 @@
     
     if ([chartType isEqualToString:QKControlChartTypeXMR]) {
         
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeX withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -119,11 +135,11 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X 图：\n%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         
-        subChartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         subChartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeMR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             subChartView.UCLValue = _UCLValue;
@@ -131,7 +147,7 @@
             subChartView.CLValue = _CLValue;
             subChartView.dataArr = _plotArr;
             subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n\nMR 图：%@", errorMsgView.text, _errDescription];
+            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nMR 图：\n%@", errorMsgView.text, _errDescription];
         }];
         [self.view addSubview:subChartView];
         
@@ -148,7 +164,7 @@
     
     if ([chartType isEqualToString:QKControlChartTypeP]) {
         
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeP withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -173,7 +189,7 @@
     
     if ([chartType isEqualToString:QKControlChartTypePn]) {
         
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypePn withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -181,7 +197,7 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"Pn 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"Pn 图：\n%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         
@@ -197,7 +213,7 @@
     }
     
     if ([chartType isEqualToString:QKControlChartTypeC]) {
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeC withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -205,7 +221,7 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"C 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"C 图：\n%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         
@@ -220,7 +236,7 @@
     }
     
     if ([chartType isEqualToString:QKControlChartTypeU]) {
-        chartView = [[ControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         chartView.translatesAutoresizingMaskIntoConstraints = NO;
         [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeU withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
             chartView.UCLValue = _UCLValue;
@@ -228,7 +244,7 @@
             chartView.CLValue = _CLValue;
             chartView.dataArr = _plotArr;
             chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"U 图：%@", _errDescription];
+            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"U 图：\n%@", _errDescription];
         }];
         [self.view addSubview:chartView];
         

@@ -8,7 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
-#import "DataManager.h"
+#import "QKDataManager.h"
 #import "MsgDisplay.h"
 #import "QKData5.h"
 
@@ -84,7 +84,7 @@
                     [MsgDisplay showErrorMsg:@"列数出错"];
                     return;
                 } else {
-                    [DataManager createLocalXLSFile:[titleField.text stringByAppendingPathExtension:@"xls"] columnNumber:[numStr integerValue]];
+                    [QKDataManager createLocalXLSFile:[titleField.text stringByAppendingPathExtension:@"xls"] columnNumber:[numStr integerValue]];
                     [objects insertObject:[titleField.text stringByAppendingPathExtension:@"xls"] atIndex:0];
                     
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -110,7 +110,7 @@
                 [MsgDisplay showErrorMsg:@"数据库名不能为空"];
             } else {
                 QKData5 *data = [[QKData5 alloc] init];
-                [DataManager createLocalRealm:field.text dataModel:data finishBlock:^{
+                [QKDataManager createLocalRealm:field.text dataModel:data finishBlock:^{
                     [objects insertObject:[field.text stringByAppendingPathExtension:@"realm"] atIndex:0];
                     
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -132,13 +132,13 @@
     [objects removeAllObjects];
     if (dataSourceSegmented.selectedSegmentIndex == 0) {
         // Excel
-        [DataManager loadLocalExcelFilesWithBlock:^(NSArray *excelFiles) {
+        [QKDataManager loadLocalExcelFilesWithBlock:^(NSArray *excelFiles) {
             objects = [excelFiles mutableCopy];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
     } else if (dataSourceSegmented.selectedSegmentIndex == 1) {
         // Realm
-        [DataManager loadLocalRealmDatabasesWithBlock:^(NSArray *realmDatabases) {
+        [QKDataManager loadLocalRealmDatabasesWithBlock:^(NSArray *realmDatabases) {
             objects = [realmDatabases mutableCopy];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
@@ -182,7 +182,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [DataManager removeLocalFile:objects[indexPath.row]];
+        [QKDataManager removeLocalFile:objects[indexPath.row]];
         [objects removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

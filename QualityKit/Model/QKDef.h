@@ -33,13 +33,21 @@
 #define QKCheckRuleConsecutiveSixPointsChangeInSameWay @"ConsecutiveSixPointsChangeInSameWay"
 #define QKCheckRuleConsecutiveNinePointsOneSide @"ConsecutiveNinePointsOneSide"
 
-// Check Rules In NSUserDefaults
+// Process Capability Analysis Type
+
+#define QKProcessCapabilityAnalysisTypeQuantity @"Quantity"
+#define QKProcessCapabilityAnalysisTypePieces @"Pieces"
+
+// Settings In NSUserDefaults
+
 #define QKCheckRules @"QKCheckRules"
 #define QKAutoFix @"QKAutoFix"
 
-@interface QualityKitDef : NSObject
+@interface QKDef : NSObject
 
++ (float)QKConstant_d2:(NSInteger)n;
 + (float)QKConstant_d3:(NSInteger)n;
++ (float)QKConstantC4:(NSInteger)n;
 + (float)QKConstantD4:(NSInteger)n;
 + (float)QKConstantD3:(NSInteger)n;
 + (float)QKConstantA2:(NSInteger)n;
@@ -47,5 +55,7 @@
 + (float)QKConstantB3:(NSInteger)n;
 + (float)QKConstantB4:(NSInteger)n;
 + (float)QKConstantE2:(NSInteger)n;
+
++ (float)shapiroWilkWValue:(NSInteger)n alpha:(float)alpha;
 
 @end

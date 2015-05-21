@@ -7,7 +7,7 @@
 //
 
 #import "RulesTableViewController.h"
-#import "QualityKitDef.h"
+#import "QKDef.h"
 
 @interface RulesTableViewController ()
 

@@ -7,7 +7,8 @@
 //
 
 #import "QKDataAnalyzer.h"
-#import "QualityKitDef.h"
+#import "QKDef.h"
+#import "QKStatisticalFoundations.h"
 
 @implementation QKDataAnalyzer
 
@@ -36,7 +37,7 @@
                     [indexesOfErrorPoints addObject:tmp];
                 }
             }
-            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
+            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
         }];
     }
     
@@ -66,25 +67,17 @@
         NSMutableArray *xBarArr = [[NSMutableArray alloc] init];
         
         for (NSArray *rowArr in dataArray) {
-            float xSum = 0;
-            for (NSNumber *item in rowArr) {
-                xSum = xSum + [item floatValue];
-            }
-            [xBarArr addObject:[NSNumber numberWithFloat:xSum/(rowArr.count)]];
+            [xBarArr addObject:[NSNumber numberWithFloat:[QKStatisticalFoundations averageValueOfArray:rowArr]]];
         }
         
-        float xBarSum = 0;
-        for (NSNumber *xBar in xBarArr) {
-            xBarSum = xBarSum + [xBar floatValue];
-        }
-        float CLValue = xBarSum/(xBarArr.count);
+        float CLValue = [QKStatisticalFoundations averageValueOfArray:xBarArr];
         
         __block float rBar;
         [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeR block:^(float _UCLR, float _LCLR, float _CLR, NSArray *_rArr) {
             rBar = _CLR;
         }];
         
-        float A2 = [QualityKitDef QKConstantA2:xBarArr.count];
+        float A2 = [QKDef QKConstantA2:xBarArr.count];
         float UCLValue = CLValue + A2 * rBar;
         float LCLValue = CLValue - A2 * rBar;
         
@@ -94,29 +87,14 @@
     if ([type isEqualToString:QKControlChartTypeR]) {
         NSMutableArray *rArr = [[NSMutableArray alloc] init];
         for (NSArray *rowArr in dataArray) {
-            float minValue = [rowArr[0] floatValue];
-            float maxValue = [rowArr[0] floatValue];
-            for (NSNumber *tmpNum in rowArr) {
-                float tmpFloat = [tmpNum floatValue];
-                if (tmpFloat >= maxValue) {
-                    maxValue = tmpFloat;
-                }
-                if (tmpFloat <= minValue) {
-                    minValue = tmpFloat;
-                }
-            }
-            [rArr addObject:[NSNumber numberWithFloat:maxValue - minValue]];
+            [rArr addObject:[NSNumber numberWithFloat:[QKStatisticalFoundations rangeValueOfArray:rowArr]]];
         }
         
-        float rSum = 0;
-        for (NSNumber *tmpR in rArr) {
-            rSum = rSum + [tmpR floatValue];
-        }
-        float CLValue = rSum/(rArr.count);
+        float CLValue = [QKStatisticalFoundations averageValueOfArray:rArr];
         
-        float D4 = [QualityKitDef QKConstantD4:rArr.count];
+        float D4 = [QKDef QKConstantD4:rArr.count];
         float UCLValue = D4 * CLValue;
-        float D3 = [QualityKitDef QKConstantD3:rArr.count];
+        float D3 = [QKDef QKConstantD3:rArr.count];
         float LCLValue = D3 * CLValue;
         
         block(UCLValue, LCLValue, CLValue, rArr);
@@ -126,25 +104,17 @@
         NSMutableArray *xBarArr = [[NSMutableArray alloc] init];
         
         for (NSArray *rowArr in dataArray) {
-            float xSum = 0;
-            for (NSNumber *item in rowArr) {
-                xSum = xSum + [item floatValue];
-            }
-            [xBarArr addObject:[NSNumber numberWithFloat:xSum/(rowArr.count)]];
+            [xBarArr addObject:[NSNumber numberWithFloat:[QKStatisticalFoundations averageValueOfArray:rowArr]]];
         }
         
-        float xBarSum = 0;
-        for (NSNumber *xBar in xBarArr) {
-            xBarSum = xBarSum + [xBar floatValue];
-        }
-        float CLValue = xBarSum / xBarArr.count;
+        float CLValue = [QKStatisticalFoundations averageValueOfArray:xBarArr];
         
         __block float sBar = 0;
         [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeS block:^(float _UCL, float _LCL, float _CL, NSArray *_sArr) {
             sBar = _CL;
         }];
         
-        float A3 = [QualityKitDef QKConstantA3:xBarArr.count];
+        float A3 = [QKDef QKConstantA3:xBarArr.count];
         float UCLValue = CLValue + A3 * sBar;
         float LCLValue = CLValue - A3 * sBar;
         
@@ -155,28 +125,13 @@
         NSMutableArray *sArr = [[NSMutableArray alloc] init];
         
         for (NSArray *rowArr in dataArray) {
-            float xSum = 0;
-            for (NSNumber *item in rowArr) {
-                xSum = xSum + [item floatValue];
-            }
-            float xBar = xSum/dataArray.count;
-            
-            float tmpSum = 0;
-            for (NSNumber *item in rowArr) {
-                tmpSum = tmpSum + ([item floatValue] - xBar) * (([item floatValue] - xBar));
-            }
-            float S = sqrtf(tmpSum/(rowArr.count - 1));
-            [sArr addObject:[NSNumber numberWithFloat:S]];
+            [sArr addObject:[NSNumber numberWithFloat:[QKStatisticalFoundations standardDeviationValueOfArray:rowArr]]];
         }
         
-        float sSum = 0;
-        for (NSNumber *tmpS in sArr) {
-            sSum = sSum + [tmpS floatValue];
-        }
-        float sBar = sSum / sArr.count;
+        float sBar = [QKStatisticalFoundations averageValueOfArray:sArr];
         
-        float B3 = [QualityKitDef QKConstantB3:sArr.count];
-        float B4 = [QualityKitDef QKConstantB4:sArr.count];
+        float B3 = [QKDef QKConstantB3:sArr.count];
+        float B4 = [QKDef QKConstantB4:sArr.count];
         
         float UCLValue = B4 * sBar;
         float LCLValue = B3 * sBar;
@@ -191,18 +146,14 @@
             [xArr addObject:[NSNumber numberWithDouble:xValue]];
         }
         
-        float xSum = 0;
-        for (NSNumber *tmp in xArr) {
-            xSum = xSum + [tmp floatValue];
-        }
-        float CLValue = xSum / xArr.count;
+        float CLValue = [QKStatisticalFoundations averageValueOfArray:xArr];
         
         __block float rBar = 0;
         [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeMR block:^(float _UCL, float _LCL, float _CLR, NSArray *_rArr) {
             rBar = _CLR;
         }];
-        float UCLValue = CLValue + [QualityKitDef QKConstantE2:xArr.count] * rBar;
-        float LCLValue = CLValue - [QualityKitDef QKConstantE2:xArr.count] * rBar;
+        float UCLValue = CLValue + [QKDef QKConstantE2:xArr.count] * rBar;
+        float LCLValue = CLValue - [QKDef QKConstantE2:xArr.count] * rBar;
         
         block(UCLValue, LCLValue, CLValue, xArr);
     }
@@ -222,8 +173,8 @@
         }
         float CLValue = rSum / rArr.count;
         
-        float UCLValue = [QualityKitDef QKConstantD4:rArr.count] * CLValue;
-        float LCLValue = [QualityKitDef QKConstantD3:rArr.count] * CLValue;
+        float UCLValue = [QKDef QKConstantD4:rArr.count] * CLValue;
+        float LCLValue = [QKDef QKConstantD3:rArr.count] * CLValue;
         
         block(UCLValue, LCLValue, CLValue, rArr);
     }
@@ -329,7 +280,7 @@
                     errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
                 }
             }
-            errorDescription = [NSString stringWithFormat:@"%@在控制线外部。可能原因：测量误差、设备出错等。", errorDescription];
+            errorDescription = [NSString stringWithFormat:@"%@在控制线外部。可能原因：测量误差、设备出错等。\n", errorDescription];
         }
         
         block(indexesOfErrorPoints, errorDescription);
@@ -373,7 +324,7 @@
                     errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
                 }
             }
-            errorDescription = [NSString stringWithFormat:@"%@在连续三个点中有两点位于 A 区。可能原因：设备不稳定、操作有误、设备调整等。", errorDescription];
+            errorDescription = [NSString stringWithFormat:@"%@在连续三个点中有两点位于 A 区。可能原因：设备不稳定、操作有误、设备调整等。\n", errorDescription];
         }
         
         block(indexesOfErrorPoints, errorDescription);
@@ -424,7 +375,7 @@
                         errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
                     }
                 }
-                errorDescription = [NSString stringWithFormat:@"%@在连续五个点中有四点位于 B 区。可能原因：过程偏倚、量具需要调整、设备不稳定等。", errorDescription];
+                errorDescription = [NSString stringWithFormat:@"%@在连续五个点中有四点位于 B 区。可能原因：过程偏倚、量具需要调整、设备不稳定等。\n", errorDescription];
             }
             
             block(indexesOfErrorPoints, errorDescription);
@@ -496,7 +447,7 @@
                         errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
                     }
                 }
-                errorDescription = [NSString stringWithFormat:@"%@连续六个点稳定上升或下降。可能原因：设备逐渐损坏、操作者的疲劳、工具的磨损等。", errorDescription];
+                errorDescription = [NSString stringWithFormat:@"%@连续六个点稳定上升或下降。可能原因：设备逐渐损坏、操作者的疲劳、工具的磨损等。\n", errorDescription];
             }
             
             block(indexesOfErrorPoints, errorDescription);
@@ -549,7 +500,7 @@
                         errorDescription = [NSString stringWithFormat:@"%@, %ld", errorDescription, (long)[indexesOfErrorPoints[j] integerValue] + 1];
                     }
                 }
-                errorDescription = [NSString stringWithFormat:@"%@连续九个点在中心线一侧。可能原因：不变的量具、旧的钢模、漂移等。", errorDescription];
+                errorDescription = [NSString stringWithFormat:@"%@连续九个点在中心线一侧。可能原因：不变的量具、旧的钢模、漂移等。\n", errorDescription];
             }
         } else {
             block(@[], @"");
@@ -584,6 +535,9 @@
             // 小于等于三执行修正
             NSMutableArray *_dataArr = [dataArr mutableCopy];
             
+            // 需要把 indexesOfErrorPoints 排序一下
+            indexesOfErrorPoints = [[QKStatisticalFoundations ascendingArray:indexesOfErrorPoints] mutableCopy];
+            
             // 按照下标去除 indexes 数组中的下标对应在 dataArr 中数据时，需要每删除一个数据，就把 indexes 数组中所有下标减一
             NSMutableArray *indexesOfPointsToBeRemoved = [indexesOfErrorPoints mutableCopy];
             for (int i = 0; i < indexesOfErrorPoints.count; i ++) {
@@ -611,14 +565,14 @@
                             [indexesOfErrorPoints addObject:tmp];
                         }
                     }
-                    errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@\n%@", errorDescription, _errorDescription];
+                    errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
                 }];
             }
             
             
         } else {
             // 大于三直接返回
-            errorDescription = [NSString stringWithFormat:@"%@\n错误点个数大于3，无法修正", errorDescription];
+            errorDescription = [NSString stringWithFormat:@"%@错误点个数大于3，无法修正。\n", errorDescription];
             
             [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
                 UCLValue = _UCLValue;
@@ -632,8 +586,7 @@
             break;
         }
     }
-    
-    
 }
+
 
 @end

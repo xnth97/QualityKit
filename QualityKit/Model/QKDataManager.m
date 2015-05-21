@@ -6,11 +6,11 @@
 //  Copyright (c) 2015年 Qin Yubo. All rights reserved.
 //
 
-#import "DataManager.h"
+#import "QKDataManager.h"
 #import <Realm/Realm.h>
 #import <JXLS/JXLS.h>
 
-@implementation DataManager
+@implementation QKDataManager
 
 + (void)loadLocalExcelFilesWithBlock:(void (^)(NSArray *))block {
     NSMutableArray *excelArr = [[NSMutableArray alloc] init];

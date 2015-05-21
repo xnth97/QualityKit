@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C1AF8F1C90E719CB69203C2"
+               BlueprintIdentifier = "C2299349CEDC39D632A25727"
                BuildableName = "libPods-QualityKitTests-FXForms.a"
                BlueprintName = "Pods-QualityKitTests-FXForms"
                ReferencedContainer = "container:Pods.xcodeproj">

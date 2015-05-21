@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 Qin Yubo. All rights reserved.
 //
 
-#import "QualityKitDef.h"
+#import "QKDef.h"
 
-@implementation QualityKitDef
+@implementation QKDef
 
 /**
  *  注意
@@ -85,6 +85,51 @@
     NSArray *E2Arr = @[@0, @2.66, @1.77, @1.46, @1.29, @1.18, @1.11, @1.05, @1.01, @0.98];
     if (n <= 10) {
         return [E2Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
++ (float)QKConstant_d2:(NSInteger)n {
+    NSArray *d2Arr = @[@0, @1.13, @1.69, @2.06, @2.33, @2.53, @2.70, @2.85, @2.97, @3.08];
+    if (n <= 10) {
+        return [d2Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
++ (float)QKConstantC4:(NSInteger)n {
+    NSArray *C4Arr = @[@0, @0.798, @0.886, @0.921, @0.940, @0.952, @0.959, @0.965, @0.969, @0.973];
+    if (n <= 10) {
+        return [C4Arr[n - 1] floatValue];
+    } else {
+        return 0;
+    }
+}
+
++ (float)shapiroWilkWValue:(NSInteger)n alpha:(float)alpha {
+    if (alpha == 0.1) {
+        NSArray *WArr = @[@0, @0, @0.787, @0.792, @0.806, @0.826, @0.838, @0.851, @0.859, @0.869, @0.876, @0.883, @0.889, @0.895, @0.901];
+        if (n <= 15) {
+            return [WArr[n - 1] floatValue];
+        } else {
+            return 0;
+        }
+    } else if (alpha == 0.05) {
+        NSArray *WArr = @[@0, @0, @0.767, @0.748, @0.762, @0.788, @0.803, @0.818, @0.829, @0.842, @0.850, @0.859, @0.866, @0.874, @0.881];
+        if (n <= 15) {
+            return [WArr[n - 1] floatValue];
+        } else {
+            return 0;
+        }
+    } else if (alpha == 0.01) {
+        NSArray *WArr = @[@0, @0, @0.753, @0.687, @0.686, @0.713, @0.730, @0.749, @0.764, @0.781, @0.792, @0.805, @0.814, @0.825, @0.835];
+        if (n <= 15) {
+            return [WArr[n - 1] floatValue];
+        } else {
+            return 0;
+        }
     } else {
         return 0;
     }
