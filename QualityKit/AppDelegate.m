@@ -26,6 +26,9 @@
     if ([userDefaults objectForKey:QKAutoFix] == nil) {
         [userDefaults setBool:NO forKey:QKAutoFix];
     }
+    if ([userDefaults objectForKey:QKSignificance] == nil) {
+        [userDefaults setObject:@0.1 forKey:QKSignificance];
+    }
     
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];

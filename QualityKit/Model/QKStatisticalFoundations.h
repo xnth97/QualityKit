@@ -36,6 +36,13 @@
  */
 + (NSArray *)descendingArray:(NSArray *)array;
 
+/**
+ *  Shapiro-Wilk Normality Test
+ *
+ *  @param array The array to be tested.
+ *
+ *  @return BOOL value if the data is normally distributed.
+ */
 + (BOOL)shapiroWilkTest:(NSArray *)array;
 
 @end

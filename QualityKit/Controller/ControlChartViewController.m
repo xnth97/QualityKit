@@ -38,7 +38,7 @@
             [MsgDisplay showErrorMsg:@"过程不受控\n无法进行过程能力分析"];
         } else if (chartView != nil && subChartView != nil) {
             // 有两个图
-            if ([QKStatisticalFoundations shapiroWilkTest:chartView.dataArr]) {
+            if ([QKStatisticalFoundations shapiroWilkTest:chartView.dataArr] && [QKStatisticalFoundations shapiroWilkTest:subChartView.dataArr]) {
                 [self processCapabilityAnalysis];
             } else {
                 [MsgDisplay showErrorMsg:@"数据不满足正态分布"];

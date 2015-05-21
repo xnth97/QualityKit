@@ -42,6 +42,7 @@
 
 #define QKCheckRules @"QKCheckRules"
 #define QKAutoFix @"QKAutoFix"
+#define QKSignificance @"QKSignificance"
 
 @interface QKDef : NSObject
 

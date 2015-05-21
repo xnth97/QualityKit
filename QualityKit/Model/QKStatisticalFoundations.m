@@ -97,7 +97,8 @@
     
     float W = numerator / denominator;
     
-    if (W >= [QKDef shapiroWilkWValue:array.count alpha:0.1]) {
+    float significance = [[[NSUserDefaults standardUserDefaults] objectForKey:QKSignificance] floatValue];
+    if (W >= [QKDef shapiroWilkWValue:array.count alpha:significance]) {
         return YES;
     } else {
         return NO;

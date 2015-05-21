@@ -15,6 +15,7 @@
 
 @implementation RulesTableViewController {
     NSArray *rulesArr;
+    NSArray *significanceArr;
 }
 
 - (void)viewDidLoad {
@@ -32,6 +33,8 @@
                    @"value": @"连续六点稳定上升或下降"},
                  @{@"key": QKCheckRuleConsecutiveNinePointsOneSide,
                    @"value": @"连续九点在中心线一侧"}];
+    
+    significanceArr = @[@0.1, @0.05, @0.01];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +44,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -50,6 +53,8 @@
         return rulesArr.count;
     } else if (section == 1) {
         return 1;
+    } else if (section == 2) {
+        return significanceArr.count;
     } else {
         return 0;
     }
@@ -71,7 +76,7 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    } else {
+    } else if (section == 1) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         if (row == 0) {
             cell.textLabel.text = @"少于三个点自动修正";
@@ -81,6 +86,13 @@
             cell.accessoryView = autoFixSwitch;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+    } else if (section == 2) {
+        cell.textLabel.text = [significanceArr[row] stringValue];
+        if ([significanceArr[row] isEqual:[[NSUserDefaults standardUserDefaults] objectForKey:QKSignificance]]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     
     return cell;
@@ -89,9 +101,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger section = indexPath.section;
     NSUInteger row = indexPath.row;
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (section == 0) {
         NSDictionary *tmp = rulesArr[row];
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         NSMutableArray *checkRules = [[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] mutableCopy];
         if ([checkRules containsObject:tmp[@"key"]]) {
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -103,6 +115,11 @@
             [[NSUserDefaults standardUserDefaults] setObject:checkRules forKey:QKCheckRules];
         }
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (section == 2) {
+        if (![significanceArr[row] isEqual:[[NSUserDefaults standardUserDefaults] objectForKey:QKSignificance]]) {
+            [[NSUserDefaults standardUserDefaults] setObject:significanceArr[row] forKey:QKSignificance];
+            [tableView reloadData];
+        }
     }
 }
 
@@ -112,9 +129,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return @"请选择检验数据应用规则";
-    } else {
+        return @"检验数据应用规则";
+    } else if (section == 1) {
         return @"修正设置";
+    } else if (section == 2) {
+        return @"Shapiro Wilk 检验显著性";
+    } else {
+        return nil;
     }
 }
 
