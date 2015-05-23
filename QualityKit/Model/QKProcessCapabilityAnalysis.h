@@ -18,8 +18,8 @@
 + (float)CPLValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL;
 + (float)CPKValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL;
 
-// 对于计件值
+// 对于计件值，包括 PBar, UBar, CBar
 
-
++ (float)PiecesCapabilityValueOfData:(NSArray *)dataArr;
 
 @end

@@ -54,4 +54,16 @@
     return (CPU <= CPL) ? CPU : CPL;
 }
 
++ (float)PiecesCapabilityValueOfData:(NSArray *)dataArr {
+    NSMutableArray *numbersArr = [[NSMutableArray alloc] init];
+    NSMutableArray *NArr = [[NSMutableArray alloc] init];
+    for (NSArray *tmpArr in dataArr) {
+        [numbersArr addObject:tmpArr[1]];
+        [NArr addObject:tmpArr[0]];
+    }
+    float numberSum = [QKStatisticalFoundations sumValueOfArray:numbersArr];
+    float NSum = [QKStatisticalFoundations sumValueOfArray:NArr];
+    return numberSum / NSum;
+}
+
 @end

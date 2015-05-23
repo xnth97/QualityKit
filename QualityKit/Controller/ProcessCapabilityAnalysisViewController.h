@@ -27,6 +27,7 @@
 @property (strong, nonatomic) id <ProcessCapabilityAnalysisDelegate> delegate;
 
 - (IBAction)backgroundTapped;
+- (IBAction)nextTextField;
 - (IBAction)calculateProcessCapabilityAnalysis;
 
 @end

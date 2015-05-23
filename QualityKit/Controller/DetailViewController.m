@@ -47,6 +47,7 @@
     [data shareInstance].title = nil;
     [data shareInstance].chartTitle = nil;
     [data shareInstance].subChartTitle = nil;
+    [data shareInstance].parameters = nil;
 }
 
 - (void)viewDidLoad {

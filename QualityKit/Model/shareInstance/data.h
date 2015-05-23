@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *chartTitle;
 @property (strong, nonatomic) NSString *subChartTitle;
+@property (strong, nonatomic) NSDictionary *parameters;
 
 + (data *)shareInstance;
 + (NSString *)appVersion;
