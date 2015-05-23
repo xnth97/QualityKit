@@ -10,56 +10,48 @@
 
 @implementation QKProcessCapabilityAnalysis
 
-+ (float)CPValueOfData:(NSArray *)dataArr {
-    __block float UCLValue = 0;
-    __block float LCLValue = 0;
++ (float)CPValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
     __block float RBar = 0;
-    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
-        UCLValue = _UCL;
-        LCLValue = _LCL;
-    }];
     [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
         RBar = _CL;
     }];
     float d2 = [QKDef QKConstant_d2:((NSArray *)dataArr[0]).count];
-    float CP = (UCLValue - LCLValue) / (6 * RBar / d2);
+    float CP = (USL - LSL) / (6 * RBar / d2);
     return CP;
 }
 
-+ (float)CPUValueOfData:(NSArray *)dataArr {
-    __block float UCLValue = 0;
-    __block float LCLValue = 0;
++ (float)CPUValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
     __block float XBar = 0;
     __block float RBar = 0;
     [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
-        UCLValue = _UCL;
-        LCLValue = _LCL;
         XBar = _CL;
     }];
     [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
         RBar = _CL;
     }];
     float d2 = [QKDef QKConstant_d2:((NSArray *)dataArr[0]).count];
-    float CPU = (UCLValue - XBar) / (3 * RBar / d2);
+    float CPU = (USL - XBar) / (3 * RBar / d2);
     return CPU;
 }
 
-+ (float)CPLValueOfData:(NSArray *)dataArr {
-    __block float UCLValue = 0;
-    __block float LCLValue = 0;
++ (float)CPLValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
     __block float XBar = 0;
     __block float RBar = 0;
     [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
-        UCLValue = _UCL;
-        LCLValue = _LCL;
         XBar = _CL;
     }];
     [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
         RBar = _CL;
     }];
     float d2 = [QKDef QKConstant_d2:((NSArray *)dataArr[0]).count];
-    float CPL = (XBar - LCLValue) / (3 * RBar / d2);
+    float CPL = (XBar - LSL) / (3 * RBar / d2);
     return CPL;
+}
+
++ (float)CPKValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
+    float CPU = [self CPUValueOfData:dataArr USL:USL LSL:LSL];
+    float CPL = [self CPLValueOfData:dataArr USL:USL LSL:LSL];
+    return (CPU <= CPL) ? CPU : CPL;
 }
 
 @end

@@ -19,15 +19,14 @@
 @property (strong, nonatomic) NSString *controlChartType;
 @property (strong, nonatomic) NSArray *dataArr;
 
-@property (weak, nonatomic) IBOutlet UILabel *cpLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cpValue;
-@property (weak, nonatomic) IBOutlet UILabel *cpuLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cpuValue;
-@property (weak, nonatomic) IBOutlet UILabel *cplLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cplValue;
-@property (weak, nonatomic) IBOutlet UILabel *cpkLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cpkValue;
+@property (weak, nonatomic) IBOutlet UITextField *uslField;
+@property (weak, nonatomic) IBOutlet UITextField *lslField;
+@property (weak, nonatomic) IBOutlet UIButton *actionBtn;
+@property (weak, nonatomic) IBOutlet UITextView *resultTextView;
 
 @property (strong, nonatomic) id <ProcessCapabilityAnalysisDelegate> delegate;
+
+- (IBAction)backgroundTapped;
+- (IBAction)calculateProcessCapabilityAnalysis;
 
 @end

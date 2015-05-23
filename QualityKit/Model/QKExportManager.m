@@ -106,12 +106,21 @@
             CGContextMoveToPoint(context, 26, 78+18+192+18+192);
             CGContextAddLineToPoint(context, 26+560, 78+18+192+18+192);
             
+            CGContextMoveToPoint(context, 26, 78+18+192+18+192+18);
+            CGContextAddLineToPoint(context, 26+560, 78+18+192+18+192+18);
+            
+            CGContextMoveToPoint(context, 26, 78+18+192+18+192+18+24);
+            CGContextAddLineToPoint(context, 26+560, 78+18+192+18+192+18+24);
+            
+            CGContextMoveToPoint(context, 26, 78+18+192+18+192+18+48);
+            CGContextAddLineToPoint(context, 26+560, 78+18+192+18+192+18+48);
+            
             //竖线
             CGContextMoveToPoint(context, 26, 78);
-            CGContextAddLineToPoint(context, 26, 78+18+192+18+192);
+            CGContextAddLineToPoint(context, 26, 78+18+192+18+192+18+48);
             
             CGContextMoveToPoint(context, 26+560, 78);
-            CGContextAddLineToPoint(context, 26+560, 78+18+192+18+192);
+            CGContextAddLineToPoint(context, 26+560, 78+18+192+18+192+18+48);
             
             CGContextStrokePath(context);
             
@@ -120,6 +129,7 @@
                                       NSForegroundColorAttributeName: [UIColor blackColor]};
             [[data shareInstance].chartTitle drawInRect:CGRectMake(26, 78, 560, 18) withAttributes:subDict];
             [[data shareInstance].subChartTitle drawInRect:CGRectMake(26, 78+18+192, 560, 192) withAttributes:subDict];
+            [@"过程能力参数" drawInRect:CGRectMake(26, 78+18+192+18+192, 560, 18) withAttributes:subDict];
             
         }
         

@@ -13,9 +13,10 @@
 
 // 对于计量值
 
-+ (float)CPValueOfData:(NSArray *)dataArr;
-+ (float)CPUValueOfData:(NSArray *)dataArr;
-+ (float)CPLValueOfData:(NSArray *)dataArr;
++ (float)CPValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL;
++ (float)CPUValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL;
++ (float)CPLValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL;
++ (float)CPKValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL;
 
 // 对于计件值
 
