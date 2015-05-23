@@ -520,6 +520,8 @@
     __block NSMutableArray *indexesOfErrorPoints = [indexesOfErrorRows mutableCopy];
     __block NSString *errorDescription = @"";
     
+    NSMutableArray *_dataArr = [dataArr mutableCopy];
+    
     while (flag) {
         
         if (indexesOfErrorPoints.count == 0) {
@@ -533,7 +535,6 @@
             
         } else if (indexesOfErrorPoints.count <= 3 && indexesOfErrorPoints.count > 0) {
             // 小于等于三执行修正
-            NSMutableArray *_dataArr = [dataArr mutableCopy];
             
             // 需要把 indexesOfErrorPoints 排序一下
             indexesOfErrorPoints = [[QKStatisticalFoundations ascendingArray:indexesOfErrorPoints] mutableCopy];

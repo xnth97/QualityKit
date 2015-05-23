@@ -14,6 +14,7 @@
 #import "ControlChartViewController.h"
 #import "RulesTableViewController.h"
 #import "QKDef.h"
+#import "data.h"
 
 #define detailIsXLS [[detailItem pathExtension] isEqualToString:@"xls"]
 #define detailIsRealm [[detailItem pathExtension] isEqualToString:@"realm"]
@@ -35,6 +36,17 @@
     if (detailItem != newDetailItem) {
         detailItem = newDetailItem;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // clear shared instances
+    [data shareInstance].chartView = nil;
+    [data shareInstance].subChartView = nil;
+    [data shareInstance].title = nil;
+    [data shareInstance].chartTitle = nil;
+    [data shareInstance].subChartTitle = nil;
 }
 
 - (void)viewDidLoad {

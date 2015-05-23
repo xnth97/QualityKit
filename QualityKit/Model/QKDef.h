@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QKDataAnalyzer.h"
+#import "QKStatisticalFoundations.h"
+#import "QKProcessCapabilityAnalysis.h"
 #import "QKData5.h"
 
 // Control Chart Type Definitions

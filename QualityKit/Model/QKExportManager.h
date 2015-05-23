@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "data.h"
 
 @interface QKExportManager : NSObject
 
 + (UIImage *)imageFromView:(UIView *)view;
-//+ (void)createPDFReportWithFileName:(NSString *)name chartView:(UIView *)chartView successBlock:(void(^)())success;
++ (void)createPDFReportWithFileName:(NSString *)name successBlock:(void(^)())success;
 
 @end

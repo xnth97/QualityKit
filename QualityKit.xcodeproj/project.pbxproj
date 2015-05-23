@@ -49,6 +49,9 @@
 		E99A5DE21B00ED2700EA23E5 /* QZWorkbook.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD61B00ED2700EA23E5 /* QZWorkbook.m */; };
 		E99A5DE31B00ED2700EA23E5 /* QZWorkSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E99A5DD81B00ED2700EA23E5 /* QZWorkSheet.m */; };
 		E9DBC2D21B0DF2DE00053C53 /* QKStatisticalFoundations.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBC2D11B0DF2DE00053C53 /* QKStatisticalFoundations.m */; };
+		E9DBC2D61B0F240300053C53 /* ProcessCapabilityAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBC2D41B0F240300053C53 /* ProcessCapabilityAnalysisViewController.m */; };
+		E9DBC2D71B0F240300053C53 /* ProcessCapabilityAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DBC2D51B0F240300053C53 /* ProcessCapabilityAnalysisViewController.xib */; };
+		E9DBC2DA1B0F832A00053C53 /* QKProcessCapabilityAnalysis.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBC2D91B0F832A00053C53 /* QKProcessCapabilityAnalysis.m */; };
 		E9DC5DE01B04E69400CA612F /* MsgDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DC5DDF1B04E69400CA612F /* MsgDisplay.m */; };
 		E9DC5DE31B05243900CA612F /* QKData5.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DC5DE21B05243900CA612F /* QKData5.m */; };
 		E9F3BD271AFF966900D998FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD261AFF966900D998FC /* main.m */; };
@@ -174,6 +177,11 @@
 		E99A5DDA1B00ED2700EA23E5 /* QZXLSReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QZXLSReader.h; sourceTree = "<group>"; };
 		E9DBC2D01B0DF2DE00053C53 /* QKStatisticalFoundations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKStatisticalFoundations.h; sourceTree = "<group>"; };
 		E9DBC2D11B0DF2DE00053C53 /* QKStatisticalFoundations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKStatisticalFoundations.m; sourceTree = "<group>"; };
+		E9DBC2D31B0F240300053C53 /* ProcessCapabilityAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessCapabilityAnalysisViewController.h; sourceTree = "<group>"; };
+		E9DBC2D41B0F240300053C53 /* ProcessCapabilityAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessCapabilityAnalysisViewController.m; sourceTree = "<group>"; };
+		E9DBC2D51B0F240300053C53 /* ProcessCapabilityAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProcessCapabilityAnalysisViewController.xib; sourceTree = "<group>"; };
+		E9DBC2D81B0F832A00053C53 /* QKProcessCapabilityAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKProcessCapabilityAnalysis.h; sourceTree = "<group>"; };
+		E9DBC2D91B0F832A00053C53 /* QKProcessCapabilityAnalysis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKProcessCapabilityAnalysis.m; sourceTree = "<group>"; };
 		E9DC5DDE1B04E69400CA612F /* MsgDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDisplay.h; sourceTree = "<group>"; };
 		E9DC5DDF1B04E69400CA612F /* MsgDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDisplay.m; sourceTree = "<group>"; };
 		E9DC5DE11B05243900CA612F /* QKData5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QKData5.h; path = "Data Model/QKData5.h"; sourceTree = "<group>"; };
@@ -367,6 +375,9 @@
 				E966D0BA1B01E89F0070AA69 /* ControlChartViewController.m */,
 				E966D0C41B024F5B0070AA69 /* RulesTableViewController.h */,
 				E966D0C51B024F5B0070AA69 /* RulesTableViewController.m */,
+				E9DBC2D31B0F240300053C53 /* ProcessCapabilityAnalysisViewController.h */,
+				E9DBC2D41B0F240300053C53 /* ProcessCapabilityAnalysisViewController.m */,
+				E9DBC2D51B0F240300053C53 /* ProcessCapabilityAnalysisViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -380,6 +391,8 @@
 				E92C930F1B0490F20026BD3A /* QKDataAnalyzer.m */,
 				E9DBC2D01B0DF2DE00053C53 /* QKStatisticalFoundations.h */,
 				E9DBC2D11B0DF2DE00053C53 /* QKStatisticalFoundations.m */,
+				E9DBC2D81B0F832A00053C53 /* QKProcessCapabilityAnalysis.h */,
+				E9DBC2D91B0F832A00053C53 /* QKProcessCapabilityAnalysis.m */,
 				E99A5DB41B00CDF500EA23E5 /* QKDataManager.h */,
 				E99A5DB51B00CDF500EA23E5 /* QKDataManager.m */,
 				E99A5DBB1B00E5ED00EA23E5 /* QKDataProcessor.h */,
@@ -654,6 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9F3BD331AFF966900D998FC /* Main.storyboard in Resources */,
+				E9DBC2D71B0F240300053C53 /* ProcessCapabilityAnalysisViewController.xib in Resources */,
 				E9F3BD381AFF966900D998FC /* LaunchScreen.xib in Resources */,
 				E9F3BD351AFF966900D998FC /* Images.xcassets in Resources */,
 				E99A5DE01B00ED2700EA23E5 /* Licenses in Resources */,
@@ -708,6 +722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */,
+				E9DBC2DA1B0F832A00053C53 /* QKProcessCapabilityAnalysis.m in Sources */,
 				E99A5DDE1B00ED2700EA23E5 /* xls.c in Sources */,
 				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
 				E9F6B8BF1B01A1EF00435FB4 /* QKControlChartView.m in Sources */,
@@ -742,6 +757,7 @@
 				E97D9F2D1B0DC4CA00003BC4 /* QKExportManager.m in Sources */,
 				E99A5DDF1B00ED2700EA23E5 /* xlstool.c in Sources */,
 				E91DEEE71AFFAC4200F004F8 /* TSTableViewExpandControlPanel.m in Sources */,
+				E9DBC2D61B0F240300053C53 /* ProcessCapabilityAnalysisViewController.m in Sources */,
 				E9F3BD271AFF966900D998FC /* main.m in Sources */,
 				E99A5DDD1B00ED2700EA23E5 /* ole.c in Sources */,
 				E91DEEE91AFFAC4200F004F8 /* TSTableViewHeaderPanel.m in Sources */,

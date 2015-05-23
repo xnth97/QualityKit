@@ -13,8 +13,11 @@
 #import "QKDataAnalyzer.h"
 #import "MsgDisplay.h"
 #import "QKStatisticalFoundations.h"
+#import "ProcessCapabilityAnalysisViewController.h"
+#import "QKExportManager.h"
+#import <QuickLook/QuickLook.h>
 
-@interface ControlChartViewController ()
+@interface ControlChartViewController ()<ProcessCapabilityAnalysisDelegate, QLPreviewControllerDataSource>
 
 @end
 
@@ -22,6 +25,11 @@
     QKControlChartView *chartView;
     QKControlChartView *subChartView;
     UITextView *errorMsgView;
+    NSString *chartTitle;
+    NSString *subChartTitle;
+    
+    NSString *exportFileName;
+    QLPreviewController *quickLookController;
 }
 
 @synthesize chartType;
@@ -33,7 +41,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *processAnalysisBtn = [[UIBarButtonItem alloc] initWithTitle:@"过程能力分析" style:UIBarButtonItemStylePlain block:^(id weakSender) {
-        if ((chartView != nil && chartView.indexesOfErrorPoints.count != 0) || (chartView != nil && chartView.indexesOfErrorPoints.count != 0 && subChartView != nil && subChartView.indexesOfErrorPoints.count != 0)) {
+        if ((chartView != nil && chartView.indexesOfErrorPoints.count != 0) || (subChartView != nil && subChartView.indexesOfErrorPoints.count != 0)) {
             // 控制图不受控
             [MsgDisplay showErrorMsg:@"过程不受控\n无法进行过程能力分析"];
         } else if (chartView != nil && subChartView != nil) {
@@ -52,7 +60,16 @@
             }
         }
     }];
-    [self.navigationItem setRightBarButtonItems:@[processAnalysisBtn]];
+    UIBarButtonItem *exportChartBtn = [[UIBarButtonItem alloc] initWithTitle:@"导出控制图" style:UIBarButtonItemStylePlain block:^(id weakSender) {
+        UIImage *image = [QKExportManager imageFromView:self.view];
+        NSArray *activityItem = @[image];
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItem applicationActivities:nil];
+        activityViewController.modalPresentationStyle = UIModalPresentationPopover;
+        activityViewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        activityViewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    }];
+    [self.navigationItem setRightBarButtonItems:@[exportChartBtn, processAnalysisBtn]];
     
     errorMsgView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     errorMsgView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -85,6 +102,9 @@
             errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nR 图：\n%@", errorMsgView.text, _errDescription];
         }];
         [self.view addSubview:subChartView];
+        
+        chartTitle = @"XBar 控制图";
+        subChartTitle = @"R 控制图";
         
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
@@ -123,6 +143,9 @@
         }];
         [self.view addSubview:subChartView];
         
+        chartTitle = @"XBar 控制图";
+        subChartTitle = @"S 控制图";
+        
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
         NSString *vfl = @"|-16-[chartView]-16-|";
@@ -160,6 +183,9 @@
         }];
         [self.view addSubview:subChartView];
         
+        chartTitle = @"XBar 控制图";
+        subChartTitle = @"MR 控制图";
+        
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
         NSString *vfl = @"|-16-[chartView]-16-|";
@@ -184,6 +210,8 @@
             errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"P 图：%@", _errDescription];
         }];
         [self.view addSubview:chartView];
+        
+        chartTitle = @"P 控制图";
         
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
@@ -210,6 +238,8 @@
         }];
         [self.view addSubview:chartView];
         
+        chartTitle = @"Pn 控制图";
+        
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
         NSString *vfl = @"|-16-[chartView]-16-|";
@@ -234,6 +264,8 @@
         }];
         [self.view addSubview:chartView];
         
+        chartTitle = @"C 控制图";
+        
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
         NSString *vfl = @"|-16-[chartView]-16-|";
@@ -257,6 +289,8 @@
         }];
         [self.view addSubview:chartView];
         
+        chartTitle = @"U 控制图";
+        
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
         NSString *vfl = @"|-16-[chartView]-16-|";
@@ -268,6 +302,14 @@
     }
     
     self.title = [NSString stringWithFormat:@"%@ 控制图", chartType];
+    
+    // save shared instances
+    
+    [data shareInstance].chartView = chartView;
+    [data shareInstance].subChartView = subChartView;
+    [data shareInstance].title = self.title;
+    [data shareInstance].chartTitle = chartTitle;
+    [data shareInstance].subChartTitle = subChartTitle;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -276,7 +318,39 @@
 }
 
 - (void)processCapabilityAnalysis {
-    NSLog(@"Fuck the PCA");
+    ProcessCapabilityAnalysisViewController *pcaController = [[ProcessCapabilityAnalysisViewController alloc] initWithNibName:@"ProcessCapabilityAnalysisViewController" bundle:nil];
+    pcaController.controlChartType = chartType;
+    pcaController.delegate = self;
+    if (chartView != nil) {
+        pcaController.dataArr = dataArr;
+    }
+    
+    UINavigationController *pcaNav = [[UINavigationController alloc] initWithRootViewController:pcaController];
+    pcaNav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:pcaNav animated:YES completion:nil];
+}
+
+#pragma mark - QLPreviewController
+
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller {
+    return 1;
+}
+
+- (id <QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index {
+    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *pdfPath = [path stringByAppendingPathComponent:exportFileName];
+    NSURL *pdfURL = [NSURL fileURLWithPath:pdfPath];
+    return pdfURL;
+}
+
+#pragma mark - ProcessCapabilityAnalysisDelegate
+
+- (void)pushPDFPreviewViewControllerWithFileName:(NSString *)fileName {
+    exportFileName = [fileName stringByAppendingPathExtension:@"pdf"];
+    quickLookController = [[QLPreviewController alloc]init];
+    quickLookController.view.backgroundColor = [UIColor whiteColor];
+    quickLookController.dataSource = self;
+    [self.navigationController pushViewController:quickLookController animated:YES];
 }
 
 /*
