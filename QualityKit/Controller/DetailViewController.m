@@ -13,13 +13,14 @@
 #import "TSTableViewModel.h"
 #import "ControlChartViewController.h"
 #import "RulesTableViewController.h"
+#import "SelectControlChartViewController.h"
 #import "QKDef.h"
 #import "data.h"
 
 #define detailIsXLS [[detailItem pathExtension] isEqualToString:@"xls"]
 #define detailIsRealm [[detailItem pathExtension] isEqualToString:@"realm"]
 
-@interface DetailViewController () {
+@interface DetailViewController () <SelectControlChartDelegate> {
     TSTableViewModel *tableModel;
 }
 
@@ -91,6 +92,13 @@
 }
 
 - (void)chooseControlSheetStyle {
+    SelectControlChartViewController *selectChartController = [[SelectControlChartViewController alloc] initWithNibName:@"SelectControlChartViewController" bundle:nil];
+    selectChartController.delegate = self;
+    UINavigationController *scNav = [[UINavigationController alloc] initWithRootViewController:selectChartController];
+    scNav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:scNav animated:YES completion:nil];
+    
+    /*
     UIAlertController *styleController = [UIAlertController alertControllerWithTitle:@"选择控制图类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *xBarR = [UIAlertAction actionWithTitle:@"XBar-R" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         ControlChartViewController *chart = [[ControlChartViewController alloc] init];
@@ -176,6 +184,7 @@
     styleController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
     styleController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
     [self presentViewController:styleController animated:YES completion:nil];
+     */
 }
 
 - (void)chooseCheckRules {
@@ -190,6 +199,85 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - SelectControlChartDelegate
+
+- (void)selectXMRChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypeXMR;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
+- (void)selectXBarRChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypeXBarR;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
+- (void)selectXBarSChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypeXBarS;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
+- (void)selectPnChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypePn;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
+- (void)selectPChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypeP;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
+- (void)selectCChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypeC;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
+- (void)selectUChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = QKControlChartTypeU;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
 }
 
 #pragma mark - TSTableViewDelegate

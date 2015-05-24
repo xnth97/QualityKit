@@ -309,7 +309,7 @@
     [data shareInstance].subChartView = subChartView;
     [data shareInstance].title = self.title;
     [data shareInstance].chartTitle = chartTitle;
-    [data shareInstance].subChartTitle = subChartTitle;
+    [data shareInstance].subChartTitle = subChartTitle; 
 }
 
 - (void)didReceiveMemoryWarning {

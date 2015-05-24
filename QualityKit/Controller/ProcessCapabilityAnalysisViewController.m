@@ -50,6 +50,7 @@
     self.title = @"过程能力分析";
     
     actionBtn.tintColor = [UIColor whiteColor];
+    [actionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     actionBtn.backgroundColor = [UIColor colorWithRed:0.000 green:0.600 blue:1.000 alpha:1.000];
     actionBtn.layer.cornerRadius = 5.0;
     actionBtn.clipsToBounds = YES;
