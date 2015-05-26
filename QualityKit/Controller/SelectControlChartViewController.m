@@ -28,6 +28,11 @@
     }];
     [self.navigationItem setLeftBarButtonItem:cancelItem];
     
+    UIBarButtonItem *useSavedControlChart = [[UIBarButtonItem alloc] initWithTitle:@"使用控制图" style:UIBarButtonItemStylePlain block:^(id weakSender) {
+        
+    }];
+    [self.navigationItem setRightBarButtonItem:useSavedControlChart];
+    
     UIImageView *baseImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SelectChart"]];
     [scrollView addSubview:baseImg];
     [scrollView setContentSize:CGSizeMake(baseImg.frame.size.width, 0)];

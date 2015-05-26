@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QKSavedControlChart.h"
 
 @interface ControlChartViewController : UIViewController
 
 @property (strong, nonatomic) NSString *chartType;
 @property (strong, nonatomic) NSArray *dataArr;
+@property (strong, nonatomic) QKSavedControlChart *savedControlChart;
+@property (nonatomic) BOOL usingSavedControlChart;
 
 @end

@@ -34,6 +34,7 @@
 		E966D0CB1B034FD40070AA69 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0C81B034FD40070AA69 /* DetailViewController.m */; };
 		E966D0CC1B034FD40070AA69 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0CA1B034FD40070AA69 /* MasterViewController.m */; };
 		E97D9F2D1B0DC4CA00003BC4 /* QKExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F2C1B0DC4CA00003BC4 /* QKExportManager.m */; };
+		E987B4D81B14960700A05921 /* QKSavedControlChart.m in Sources */ = {isa = PBXBuildFile; fileRef = E987B4D71B14960700A05921 /* QKSavedControlChart.m */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
 		E98DD9AC1B0100480040C4BE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98DD9AB1B0100470040C4BE /* Realm.framework */; };
 		E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */; };
@@ -54,6 +55,7 @@
 		E9DBC2DA1B0F832A00053C53 /* QKProcessCapabilityAnalysis.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBC2D91B0F832A00053C53 /* QKProcessCapabilityAnalysis.m */; };
 		E9DBC2DE1B11748900053C53 /* SelectControlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBC2DC1B11748900053C53 /* SelectControlChartViewController.m */; };
 		E9DBC2DF1B11748900053C53 /* SelectControlChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DBC2DD1B11748900053C53 /* SelectControlChartViewController.xib */; };
+		E9DBC2E21B13384900053C53 /* MainSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBC2E11B13384900053C53 /* MainSplitViewController.m */; };
 		E9DC5DE01B04E69400CA612F /* MsgDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DC5DDF1B04E69400CA612F /* MsgDisplay.m */; };
 		E9DC5DE31B05243900CA612F /* QKData5.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DC5DE21B05243900CA612F /* QKData5.m */; };
 		E9F3BD271AFF966900D998FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F3BD261AFF966900D998FC /* main.m */; };
@@ -144,6 +146,8 @@
 		E966D0CA1B034FD40070AA69 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		E97D9F2B1B0DC4CA00003BC4 /* QKExportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKExportManager.h; sourceTree = "<group>"; };
 		E97D9F2C1B0DC4CA00003BC4 /* QKExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKExportManager.m; sourceTree = "<group>"; };
+		E987B4D61B14960700A05921 /* QKSavedControlChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QKSavedControlChart.h; path = "Data Model/QKSavedControlChart.h"; sourceTree = "<group>"; };
+		E987B4D71B14960700A05921 /* QKSavedControlChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QKSavedControlChart.m; path = "Data Model/QKSavedControlChart.m"; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E98DD9AB1B0100470040C4BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -187,6 +191,8 @@
 		E9DBC2DB1B11748900053C53 /* SelectControlChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectControlChartViewController.h; sourceTree = "<group>"; };
 		E9DBC2DC1B11748900053C53 /* SelectControlChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectControlChartViewController.m; sourceTree = "<group>"; };
 		E9DBC2DD1B11748900053C53 /* SelectControlChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectControlChartViewController.xib; sourceTree = "<group>"; };
+		E9DBC2E01B13384900053C53 /* MainSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSplitViewController.h; sourceTree = "<group>"; };
+		E9DBC2E11B13384900053C53 /* MainSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSplitViewController.m; sourceTree = "<group>"; };
 		E9DC5DDE1B04E69400CA612F /* MsgDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDisplay.h; sourceTree = "<group>"; };
 		E9DC5DDF1B04E69400CA612F /* MsgDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDisplay.m; sourceTree = "<group>"; };
 		E9DC5DE11B05243900CA612F /* QKData5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QKData5.h; path = "Data Model/QKData5.h"; sourceTree = "<group>"; };
@@ -372,6 +378,8 @@
 			isa = PBXGroup;
 			children = (
 				E9F3BD311AFF966900D998FC /* Main.storyboard */,
+				E9DBC2E01B13384900053C53 /* MainSplitViewController.h */,
+				E9DBC2E11B13384900053C53 /* MainSplitViewController.m */,
 				E966D0C91B034FD40070AA69 /* MasterViewController.h */,
 				E966D0CA1B034FD40070AA69 /* MasterViewController.m */,
 				E966D0C71B034FD40070AA69 /* DetailViewController.h */,
@@ -570,6 +578,8 @@
 			children = (
 				E9DC5DE11B05243900CA612F /* QKData5.h */,
 				E9DC5DE21B05243900CA612F /* QKData5.m */,
+				E987B4D61B14960700A05921 /* QKSavedControlChart.h */,
+				E987B4D71B14960700A05921 /* QKSavedControlChart.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -733,6 +743,7 @@
 				E99A5DDB1B00ED2700EA23E5 /* XlsReader.cpp in Sources */,
 				E9DBC2DA1B0F832A00053C53 /* QKProcessCapabilityAnalysis.m in Sources */,
 				E99A5DDE1B00ED2700EA23E5 /* xls.c in Sources */,
+				E987B4D81B14960700A05921 /* QKSavedControlChart.m in Sources */,
 				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
 				E9F6B8BF1B01A1EF00435FB4 /* QKControlChartView.m in Sources */,
 				E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */,
@@ -740,6 +751,7 @@
 				E91DEEEE1AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m in Sources */,
 				E9DC5DE31B05243900CA612F /* QKData5.m in Sources */,
 				E99A5DBD1B00E5ED00EA23E5 /* QKDataProcessor.m in Sources */,
+				E9DBC2E21B13384900053C53 /* MainSplitViewController.m in Sources */,
 				E9F3BD2A1AFF966900D998FC /* AppDelegate.m in Sources */,
 				E99A5DE11B00ED2700EA23E5 /* QZCell.m in Sources */,
 				E91DEEEB1AFFAC4200F004F8 /* TSTableViewRow.m in Sources */,

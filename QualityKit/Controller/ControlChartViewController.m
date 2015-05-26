@@ -27,6 +27,8 @@
     UITextView *errorMsgView;
     NSString *chartTitle;
     NSString *subChartTitle;
+    NSString *chartRule;
+    NSString *subChartRule;
     
     NSString *exportFileName;
     QLPreviewController *quickLookController;
@@ -34,6 +36,7 @@
 
 @synthesize chartType;
 @synthesize dataArr;
+@synthesize usingSavedControlChart;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,34 +80,74 @@
     errorMsgView.editable = NO;
     [self.view addSubview:errorMsgView];
     
-    if ([chartType isEqualToString:QKControlChartTypeXBarR]) {
+    if ([chartType isEqualToString:QKControlChartTypeXBarR] || [chartType isEqualToString:QKControlChartTypeXBarS] || [chartType isEqualToString:QKControlChartTypeXMR]) {
         
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBar withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：\n%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
+        if ([chartType isEqualToString:QKControlChartTypeXBarR]) {
+            chartTitle = @"XBar 控制图";
+            subChartTitle = @"R 控制图";
+            chartRule = QKControlChartTypeXBar;
+            subChartRule = QKControlChartTypeR;
+        } else if ([chartType isEqualToString:QKControlChartTypeXBarS]) {
+            chartTitle = @"XBar 控制图";
+            subChartTitle = @"S 控制图";
+            chartRule = QKControlChartTypeXBarUsingS;
+            subChartRule = QKControlChartTypeS;
+        } else if ([chartType isEqualToString:QKControlChartTypeXMR]) {
+            chartTitle = @"X 控制图";
+            subChartTitle = @"MR 控制图";
+            chartRule = QKControlChartTypeX;
+            subChartRule = QKControlChartTypeMR;
+        }
         
-        subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        subChartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            subChartView.UCLValue = _UCLValue;
-            subChartView.LCLValue = _LCLValue;
-            subChartView.CLValue = _CLValue;
-            subChartView.dataArr = _plotArr;
-            subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nR 图：\n%@", errorMsgView.text, _errDescription];
-        }];
-        [self.view addSubview:subChartView];
-        
-        chartTitle = @"XBar 控制图";
-        subChartTitle = @"R 控制图";
+        if (usingSavedControlChart) {
+            chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+            chartView.translatesAutoresizingMaskIntoConstraints = NO;
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                chartView.UCLValue = _UCLValue;
+                chartView.LCLValue = _LCLValue;
+                chartView.CLValue = _CLValue;
+                chartView.dataArr = _plotArr;
+                chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+                errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@：\n%@", chartTitle, _errDescription];
+            }];
+            [self.view addSubview:chartView];
+            
+            subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+            subChartView.translatesAutoresizingMaskIntoConstraints = NO;
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                subChartView.UCLValue = _UCLValue;
+                subChartView.LCLValue = _LCLValue;
+                subChartView.CLValue = _CLValue;
+                subChartView.dataArr = _plotArr;
+                subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+                errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n%@：\n%@", errorMsgView.text, subChartTitle, _errDescription];
+            }];
+            [self.view addSubview:subChartView];
+        } else {
+            chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+            chartView.translatesAutoresizingMaskIntoConstraints = NO;
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                chartView.UCLValue = _UCLValue;
+                chartView.LCLValue = _LCLValue;
+                chartView.CLValue = _CLValue;
+                chartView.dataArr = _plotArr;
+                chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+                errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@：\n%@", chartTitle, _errDescription];
+            }];
+            [self.view addSubview:chartView];
+            
+            subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+            subChartView.translatesAutoresizingMaskIntoConstraints = NO;
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                subChartView.UCLValue = _UCLValue;
+                subChartView.LCLValue = _LCLValue;
+                subChartView.CLValue = _CLValue;
+                subChartView.dataArr = _plotArr;
+                subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+                errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n%@：\n%@", errorMsgView.text, subChartTitle, _errDescription];
+            }];
+            [self.view addSubview:subChartView];
+        }
         
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
@@ -115,181 +158,46 @@
         for (NSString *tmpVFL in @[vfl, vfl2, vfl3, vfl4]) {
             [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
         }
-    }
-    
-    if ([chartType isEqualToString:QKControlChartTypeXBarS]) {
-        
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeXBarUsingS withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X-bar 图：\n%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
-        
-        subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        subChartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeS withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            subChartView.UCLValue = _UCLValue;
-            subChartView.LCLValue = _LCLValue;
-            subChartView.CLValue = _CLValue;
-            subChartView.dataArr = _plotArr;
-            subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nS 图：\n%@", errorMsgView.text, _errDescription];
-        }];
-        [self.view addSubview:subChartView];
-        
-        chartTitle = @"XBar 控制图";
-        subChartTitle = @"S 控制图";
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView, errorMsgView);
-        NSDictionary *metrics = @{@"lowerDist": @240};
-        NSString *vfl = @"|-16-[chartView]-16-|";
-        NSString *vfl2 = @"V:|-64-[chartView]-32-[subChartView(chartView)]-16-[errorMsgView(180)]-16-|";
-        NSString *vfl3 = @"|-16-[subChartView]-16-|";
-        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
-        for (NSString *tmpVFL in @[vfl, vfl2, vfl3, vfl4]) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
-        }
-    }
-    
-    if ([chartType isEqualToString:QKControlChartTypeXMR]) {
-        
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeX withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"X 图：\n%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
-        
-        subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        subChartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeMR withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            subChartView.UCLValue = _UCLValue;
-            subChartView.LCLValue = _LCLValue;
-            subChartView.CLValue = _CLValue;
-            subChartView.dataArr = _plotArr;
-            subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\nMR 图：\n%@", errorMsgView.text, _errDescription];
-        }];
-        [self.view addSubview:subChartView];
-        
-        chartTitle = @"XBar 控制图";
-        subChartTitle = @"MR 控制图";
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, subChartView, errorMsgView);
-        NSDictionary *metrics = @{@"lowerDist": @240};
-        NSString *vfl = @"|-16-[chartView]-16-|";
-        NSString *vfl2 = @"V:|-64-[chartView]-32-[subChartView(chartView)]-16-[errorMsgView(180)]-16-|";
-        NSString *vfl3 = @"|-16-[subChartView]-16-|";
-        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
-        for (NSString *tmpVFL in @[vfl, vfl2, vfl3, vfl4]) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
-        }
-    }
-    
-    if ([chartType isEqualToString:QKControlChartTypeP]) {
-        
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeP withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"P 图：%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
-        
-        chartTitle = @"P 控制图";
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
-        NSDictionary *metrics = @{@"lowerDist": @240};
-        NSString *vfl = @"|-16-[chartView]-16-|";
-        NSString *vfl2 = @"V:|-64-[chartView]-32-[errorMsgView(240)]-16-|";
-        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
-        for (NSString *tmpVFL in @[vfl, vfl2, vfl4]) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
+    } else {
+        if ([chartType isEqualToString:QKControlChartTypeP]) {
+            chartTitle = @"P 控制图";
+            chartRule = QKControlChartTypeP;
+        } else if ([chartType isEqualToString:QKControlChartTypePn]) {
+            chartTitle = @"Pn 控制图";
+            chartRule = QKControlChartTypePn;
+        } else if ([chartType isEqualToString:QKControlChartTypeC]) {
+            chartTitle = @"C 控制图";
+            chartRule = QKControlChartTypeC;
+        } else if ([chartType isEqualToString:QKControlChartTypeU]) {
+            chartTitle = @"U 控制图";
+            chartRule = QKControlChartTypeU;
         }
         
-    }
-    
-    if ([chartType isEqualToString:QKControlChartTypePn]) {
-        
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypePn withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"Pn 图：\n%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
-        
-        chartTitle = @"Pn 控制图";
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
-        NSDictionary *metrics = @{@"lowerDist": @240};
-        NSString *vfl = @"|-16-[chartView]-16-|";
-        NSString *vfl2 = @"V:|-64-[chartView]-32-[errorMsgView(240)]-16-|";
-        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
-        for (NSString *tmpVFL in @[vfl, vfl2, vfl4]) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
+        if (usingSavedControlChart) {
+            chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+            chartView.translatesAutoresizingMaskIntoConstraints = NO;
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                chartView.UCLValue = _UCLValue;
+                chartView.LCLValue = _LCLValue;
+                chartView.CLValue = _CLValue;
+                chartView.dataArr = _plotArr;
+                chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+                errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@：%@", chartTitle, _errDescription];
+            }];
+            [self.view addSubview:chartView];
+        } else {
+            chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+            chartView.translatesAutoresizingMaskIntoConstraints = NO;
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                chartView.UCLValue = _UCLValue;
+                chartView.LCLValue = _LCLValue;
+                chartView.CLValue = _CLValue;
+                chartView.dataArr = _plotArr;
+                chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
+                errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@：%@", chartTitle, _errDescription];
+            }];
+            [self.view addSubview:chartView];
         }
-        
-    }
-    
-    if ([chartType isEqualToString:QKControlChartTypeC]) {
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeC withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"C 图：\n%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
-        
-        chartTitle = @"C 控制图";
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
-        NSDictionary *metrics = @{@"lowerDist": @240};
-        NSString *vfl = @"|-16-[chartView]-16-|";
-        NSString *vfl2 = @"V:|-64-[chartView]-32-[errorMsgView(240)]-16-|";
-        NSString *vfl4 = @"|-16-[errorMsgView]-16-|";
-        for (NSString *tmpVFL in @[vfl, vfl2, vfl4]) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:tmpVFL options:0 metrics:metrics views:views]];
-        }
-    }
-    
-    if ([chartType isEqualToString:QKControlChartTypeU]) {
-        chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-        chartView.translatesAutoresizingMaskIntoConstraints = NO;
-        [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:QKControlChartTypeU withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-            chartView.UCLValue = _UCLValue;
-            chartView.LCLValue = _LCLValue;
-            chartView.CLValue = _CLValue;
-            chartView.dataArr = _plotArr;
-            chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
-            errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"U 图：\n%@", _errDescription];
-        }];
-        [self.view addSubview:chartView];
-        
-        chartTitle = @"U 控制图";
         
         NSDictionary *views = NSDictionaryOfVariableBindings(chartView, errorMsgView);
         NSDictionary *metrics = @{@"lowerDist": @240};
