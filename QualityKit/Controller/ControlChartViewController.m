@@ -10,6 +10,7 @@
 #import "ALActionBlocks.h"
 #import "QKControlChartView.h"
 #import "QKDef.h"
+#import "QKDataManager.h"
 #import "QKDataAnalyzer.h"
 #import "MsgDisplay.h"
 #import "QKStatisticalFoundations.h"
@@ -37,11 +38,16 @@
 @synthesize chartType;
 @synthesize dataArr;
 @synthesize usingSavedControlChart;
+@synthesize savedControlChart;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    if (usingSavedControlChart && savedControlChart != nil) {
+        self.chartType = savedControlChart.controlChartType;
+    }
     
     UIBarButtonItem *processAnalysisBtn = [[UIBarButtonItem alloc] initWithTitle:@"过程能力分析" style:UIBarButtonItemStylePlain block:^(id weakSender) {
         if ((chartView != nil && chartView.indexesOfErrorPoints.count != 0) || (subChartView != nil && subChartView.indexesOfErrorPoints.count != 0)) {
@@ -64,13 +70,53 @@
         }
     }];
     UIBarButtonItem *exportChartBtn = [[UIBarButtonItem alloc] initWithTitle:@"导出控制图" style:UIBarButtonItemStylePlain block:^(id weakSender) {
-        UIImage *image = [QKExportManager imageFromView:self.view];
-        NSArray *activityItem = @[image];
-        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItem applicationActivities:nil];
-        activityViewController.modalPresentationStyle = UIModalPresentationPopover;
-        activityViewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        activityViewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
-        [self presentViewController:activityViewController animated:YES completion:nil];
+        
+        UIAlertController *exportController = [UIAlertController alertControllerWithTitle:@"导出" message:@"请选择导出类型" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *imgAction = [UIAlertAction actionWithTitle:@"图像" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIImage *image = [QKExportManager imageFromView:self.view];
+            NSArray *activityItem = @[image];
+            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItem applicationActivities:nil];
+            activityViewController.modalPresentationStyle = UIModalPresentationPopover;
+            activityViewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+            activityViewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
+            [self presentViewController:activityViewController animated:YES completion:nil];
+        }];
+        UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"存储以供使用" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            UIAlertController *saveController = [UIAlertController alertControllerWithTitle:@"请输入名称" message:@"请输入控制图名称" preferredStyle:UIAlertControllerStyleAlert];
+            [saveController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"输入控制图名称";
+            }];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                UITextField *textField = saveController.textFields[0];
+                if ([textField.text isEqualToString:@""]) {
+                    [MsgDisplay showErrorMsg:@"请输入控制图名称"];
+                } else {
+                    QKSavedControlChart *tmpSavedChart = [[QKSavedControlChart alloc] init];
+                    tmpSavedChart.name = textField.text;
+                    tmpSavedChart.controlChartType = self.chartType;
+                    tmpSavedChart.UCLValue = chartView.UCLValue;
+                    tmpSavedChart.LCLValue = chartView.LCLValue;
+                    tmpSavedChart.CLValue = chartView.CLValue;
+                    tmpSavedChart.subUCLValue = subChartView.UCLValue;
+                    tmpSavedChart.subLCLValue = subChartView.LCLValue;
+                    tmpSavedChart.subCLValue = subChartView.CLValue;
+                    [QKDataManager addData:tmpSavedChart ToRealm:QKSavedControlCharts];
+                    [MsgDisplay showSuccessMsg:@"控制图保存成功！"];
+                }
+            }];
+            [saveController addAction:cancel];
+            [saveController addAction:saveAction];
+            [self presentViewController:saveController animated:YES completion:nil];
+            
+        }];
+        [exportController addAction:imgAction];
+        [exportController addAction:saveAction];
+        exportController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        exportController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItems[0];
+        [self presentViewController:exportController animated:YES completion:nil];
+        
     }];
     [self.navigationItem setRightBarButtonItems:@[exportChartBtn, processAnalysisBtn]];
     
@@ -102,10 +148,11 @@
         if (usingSavedControlChart) {
             chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             chartView.translatesAutoresizingMaskIntoConstraints = NO;
-            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-                chartView.UCLValue = _UCLValue;
-                chartView.LCLValue = _LCLValue;
-                chartView.CLValue = _CLValue;
+            
+            [QKDataAnalyzer getStatisticalValuesUsingSavedControlChartFromData:dataArr UCL:savedControlChart.UCLValue LCL:savedControlChart.LCLValue CL:savedControlChart.CLValue checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                chartView.UCLValue = savedControlChart.UCLValue;
+                chartView.LCLValue = savedControlChart.LCLValue;
+                chartView.CLValue = savedControlChart.CLValue;
                 chartView.dataArr = _plotArr;
                 chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
                 errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@：\n%@", chartTitle, _errDescription];
@@ -114,15 +161,16 @@
             
             subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             subChartView.translatesAutoresizingMaskIntoConstraints = NO;
-            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-                subChartView.UCLValue = _UCLValue;
-                subChartView.LCLValue = _LCLValue;
-                subChartView.CLValue = _CLValue;
+            [QKDataAnalyzer getStatisticalValuesUsingSavedControlChartFromData:dataArr UCL:savedControlChart.subUCLValue LCL:savedControlChart.subLCLValue CL:savedControlChart.subCLValue checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                subChartView.UCLValue = savedControlChart.subUCLValue;
+                subChartView.LCLValue = savedControlChart.subLCLValue;
+                subChartView.CLValue = savedControlChart.subCLValue;
                 subChartView.dataArr = _plotArr;
                 subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
                 errorMsgView.text =  ([_errDescription isEqualToString:@""]) ? errorMsgView.text : [NSString stringWithFormat:@"%@\n%@：\n%@", errorMsgView.text, subChartTitle, _errDescription];
             }];
             [self.view addSubview:subChartView];
+            
         } else {
             chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             chartView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -176,10 +224,10 @@
         if (usingSavedControlChart) {
             chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             chartView.translatesAutoresizingMaskIntoConstraints = NO;
-            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-                chartView.UCLValue = _UCLValue;
-                chartView.LCLValue = _LCLValue;
-                chartView.CLValue = _CLValue;
+            [QKDataAnalyzer getStatisticalValuesUsingSavedControlChartFromData:dataArr UCL:savedControlChart.UCLValue LCL:savedControlChart.LCLValue CL:savedControlChart.CLValue checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+                chartView.UCLValue = savedControlChart.UCLValue;
+                chartView.LCLValue = savedControlChart.LCLValue;
+                chartView.CLValue = savedControlChart.CLValue;
                 chartView.dataArr = _plotArr;
                 chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
                 errorMsgView.text = ([_errDescription isEqualToString:@""]) ? @"" : [NSString stringWithFormat:@"%@：%@", chartTitle, _errDescription];

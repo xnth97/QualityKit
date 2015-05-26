@@ -35,6 +35,7 @@
 		E966D0CC1B034FD40070AA69 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E966D0CA1B034FD40070AA69 /* MasterViewController.m */; };
 		E97D9F2D1B0DC4CA00003BC4 /* QKExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E97D9F2C1B0DC4CA00003BC4 /* QKExportManager.m */; };
 		E987B4D81B14960700A05921 /* QKSavedControlChart.m in Sources */ = {isa = PBXBuildFile; fileRef = E987B4D71B14960700A05921 /* QKSavedControlChart.m */; };
+		E987B4DB1B14A91D00A05921 /* SavedChartTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E987B4DA1B14A91D00A05921 /* SavedChartTableViewController.m */; };
 		E98C60E61AFFA1DC00710840 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98C60E51AFFA1DC00710840 /* QuartzCore.framework */; };
 		E98DD9AC1B0100480040C4BE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98DD9AB1B0100470040C4BE /* Realm.framework */; };
 		E99A5DB11B00CAF500EA23E5 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */; };
@@ -148,6 +149,8 @@
 		E97D9F2C1B0DC4CA00003BC4 /* QKExportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKExportManager.m; sourceTree = "<group>"; };
 		E987B4D61B14960700A05921 /* QKSavedControlChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QKSavedControlChart.h; path = "Data Model/QKSavedControlChart.h"; sourceTree = "<group>"; };
 		E987B4D71B14960700A05921 /* QKSavedControlChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QKSavedControlChart.m; path = "Data Model/QKSavedControlChart.m"; sourceTree = "<group>"; };
+		E987B4D91B14A91D00A05921 /* SavedChartTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedChartTableViewController.h; sourceTree = "<group>"; };
+		E987B4DA1B14A91D00A05921 /* SavedChartTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedChartTableViewController.m; sourceTree = "<group>"; };
 		E98C60E51AFFA1DC00710840 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E98DD9AB1B0100470040C4BE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = QualityKit/Framework/Realm.framework; sourceTree = "<group>"; };
 		E99A5DB01B00CAF500EA23E5 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -394,6 +397,8 @@
 				E9DBC2DB1B11748900053C53 /* SelectControlChartViewController.h */,
 				E9DBC2DC1B11748900053C53 /* SelectControlChartViewController.m */,
 				E9DBC2DD1B11748900053C53 /* SelectControlChartViewController.xib */,
+				E987B4D91B14A91D00A05921 /* SavedChartTableViewController.h */,
+				E987B4DA1B14A91D00A05921 /* SavedChartTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -746,6 +751,7 @@
 				E987B4D81B14960700A05921 /* QKSavedControlChart.m in Sources */,
 				E91DEEE81AFFAC4200F004F8 /* TSTableViewExpandSection.m in Sources */,
 				E9F6B8BF1B01A1EF00435FB4 /* QKControlChartView.m in Sources */,
+				E987B4DB1B14A91D00A05921 /* SavedChartTableViewController.m in Sources */,
 				E91DEEE41AFFAC4200F004F8 /* TSNavigationStripView.m in Sources */,
 				E91DEEEF1AFFAC4200F004F8 /* TSTableViewModel.m in Sources */,
 				E91DEEEE1AFFAC4200F004F8 /* TSTableViewHeaderSectionView.m in Sources */,

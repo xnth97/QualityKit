@@ -47,6 +47,9 @@
 #define QKAutoFix @"QKAutoFix"
 #define QKSignificance @"QKSignificance"
 
+// The name of database which stores all saved control charts.
+#define QKSavedControlCharts @"savedControlCharts.realm"
+
 @interface QKDef : NSObject
 
 + (float)QKConstant_d2:(NSInteger)n;

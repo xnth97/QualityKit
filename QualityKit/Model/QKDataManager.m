@@ -156,4 +156,9 @@
     });
 }
 
++ (RLMRealm *)realmByName:(NSString *)name {
+    RLMRealm *realm = [RLMRealm realmWithPath:[self fullPathOfFile:name]];
+    return realm;
+}
+
 @end

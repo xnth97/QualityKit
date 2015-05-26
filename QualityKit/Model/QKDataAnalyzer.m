@@ -59,6 +59,32 @@
     block(UCLValue, LCLValue, CLValue, plotArr, indexesOfErrorPoints, errorDescription);
 }
 
+#pragma mark - using saved control chart
+
++ (void)getStatisticalValuesUsingSavedControlChartFromData:(NSArray *)dataArr UCL:(float)UCLValue LCL:(float)LCLValue CL:(float)CLValue checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void (^)(NSArray *, NSArray *, NSString *))block {
+    
+    __block NSMutableArray *plotArr = [[NSMutableArray alloc] init];
+    __block NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
+    __block NSString *errorDescription = @"";
+    
+    [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+        plotArr = [_plotArr mutableCopy];
+    }];
+    
+    for (NSString *rule in rulesArr) {
+        [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+            for (id tmp in _indexesOfErrorPoints) {
+                if (![indexesOfErrorPoints containsObject:tmp]) {
+                    [indexesOfErrorPoints addObject:tmp];
+                }
+            }
+            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
+        }];
+    }
+    
+    block(plotArr, indexesOfErrorPoints, errorDescription);
+}
+
 #pragma mark - calculate data
 
 + (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void (^)(float, float, float, NSArray *))block {

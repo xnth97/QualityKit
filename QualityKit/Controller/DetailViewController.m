@@ -192,6 +192,19 @@
     }
 }
 
+- (void)generateChartWithSavedChart:(QKSavedControlChart *)savedChart {
+    ControlChartViewController *chart = [[ControlChartViewController alloc] init];
+    [self.navigationController pushViewController:chart animated:YES];
+    chart.chartType = savedChart.controlChartType;
+    chart.savedControlChart = savedChart;
+    chart.usingSavedControlChart = YES;
+    if (detailIsXLS) {
+        chart.dataArr = [QKDataProcessor convertXLSFileToDoubleArray:detailItem];
+    } else if (detailIsRealm) {
+        chart.dataArr = [QKDataProcessor convertRealmToDoubleArray:detailItem dataModelClass:[QKData5 className]];
+    }
+}
+
 #pragma mark - TSTableViewDelegate
 
 - (void)tableView:(TSTableView *)tableView willSelectColumnAtPath:(NSIndexPath *)columnPath animated:(BOOL)animated {

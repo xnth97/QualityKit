@@ -8,8 +8,9 @@
 
 #import "SelectControlChartViewController.h"
 #import "ALActionBlocks.h"
+#import "SavedChartTableViewController.h"
 
-@interface SelectControlChartViewController ()
+@interface SelectControlChartViewController () <SavedChartDelegate>
 
 @end
 
@@ -29,7 +30,9 @@
     [self.navigationItem setLeftBarButtonItem:cancelItem];
     
     UIBarButtonItem *useSavedControlChart = [[UIBarButtonItem alloc] initWithTitle:@"使用控制图" style:UIBarButtonItemStylePlain block:^(id weakSender) {
-        
+        SavedChartTableViewController *savedChart = [[SavedChartTableViewController alloc] initWithStyle:UITableViewStylePlain];
+        savedChart.delegate = self;
+        [self.navigationController pushViewController:savedChart animated:YES];
     }];
     [self.navigationItem setRightBarButtonItem:useSavedControlChart];
     
@@ -82,6 +85,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - select chart table delegate
+
+- (void)generateControlChartWithSavedChart:(QKSavedControlChart *)savedChart {
+    [delegate generateChartWithSavedChart:savedChart];
 }
 
 /*

@@ -21,5 +21,6 @@
 + (void)removeLocalFile:(NSString *)filePath;
 + (void)addData:(RLMObject *)data ToRealm:(NSString *)realmName;
 + (void)removeData:(RLMObject *)data InRealm:(NSString *)realmName;
++ (RLMRealm *)realmByName:(NSString *)name;
 
 @end

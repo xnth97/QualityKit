@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QKSavedControlChart.h"
 
 @protocol SelectControlChartDelegate <NSObject>
 
@@ -17,6 +18,7 @@
 - (void)selectPnChart;
 - (void)selectCChart;
 - (void)selectUChart;
+- (void)generateChartWithSavedChart:(QKSavedControlChart *)savedChart;
 
 @end
 
