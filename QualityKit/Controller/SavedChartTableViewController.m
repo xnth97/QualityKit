@@ -19,6 +19,7 @@
 
 @implementation SavedChartTableViewController {
     RLMResults *chartData;
+    NSMutableArray *chartDataInTable;
 }
 
 @synthesize delegate;
@@ -41,6 +42,15 @@
     RLMRealm *realm = [QKDataManager realmByName:QKSavedControlCharts];
     chartData = [QKSavedControlChart allObjectsInRealm:realm];
     
+    chartDataInTable = [[NSMutableArray alloc] init];
+    for (QKSavedControlChart *tmp in chartData) {
+        [chartDataInTable addObject:@{@"name": tmp.name,
+                                      @"type": tmp.controlChartType}];
+    }
+    
+    _token = [realm addNotificationBlock:^(NSString *notification, RLMRealm *realm) {
+        chartData = [QKSavedControlChart allObjectsInRealm:realm];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +67,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return chartData.count;
+    return chartDataInTable.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,9 +77,8 @@
     }
     // Configure the cell...
     NSUInteger row = [indexPath row];
-    QKSavedControlChart *chart = chartData[row];
-    cell.textLabel.text = chart.name;
-    cell.detailTextLabel.text = chart.controlChartType;
+    cell.textLabel.text = (chartDataInTable[row])[@"name"];
+    cell.detailTextLabel.text = (chartDataInTable[row])[@"type"];
     return cell;
 }
 
@@ -82,25 +91,34 @@
     }];
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        NSUInteger row = [indexPath row];
+        [chartDataInTable removeObjectAtIndex:row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        QKSavedControlChart *chart = chartData[row];
+        RLMRealm *realm = [QKDataManager realmByName:QKSavedControlCharts];
+        
+        [realm beginWriteTransaction];
+        [realm deleteObject:chart];
+        [realm commitWriteTransaction];
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

@@ -18,5 +18,6 @@
 @interface SavedChartTableViewController : UITableViewController
 
 @property (strong, nonatomic) id <SavedChartDelegate> delegate;
+@property (strong) RLMNotificationToken *token;
 
 @end

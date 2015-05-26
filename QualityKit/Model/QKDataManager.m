@@ -9,6 +9,7 @@
 #import "QKDataManager.h"
 #import <Realm/Realm.h>
 #import <JXLS/JXLS.h>
+#import "QKDef.h"
 
 @implementation QKDataManager
 
@@ -28,7 +29,11 @@
     for (NSString *tmpFile in [self allFilesInDocumentDirectory]) {
         NSString *extStr = [tmpFile pathExtension];
         if ([extStr isEqualToString:@"realm"]) {
-            [realmArr addObject:tmpFile];
+            if ([tmpFile isEqualToString:QKSavedControlCharts]) {
+                continue;
+            } else {
+                [realmArr addObject:tmpFile];
+            }
         }
     }
     block(realmArr);
@@ -146,6 +151,8 @@
         [realm commitWriteTransaction];
     });
 }
+
+// 有个 bug 关于传值和传引用的问题
 
 + (void)removeData:(RLMObject *)data InRealm:(NSString *)realmName {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{

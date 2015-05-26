@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "QKDataManager.h"
 #import "MsgDisplay.h"
+#import "QKDef.h"
 #import "QKData5.h"
 
 @interface MasterViewController ()
