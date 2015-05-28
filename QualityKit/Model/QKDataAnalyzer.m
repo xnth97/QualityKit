@@ -10,42 +10,51 @@
 #import "QKDef.h"
 #import "QKStatisticalFoundations.h"
 
+#define uclAndLclAreNSNumbers [UCLValue isKindOfClass:[NSNumber class]] && [LCLValue isKindOfClass:[NSNumber class]]
+#define uclAndLclAreNSArrays [UCLValue isKindOfClass:[NSArray class]] && [LCLValue isKindOfClass:[NSArray class]]
+
+#define uclIsNSNumberInChecking [UCL isKindOfClass:[NSNumber class]]
+#define lclIsNSArrayInChecking [UCL isKindOfClass:[NSArray class]]
+
 @implementation QKDataAnalyzer
 
 #pragma mark - get statistical values
 
-+ (void)getStatisticalValuesOfDoubleArray:(NSArray *)dataArr checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void (^)(float, float, float, NSArray *, NSArray *, NSString *))block {
++ (void)getStatisticalValuesOfDoubleArray:(NSArray *)dataArr checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void (^)(id, id, float, NSArray *, NSArray *, NSString *))block {
     
-    __block float UCLValue;
-    __block float LCLValue;
+    __block id UCLValue;
+    __block id LCLValue;
     __block float CLValue;
     __block NSMutableArray *plotArr = [[NSMutableArray alloc] init];
     __block NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
     __block NSString *errorDescription = @"";
     
-    [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+    [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr) {
         UCLValue = _UCLValue;
         LCLValue = _LCLValue;
         CLValue = _CLValue;
         plotArr = [_plotArr mutableCopy];
     }];
     
-    for (NSString *rule in rulesArr) {
-        [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
-            for (id tmp in _indexesOfErrorPoints) {
-                if (![indexesOfErrorPoints containsObject:tmp]) {
-                    [indexesOfErrorPoints addObject:tmp];
+    if (uclAndLclAreNSNumbers) {
+        for (NSString *rule in rulesArr) {
+            [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+                for (id tmp in _indexesOfErrorPoints) {
+                    if (![indexesOfErrorPoints containsObject:tmp]) {
+                        [indexesOfErrorPoints addObject:tmp];
+                    }
                 }
-            }
-            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
-        }];
+                errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
+            }];
+        }
     }
+    
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:QKAutoFix] == YES) {
         // 【重要】
         // 如果这里不判断是否为0，之后 fixData 会直接进入为0的环节，从而返回空值
         if (indexesOfErrorPoints.count > 0) {
-            [self fixData:dataArr indexesOfErrorRows:indexesOfErrorPoints checkRules:rulesArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+            [self fixData:dataArr indexesOfErrorRows:indexesOfErrorPoints checkRules:rulesArr controlChartType:type block:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
                 UCLValue = _UCLValue;
                 LCLValue = _LCLValue;
                 CLValue = _CLValue;
@@ -61,25 +70,27 @@
 
 #pragma mark - using saved control chart
 
-+ (void)getStatisticalValuesUsingSavedControlChartFromData:(NSArray *)dataArr UCL:(float)UCLValue LCL:(float)LCLValue CL:(float)CLValue checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void (^)(NSArray *, NSArray *, NSString *))block {
++ (void)getStatisticalValuesUsingSavedControlChartFromData:(NSArray *)dataArr UCL:(id)UCLValue LCL:(id)LCLValue CL:(float)CLValue checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void (^)(NSArray *, NSArray *, NSString *))block {
     
     __block NSMutableArray *plotArr = [[NSMutableArray alloc] init];
     __block NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
     __block NSString *errorDescription = @"";
     
-    [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+    [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr) {
         plotArr = [_plotArr mutableCopy];
     }];
     
-    for (NSString *rule in rulesArr) {
-        [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
-            for (id tmp in _indexesOfErrorPoints) {
-                if (![indexesOfErrorPoints containsObject:tmp]) {
-                    [indexesOfErrorPoints addObject:tmp];
+    if (uclAndLclAreNSNumbers) {
+        for (NSString *rule in rulesArr) {
+            [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+                for (id tmp in _indexesOfErrorPoints) {
+                    if (![indexesOfErrorPoints containsObject:tmp]) {
+                        [indexesOfErrorPoints addObject:tmp];
+                    }
                 }
-            }
-            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
-        }];
+                errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
+            }];
+        }
     }
     
     block(plotArr, indexesOfErrorPoints, errorDescription);
@@ -87,7 +98,7 @@
 
 #pragma mark - calculate data
 
-+ (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void (^)(float, float, float, NSArray *))block {
++ (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void (^)(id, id, float, NSArray *))block {
     
     if ([type isEqualToString:QKControlChartTypeXBar]) {
         NSMutableArray *xBarArr = [[NSMutableArray alloc] init];
@@ -99,13 +110,13 @@
         float CLValue = [QKStatisticalFoundations averageValueOfArray:xBarArr];
         
         __block float rBar;
-        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeR block:^(float _UCLR, float _LCLR, float _CLR, NSArray *_rArr) {
+        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeR block:^(id _UCLR, id _LCLR, float _CLR, NSArray *_rArr) {
             rBar = _CLR;
         }];
         
         float A2 = [QKDef QKConstantA2:xBarArr.count];
-        float UCLValue = CLValue + A2 * rBar;
-        float LCLValue = CLValue - A2 * rBar;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:CLValue + A2 * rBar];
+        NSNumber *LCLValue = [NSNumber numberWithFloat:CLValue - A2 * rBar];
         
         block(UCLValue, LCLValue, CLValue, xBarArr);
     }
@@ -119,9 +130,9 @@
         float CLValue = [QKStatisticalFoundations averageValueOfArray:rArr];
         
         float D4 = [QKDef QKConstantD4:rArr.count];
-        float UCLValue = D4 * CLValue;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:D4 * CLValue];
         float D3 = [QKDef QKConstantD3:rArr.count];
-        float LCLValue = D3 * CLValue;
+        NSNumber *LCLValue = [NSNumber numberWithFloat:D3 * CLValue];
         
         block(UCLValue, LCLValue, CLValue, rArr);
     }
@@ -136,13 +147,13 @@
         float CLValue = [QKStatisticalFoundations averageValueOfArray:xBarArr];
         
         __block float sBar = 0;
-        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeS block:^(float _UCL, float _LCL, float _CL, NSArray *_sArr) {
+        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeS block:^(id _UCL, id _LCL, float _CL, NSArray *_sArr) {
             sBar = _CL;
         }];
         
         float A3 = [QKDef QKConstantA3:xBarArr.count];
-        float UCLValue = CLValue + A3 * sBar;
-        float LCLValue = CLValue - A3 * sBar;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:CLValue + A3 * sBar];
+        NSNumber *LCLValue = [NSNumber numberWithFloat:CLValue - A3 * sBar];
         
         block(UCLValue, LCLValue, CLValue, xBarArr);
     }
@@ -159,8 +170,8 @@
         float B3 = [QKDef QKConstantB3:sArr.count];
         float B4 = [QKDef QKConstantB4:sArr.count];
         
-        float UCLValue = B4 * sBar;
-        float LCLValue = B3 * sBar;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:B4 * sBar];
+        NSNumber *LCLValue = [NSNumber numberWithFloat:B3 * sBar];
         
         block(UCLValue, LCLValue, sBar, sArr);
     }
@@ -175,11 +186,11 @@
         float CLValue = [QKStatisticalFoundations averageValueOfArray:xArr];
         
         __block float rBar = 0;
-        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeMR block:^(float _UCL, float _LCL, float _CLR, NSArray *_rArr) {
+        [self calculateControlLineValuesOfData:dataArray controlChartType:QKControlChartTypeMR block:^(id _UCL, id _LCL, float _CLR, NSArray *_rArr) {
             rBar = _CLR;
         }];
-        float UCLValue = CLValue + [QKDef QKConstantE2:xArr.count] * rBar;
-        float LCLValue = CLValue - [QKDef QKConstantE2:xArr.count] * rBar;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:CLValue + [QKDef QKConstantE2:xArr.count] * rBar];
+        NSNumber *LCLValue = [NSNumber numberWithFloat:CLValue - [QKDef QKConstantE2:xArr.count] * rBar];
         
         block(UCLValue, LCLValue, CLValue, xArr);
     }
@@ -199,8 +210,8 @@
         }
         float CLValue = rSum / rArr.count;
         
-        float UCLValue = [QKDef QKConstantD4:rArr.count] * CLValue;
-        float LCLValue = [QKDef QKConstantD3:rArr.count] * CLValue;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:[QKDef QKConstantD4:rArr.count] * CLValue];
+        NSNumber *LCLValue = [NSNumber numberWithFloat:[QKDef QKConstantD3:rArr.count] * CLValue];
         
         block(UCLValue, LCLValue, CLValue, rArr);
     }
@@ -223,11 +234,20 @@
         
         float CLValue = pniSum / nSum;
         
-        float UCLValue = CLValue + 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(nSum / dataArray.count);
-        float LCLValue = CLValue - 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(nSum / dataArray.count);
-        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
+        NSMutableArray *UCLArr = [[NSMutableArray alloc] init];
+        NSMutableArray *LCLArr = [[NSMutableArray alloc] init];
+        for (int i = 0; i < dataArray.count; i ++) {
+            NSArray *tmp = dataArray[i];
+            float ni = [tmp[0] floatValue];
+            NSNumber *UCLValue = [NSNumber numberWithFloat:CLValue + 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(ni)];
+            float tLCL = CLValue - 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(ni);
+            float LCL = (tLCL >= 0) ? tLCL : 0;
+            NSNumber *LCLValue = [NSNumber numberWithFloat:LCL];
+            [UCLArr addObject:UCLValue];
+            [LCLArr addObject:LCLValue];
+        }
         
-        block(UCLValue, LCLValue, CLValue, pArr);
+        block(UCLArr, LCLArr, CLValue, pArr);
     }
     
     if ([type isEqualToString:QKControlChartTypePn]) {
@@ -242,9 +262,9 @@
         float pBar = pSum / (dataArray.count * [(dataArray[0])[0] integerValue]);
         float CLValue = pSum / dataArray.count;
         
-        float UCLValue = CLValue + 3 * sqrt(CLValue * (1 - pBar));
-        float LCLValue = CLValue - 3 * sqrt(CLValue * (1 - pBar));
-        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:CLValue + 3 * sqrt(CLValue * (1 - pBar))];
+        float _LCLValue = CLValue - 3 * sqrt(CLValue * (1 - pBar));
+        NSNumber *LCLValue = [NSNumber numberWithFloat:(_LCLValue >= 0) ? _LCLValue : 0];
         
         block(UCLValue, LCLValue, CLValue, pArr);
     }
@@ -259,9 +279,9 @@
             [cArr addObject:tmpC[1]];
         }
         float CLValue = cSum / dataArray.count;
-        float UCLValue = CLValue + 3 * sqrt(CLValue);
-        float LCLValue = CLValue - 3 * sqrt(CLValue);
-        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
+        NSNumber *UCLValue = [NSNumber numberWithFloat:CLValue + 3 * sqrt(CLValue)];
+        float _LCLValue = CLValue - 3 * sqrt(CLValue);
+        NSNumber *LCLValue = [NSNumber numberWithFloat:(_LCLValue >= 0) ? _LCLValue : 0];
         
         block(UCLValue, LCLValue, CLValue, cArr);
     }
@@ -279,24 +299,39 @@
         }
         float CLValue = uSum / dataArray.count;
         
-        float UCLValue = CLValue + 3 * sqrt(CLValue) / sqrt(nSum / dataArray.count);
-        float LCLValue = CLValue - 3 * sqrt(CLValue) / sqrt(nSum / dataArray.count);
-        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
+        NSMutableArray *UCLArr = [[NSMutableArray alloc] init];
+        NSMutableArray *LCLArr = [[NSMutableArray alloc] init];
+        for (NSArray *tmp in dataArray) {
+            float ni = [tmp[0] floatValue];
+            float UCLValue = CLValue + 3 * sqrt(CLValue) / sqrt(ni);
+            float LCLValue = CLValue - 3 * sqrt(CLValue) / sqrt(ni);
+            LCLValue = (LCLValue >= 0) ? LCLValue : 0;
+            [UCLArr addObject:[NSNumber numberWithFloat:UCLValue]];
+            [LCLArr addObject:[NSNumber numberWithFloat:LCLValue]];
+        }
         
-        block(UCLValue, LCLValue, CLValue, uArr);
+        block(UCLArr, LCLArr, CLValue, uArr);
     }
 }
 
 #pragma mark - check data
 
-+ (void)checkData:(NSArray *)plotArray UCLValue:(float)UCL LCLValue:(float)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
++ (void)checkData:(NSArray *)plotArray UCLValue:(id)UCL LCLValue:(id)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void (^)(NSArray *, NSString *))block {
     
     if ([checkRule isEqualToString:QKCheckRuleOutsideControlLine]) {
         NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
         for (int i = 0; i < plotArray.count; i ++) {
             float tmpFloat = [plotArray[i] floatValue];
-            if (tmpFloat > UCL || tmpFloat < LCL) {
-                [indexesOfErrorPoints addObject:[NSNumber numberWithInt:i]];
+            if ([UCL isKindOfClass:[NSNumber class]]) {
+                if (tmpFloat > [UCL floatValue] || tmpFloat < [LCL floatValue]) {
+                    [indexesOfErrorPoints addObject:[NSNumber numberWithInt:i]];
+                }
+            } else if ([UCL isKindOfClass:[NSArray class]]) {
+                NSNumber *tmpUCL = ((NSArray *)UCL)[0];
+                NSNumber *tmpLCL = ((NSArray *)LCL)[0];
+                if (tmpFloat > [tmpUCL floatValue] || tmpFloat < [tmpLCL floatValue]) {
+                    [indexesOfErrorPoints addObject:[NSNumber numberWithInt:i]];
+                }
             }
         }
         
@@ -317,20 +352,33 @@
     }
     
     if ([checkRule isEqualToString:QKCheckRuleTwoOfThreeInAreaA]) {
-        float unitArea = (UCL - LCL) / 6;
-        // 下 A 区上限
-        float lowerAreaAUpperLimit = LCL + unitArea;
-        // 上 A 区下限
-        float upperAreaALowerLimit = UCL - unitArea;
         
         NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < plotArray.count - 2; i ++) {
+            
+            float UCLValue;
+            float LCLValue;
+            
+            if (uclIsNSNumberInChecking) {
+                UCLValue = [UCL floatValue];
+                LCLValue = [LCL floatValue];
+            } else {
+                UCLValue = [((NSArray *)UCL)[i] floatValue];
+                LCLValue = [((NSArray *)LCL)[i] floatValue];
+            }
+            
+            float unitArea = (UCLValue - LCLValue) / 6;
+            // 下 A 区上限
+            float lowerAreaAUpperLimit = LCLValue + unitArea;
+            // 上 A 区下限
+            float upperAreaALowerLimit = UCLValue - unitArea;
+            
             float inAreaAPointsNum = 0;
             NSMutableArray *indexesOfCheckedPossibleErrorPoints = [[NSMutableArray alloc] init];
             for (int j = i; j <= i + 2; j ++) {
                 float pointValue = [plotArray[j] floatValue];
-                if ((pointValue >= LCL && pointValue <= lowerAreaAUpperLimit) || (pointValue >= upperAreaALowerLimit && pointValue <= UCL)) {
+                if ((pointValue >= LCLValue && pointValue <= lowerAreaAUpperLimit) || (pointValue >= upperAreaALowerLimit && pointValue <= UCLValue)) {
                     [indexesOfCheckedPossibleErrorPoints addObject:[NSNumber numberWithInteger:j]];
                     inAreaAPointsNum ++;
                 }
@@ -364,19 +412,32 @@
     if ([checkRule isEqualToString:QKCheckRuleFourOfFiveInAreaB]) {
         
         if (plotArray.count >= 5) {
-            float unitArea = (UCL - LCL) / 6;
-            // 下 B 区下限
-            float lowerAreaBLowerLimit = LCL + unitArea;
-            // 下 B 区上限
-            float lowerAreaBUpperLimit = LCL + 2 * unitArea;
-            // 上 B 区下限
-            float upperAreaBLowerLimit = UCL - 2 * unitArea;
-            // 上 B 区上限
-            float upperAreaBUpperLimit = UCL - unitArea;
+            
+            float UCLValue;
+            float LCLValue;
             
             NSMutableArray *indexesOfErrorPoints = [[NSMutableArray alloc] init];
             
             for (int i = 0; i < plotArray.count - 4; i ++) {
+                
+                if (uclIsNSNumberInChecking) {
+                    UCLValue = [UCL floatValue];
+                    LCLValue = [LCL floatValue];
+                } else {
+                    UCLValue = [((NSArray *)UCL)[i] floatValue];
+                    LCLValue = [((NSArray *)LCL)[i] floatValue];
+                }
+                
+                float unitArea = (UCLValue - LCLValue) / 6;
+                // 下 B 区下限
+                float lowerAreaBLowerLimit = LCLValue + unitArea;
+                // 下 B 区上限
+                float lowerAreaBUpperLimit = LCLValue + 2 * unitArea;
+                // 上 B 区下限
+                float upperAreaBLowerLimit = UCLValue - 2 * unitArea;
+                // 上 B 区上限
+                float upperAreaBUpperLimit = UCLValue - unitArea;
+                
                 float inAreaAPointsNum = 0;
                 NSMutableArray *indexesOfCheckedPossibleErrorPoints = [[NSMutableArray alloc] init];
                 for (int j = i; j <= i + 4; j ++) {
@@ -540,11 +601,11 @@
 
 #pragma mark - fix data
 
-+ (void)fixData:(NSArray *)dataArr indexesOfErrorRows:(NSArray *)indexesOfErrorRows checkRules:(NSArray *)rulesArr controlChartType:(NSString *)type block:(void (^)(float, float, float, NSArray *, NSArray *, NSString *))block {
++ (void)fixData:(NSArray *)dataArr indexesOfErrorRows:(NSArray *)indexesOfErrorRows checkRules:(NSArray *)rulesArr controlChartType:(NSString *)type block:(void (^)(id, id, float, NSArray *, NSArray *, NSString *))block {
     
     __block BOOL flag = YES;
-    __block float UCLValue = 0;
-    __block float LCLValue = 0;
+    __block id UCLValue;
+    __block id LCLValue;
     __block float CLValue = 0;
     __block NSMutableArray *plotArr = [[NSMutableArray alloc] init];
     __block NSMutableArray *indexesOfErrorPoints = [indexesOfErrorRows mutableCopy];
@@ -582,7 +643,7 @@
             [indexesOfErrorPoints removeAllObjects];
             errorDescription = @"";
             
-            [self calculateControlLineValuesOfData:_dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+            [self calculateControlLineValuesOfData:_dataArr controlChartType:type block:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr) {
                 UCLValue = _UCLValue;
                 LCLValue = _LCLValue;
                 CLValue = _CLValue;
@@ -605,7 +666,7 @@
             // 大于三直接返回
             errorDescription = [NSString stringWithFormat:@"%@错误点个数大于3，无法修正。\n", errorDescription];
             
-            [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr) {
+            [self calculateControlLineValuesOfData:dataArr controlChartType:type block:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr) {
                 UCLValue = _UCLValue;
                 LCLValue = _LCLValue;
                 CLValue = _CLValue;

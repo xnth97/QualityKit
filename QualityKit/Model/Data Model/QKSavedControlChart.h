@@ -13,11 +13,11 @@
 
 @property NSString *name;
 @property NSString *controlChartType;
-@property float UCLValue;
-@property float LCLValue;
+@property NSData *UCLValue;
+@property NSData *LCLValue;
 @property float CLValue;
-@property float subUCLValue;
-@property float subLCLValue;
+@property NSData *subUCLValue;
+@property NSData *subLCLValue;
 @property float subCLValue;
 
 @end

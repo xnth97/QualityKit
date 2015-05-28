@@ -11,8 +11,8 @@
 @interface QKControlChartView : UIView
 
 @property (strong, nonatomic) NSArray *dataArr;
-@property (nonatomic) float UCLValue;
-@property (nonatomic) float LCLValue;
+@property (nonatomic) id UCLValue;
+@property (nonatomic) id LCLValue;
 @property (nonatomic) float CLValue;
 @property (strong, nonatomic) NSArray *indexesOfErrorPoints;
 

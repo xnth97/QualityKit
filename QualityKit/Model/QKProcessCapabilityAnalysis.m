@@ -12,7 +12,7 @@
 
 + (float)CPValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
     __block float RBar = 0;
-    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
+    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(id _UCL, id _LCL, float _CL, NSArray *_plotArr) {
         RBar = _CL;
     }];
     float d2 = [QKDef QKConstant_d2:((NSArray *)dataArr[0]).count];
@@ -23,10 +23,10 @@
 + (float)CPUValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
     __block float XBar = 0;
     __block float RBar = 0;
-    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
+    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(id _UCL, id _LCL, float _CL, NSArray *_plotArr) {
         XBar = _CL;
     }];
-    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
+    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(id _UCL, id _LCL, float _CL, NSArray *_plotArr) {
         RBar = _CL;
     }];
     float d2 = [QKDef QKConstant_d2:((NSArray *)dataArr[0]).count];
@@ -37,10 +37,10 @@
 + (float)CPLValueOfData:(NSArray *)dataArr USL:(float)USL LSL:(float)LSL {
     __block float XBar = 0;
     __block float RBar = 0;
-    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
+    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeXBar block:^(id _UCL, id _LCL, float _CL, NSArray *_plotArr) {
         XBar = _CL;
     }];
-    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(float _UCL, float _LCL, float _CL, NSArray *_plotArr) {
+    [QKDataAnalyzer calculateControlLineValuesOfData:dataArr controlChartType:QKControlChartTypeR block:^(id _UCL, id _LCL, float _CL, NSArray *_plotArr) {
         RBar = _CL;
     }];
     float d2 = [QKDef QKConstant_d2:((NSArray *)dataArr[0]).count];

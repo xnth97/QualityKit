@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "03D37589710F29D07F4CC459"
+               BlueprintIdentifier = "428803F6783770FAB0AD08BC"
                BuildableName = "libPods-QualityKitTests-KVOController.a"
                BlueprintName = "Pods-QualityKitTests-KVOController"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -96,11 +96,11 @@
                     QKSavedControlChart *tmpSavedChart = [[QKSavedControlChart alloc] init];
                     tmpSavedChart.name = textField.text;
                     tmpSavedChart.controlChartType = self.chartType;
-                    tmpSavedChart.UCLValue = chartView.UCLValue;
-                    tmpSavedChart.LCLValue = chartView.LCLValue;
+                    tmpSavedChart.UCLValue = [NSKeyedArchiver archivedDataWithRootObject:chartView.UCLValue];
+                    tmpSavedChart.LCLValue = [NSKeyedArchiver archivedDataWithRootObject:chartView.LCLValue];
                     tmpSavedChart.CLValue = chartView.CLValue;
-                    tmpSavedChart.subUCLValue = subChartView.UCLValue;
-                    tmpSavedChart.subLCLValue = subChartView.LCLValue;
+                    tmpSavedChart.subUCLValue = [NSKeyedArchiver archivedDataWithRootObject:subChartView.UCLValue];
+                    tmpSavedChart.subLCLValue = [NSKeyedArchiver archivedDataWithRootObject:subChartView.LCLValue];
                     tmpSavedChart.subCLValue = subChartView.CLValue;
                     [QKDataManager addData:tmpSavedChart ToRealm:QKSavedControlCharts];
                     [MsgDisplay showSuccessMsg:@"控制图保存成功！"];
@@ -150,8 +150,8 @@
             chartView.translatesAutoresizingMaskIntoConstraints = NO;
             
             [QKDataAnalyzer getStatisticalValuesUsingSavedControlChartFromData:dataArr UCL:savedControlChart.UCLValue LCL:savedControlChart.LCLValue CL:savedControlChart.CLValue checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-                chartView.UCLValue = savedControlChart.UCLValue;
-                chartView.LCLValue = savedControlChart.LCLValue;
+                chartView.UCLValue = [NSKeyedUnarchiver unarchiveObjectWithData:savedControlChart.UCLValue];
+                chartView.LCLValue = [NSKeyedUnarchiver unarchiveObjectWithData:savedControlChart.LCLValue];
                 chartView.CLValue = savedControlChart.CLValue;
                 chartView.dataArr = _plotArr;
                 chartView.indexesOfErrorPoints = _indexesOfErrorPoints;
@@ -162,8 +162,8 @@
             subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             subChartView.translatesAutoresizingMaskIntoConstraints = NO;
             [QKDataAnalyzer getStatisticalValuesUsingSavedControlChartFromData:dataArr UCL:savedControlChart.subUCLValue LCL:savedControlChart.subLCLValue CL:savedControlChart.subCLValue checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
-                subChartView.UCLValue = savedControlChart.subUCLValue;
-                subChartView.LCLValue = savedControlChart.subLCLValue;
+                subChartView.UCLValue = [NSKeyedUnarchiver unarchiveObjectWithData:savedControlChart.subUCLValue];
+                subChartView.LCLValue = [NSKeyedUnarchiver unarchiveObjectWithData:savedControlChart.subLCLValue];
                 subChartView.CLValue = savedControlChart.subCLValue;
                 subChartView.dataArr = _plotArr;
                 subChartView.indexesOfErrorPoints = _indexesOfErrorPoints;
@@ -174,7 +174,7 @@
         } else {
             chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             chartView.translatesAutoresizingMaskIntoConstraints = NO;
-            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
                 chartView.UCLValue = _UCLValue;
                 chartView.LCLValue = _LCLValue;
                 chartView.CLValue = _CLValue;
@@ -186,7 +186,7 @@
             
             subChartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             subChartView.translatesAutoresizingMaskIntoConstraints = NO;
-            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:subChartRule withBlock:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
                 subChartView.UCLValue = _UCLValue;
                 subChartView.LCLValue = _LCLValue;
                 subChartView.CLValue = _CLValue;
@@ -236,7 +236,7 @@
         } else {
             chartView = [[QKControlChartView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
             chartView.translatesAutoresizingMaskIntoConstraints = NO;
-            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(float _UCLValue, float _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
+            [QKDataAnalyzer getStatisticalValuesOfDoubleArray:dataArr checkRulesArray:[[NSUserDefaults standardUserDefaults] objectForKey:QKCheckRules] controlChartType:chartRule withBlock:^(id _UCLValue, id _LCLValue, float _CLValue, NSArray *_plotArr, NSArray *_indexesOfErrorPoints, NSString *_errDescription) {
                 chartView.UCLValue = _UCLValue;
                 chartView.LCLValue = _LCLValue;
                 chartView.CLValue = _CLValue;

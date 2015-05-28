@@ -9,12 +9,19 @@
 #import "QKControlChartView.h"
 #import "QKDef.h"
 
-@implementation QKControlChartView
+#define uclAndLclAreNSNumbers [_UCLValue isKindOfClass:[NSNumber class]] && [_LCLValue isKindOfClass:[NSNumber class]]
+#define uclAndLclAreNSArrays [_UCLValue isKindOfClass:[NSArray class]] && [_LCLValue isKindOfClass:[NSArray class]]
+
+@implementation QKControlChartView {
+    float UCLFloatValue;
+    float LCLFloatValue;
+    
+    NSArray *UCLArray;
+    NSArray *LCLArray;
+}
 
 @synthesize dataArr;
 @synthesize indexesOfErrorPoints;
-@synthesize UCLValue;
-@synthesize LCLValue;
 @synthesize CLValue;
 
 - (id)initWithFrame:(CGRect)frame {
@@ -35,6 +42,14 @@
     if (dataArr != nil && dataArr.count > 0) {
         float width = rect.size.width;
         float height = rect.size.height;
+        
+        if (uclAndLclAreNSNumbers) {
+            UCLFloatValue = [_UCLValue floatValue];
+            LCLFloatValue = [_LCLValue floatValue];
+        } else if (uclAndLclAreNSArrays) {
+            UCLArray = [_UCLValue copy];
+            LCLArray = [_UCLValue copy];
+        }
         
         CGContextRef context = UIGraphicsGetCurrentContext();
         
@@ -76,11 +91,11 @@
                 minValue = tmpFloat;
             }
         }
-        if (maxValue <= UCLValue) {
-            maxValue = UCLValue;
+        if (maxValue <= UCLFloatValue) {
+            maxValue = UCLFloatValue;
         }
-        if (minValue >= LCLValue) {
-            minValue = LCLValue;
+        if (minValue >= LCLFloatValue) {
+            minValue = LCLFloatValue;
         }
         
         // 绘图上下限
@@ -106,14 +121,15 @@
         CGFloat lengths[] = {20, 10};
         CGContextSetLineDash(context, 0, lengths, 2);
         CGContextBeginPath(context);
-        
-        CGContextMoveToPoint(context, 50, zeroHeight - UCLValue * unitHeight);
-        CGContextAddLineToPoint(context, width - 100, zeroHeight - UCLValue * unitHeight);
-        
-        CGContextMoveToPoint(context, 50, zeroHeight - LCLValue * unitHeight);
-        CGContextAddLineToPoint(context, width - 100, zeroHeight - LCLValue * unitHeight);
-        
+            
+        CGContextMoveToPoint(context, 50, zeroHeight - UCLFloatValue * unitHeight);
+        CGContextAddLineToPoint(context, width - 100, zeroHeight - UCLFloatValue * unitHeight);
+            
+        CGContextMoveToPoint(context, 50, zeroHeight - LCLFloatValue * unitHeight);
+        CGContextAddLineToPoint(context, width - 100, zeroHeight - LCLFloatValue * unitHeight);
+            
         CGContextStrokePath(context);
+
         
         // 确定每点坐标
         float unitWidth = (width - 50 - 100)/(dataArr.count + 1);
@@ -178,16 +194,16 @@
         }
         
         // 绘制 UCL, LCL, CL 值
-        NSString *tStr2 = [NSString stringWithFormat:@"UCL=%.3f", UCLValue];
+        NSString *tStr2 = [NSString stringWithFormat:@"UCL=%.3f", UCLFloatValue];
         NSMutableParagraphStyle *paragraph2 = [[NSMutableParagraphStyle alloc] init];
         paragraph2.alignment = NSTextAlignmentLeft;
         NSDictionary *dict2 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
                                 NSParagraphStyleAttributeName: paragraph2,
                                 NSForegroundColorAttributeName: [UIColor redColor]};
-        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - UCLValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - UCLFloatValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
         
-        tStr2 = [NSString stringWithFormat:@"LCL=%.3f", LCLValue];
-        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - LCLValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        tStr2 = [NSString stringWithFormat:@"LCL=%.3f", LCLFloatValue];
+        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - LCLFloatValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
         
         NSDictionary *dict3 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
                                 NSParagraphStyleAttributeName: paragraph2,
