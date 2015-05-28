@@ -48,7 +48,7 @@
             LCLFloatValue = [_LCLValue floatValue];
         } else if (uclAndLclAreNSArrays) {
             UCLArray = [_UCLValue copy];
-            LCLArray = [_UCLValue copy];
+            LCLArray = [_LCLValue copy];
         }
         
         CGContextRef context = UIGraphicsGetCurrentContext();
@@ -80,22 +80,24 @@
         CGContextStrokePath(context);
         
         // 确定 y 轴上下限及单位高度
-        float maxValue = [dataArr[0] floatValue];
-        float minValue = [dataArr[0] floatValue];
-        for (NSNumber *tmpNum in dataArr) {
-            float tmpFloat = [tmpNum floatValue];
-            if (tmpFloat >= maxValue) {
-                maxValue = tmpFloat;
+        float maxValue = [QKStatisticalFoundations maximumValueOfArray:dataArr];
+        float minValue = [QKStatisticalFoundations minimumValueOfArray:dataArr];
+        if (uclAndLclAreNSNumbers) {
+            if (maxValue <= UCLFloatValue) {
+                maxValue = UCLFloatValue;
             }
-            if (tmpFloat <= minValue) {
-                minValue = tmpFloat;
+            if (minValue >= LCLFloatValue) {
+                minValue = LCLFloatValue;
             }
-        }
-        if (maxValue <= UCLFloatValue) {
-            maxValue = UCLFloatValue;
-        }
-        if (minValue >= LCLFloatValue) {
-            minValue = LCLFloatValue;
+        } else if (uclAndLclAreNSArrays) {
+            float maxUCLValue = [QKStatisticalFoundations maximumValueOfArray:UCLArray];
+            float minLCLValue = [QKStatisticalFoundations minimumValueOfArray:LCLArray];
+            if (maxValue <= maxUCLValue) {
+                maxValue = maxUCLValue;
+            }
+            if (minValue >= minLCLValue) {
+                minValue = minLCLValue;
+            }
         }
         
         // 绘图上下限
@@ -112,24 +114,6 @@
         float unitHeight = (height - 15 - 30 - 2 * 20)/(upperLimit - lowerLimit);
         // 0 位置 y 坐标
         float zeroHeight = CLHeight + CLValue * unitHeight;
-        
-        // 绘制 UCL 和 LCL
-        CGContextSetLineCap(context, kCGLineCapRound);
-        CGContextSetLineWidth(context, 0.5);
-        CGContextSetAllowsAntialiasing(context, YES);
-        CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-        CGFloat lengths[] = {20, 10};
-        CGContextSetLineDash(context, 0, lengths, 2);
-        CGContextBeginPath(context);
-            
-        CGContextMoveToPoint(context, 50, zeroHeight - UCLFloatValue * unitHeight);
-        CGContextAddLineToPoint(context, width - 100, zeroHeight - UCLFloatValue * unitHeight);
-            
-        CGContextMoveToPoint(context, 50, zeroHeight - LCLFloatValue * unitHeight);
-        CGContextAddLineToPoint(context, width - 100, zeroHeight - LCLFloatValue * unitHeight);
-            
-        CGContextStrokePath(context);
-
         
         // 确定每点坐标
         float unitWidth = (width - 50 - 100)/(dataArr.count + 1);
@@ -179,6 +163,61 @@
             CGContextFillPath(context);
         }
         
+        // 绘制 UCL 和 LCL
+        CGContextSetLineCap(context, kCGLineCapRound);
+        CGContextSetLineWidth(context, 0.5);
+        CGContextSetAllowsAntialiasing(context, YES);
+        CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+        CGFloat lengths[] = {10, 3};
+        CGContextSetLineDash(context, 0, lengths, 2);
+        CGContextBeginPath(context);
+        
+        if (uclAndLclAreNSNumbers) {
+            
+            CGContextMoveToPoint(context, 50, zeroHeight - UCLFloatValue * unitHeight);
+            CGContextAddLineToPoint(context, width - 100, zeroHeight - UCLFloatValue * unitHeight);
+            
+            CGContextMoveToPoint(context, 50, zeroHeight - LCLFloatValue * unitHeight);
+            CGContextAddLineToPoint(context, width - 100, zeroHeight - LCLFloatValue * unitHeight);
+            
+        } else if (uclAndLclAreNSArrays) {
+            
+            NSMutableArray *uclPointsArr = [[NSMutableArray alloc] init];
+            NSMutableArray *lclPointsArr = [[NSMutableArray alloc] init];
+            for (int i = 0; i < UCLArray.count; i ++) {
+                
+                float tmpUCLValue = [UCLArray[i] floatValue];
+                float tmpLCLValue = [LCLArray[i] floatValue];
+                
+                if (i == 0) {
+                    [uclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50, zeroHeight - tmpUCLValue * unitHeight)]];
+                    [uclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50 + 1.5 * unitWidth, zeroHeight - tmpUCLValue * unitHeight)]];
+                    [lclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50, zeroHeight - tmpLCLValue * unitHeight)]];
+                    [lclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50 + 1.5 * unitWidth, zeroHeight - tmpLCLValue * unitHeight)]];
+                } else {
+                    [uclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50 + (i + 0.5) * unitWidth, zeroHeight - tmpUCLValue * unitHeight)]];
+                    [uclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50 + (i + 1.5) * unitWidth, zeroHeight - tmpUCLValue * unitHeight)]];
+                    [lclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50 + (i + 0.5) * unitWidth, zeroHeight - tmpLCLValue * unitHeight)]];
+                    [lclPointsArr addObject:[NSValue valueWithCGPoint:CGPointMake(50 + (i + 1.5) * unitWidth, zeroHeight - tmpLCLValue * unitHeight)]];
+                }
+                
+            }
+            
+            for (int j = 0; j < uclPointsArr.count - 1; j ++) {
+                CGPoint point1 = [uclPointsArr[j] CGPointValue];
+                CGPoint point2 = [uclPointsArr[j + 1] CGPointValue];
+                CGContextMoveToPoint(context, point1.x, point1.y);
+                CGContextAddLineToPoint(context, point2.x, point2.y);
+                
+                CGPoint point01 = [lclPointsArr[j] CGPointValue];
+                CGPoint point02 = [lclPointsArr[j + 1] CGPointValue];
+                CGContextMoveToPoint(context, point01.x, point01.y);
+                CGContextAddLineToPoint(context, point02.x, point02.y);
+            }
+        }
+        
+        CGContextStrokePath(context);
+        
         // 绘制 x 坐标值
         
         
@@ -194,16 +233,27 @@
         }
         
         // 绘制 UCL, LCL, CL 值
-        NSString *tStr2 = [NSString stringWithFormat:@"UCL=%.3f", UCLFloatValue];
+        
         NSMutableParagraphStyle *paragraph2 = [[NSMutableParagraphStyle alloc] init];
         paragraph2.alignment = NSTextAlignmentLeft;
         NSDictionary *dict2 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
                                 NSParagraphStyleAttributeName: paragraph2,
                                 NSForegroundColorAttributeName: [UIColor redColor]};
-        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - UCLFloatValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        NSString *tStr2;
         
-        tStr2 = [NSString stringWithFormat:@"LCL=%.3f", LCLFloatValue];
-        [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - LCLFloatValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        if (uclAndLclAreNSNumbers) {
+            tStr2 = [NSString stringWithFormat:@"UCL=%.3f", UCLFloatValue];
+            [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - UCLFloatValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+            
+            tStr2 = [NSString stringWithFormat:@"LCL=%.3f", LCLFloatValue];
+            [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - LCLFloatValue * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        } else {
+            tStr2 = [NSString stringWithFormat:@"UCL=%.3f", [[UCLArray lastObject] floatValue]];
+            [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - [[UCLArray lastObject] floatValue] * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+            
+            tStr2 = [NSString stringWithFormat:@"LCL=%.3f", [[LCLArray lastObject] floatValue]];
+            [tStr2 drawInRect:CGRectMake(width - 92, zeroHeight - [[LCLArray lastObject] floatValue] * unitHeight - 0.5 * 20, 90, 20) withAttributes:dict2];
+        }
         
         NSDictionary *dict3 = @{NSFontAttributeName: [UIFont systemFontOfSize:16.0],
                                 NSParagraphStyleAttributeName: paragraph2,
