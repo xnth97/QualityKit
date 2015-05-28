@@ -36,17 +36,15 @@
         plotArr = [_plotArr mutableCopy];
     }];
     
-    if (uclAndLclAreNSNumbers) {
-        for (NSString *rule in rulesArr) {
-            [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
-                for (id tmp in _indexesOfErrorPoints) {
-                    if (![indexesOfErrorPoints containsObject:tmp]) {
-                        [indexesOfErrorPoints addObject:tmp];
-                    }
+    for (NSString *rule in rulesArr) {
+        [self checkData:plotArr UCLValue:UCLValue LCLValue:LCLValue CLValue:CLValue rule:rule block:^(NSArray *_indexesOfErrorPoints, NSString *_errorDescription) {
+            for (id tmp in _indexesOfErrorPoints) {
+                if (![indexesOfErrorPoints containsObject:tmp]) {
+                    [indexesOfErrorPoints addObject:tmp];
                 }
-                errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
-            }];
-        }
+            }
+            errorDescription = (indexesOfErrorPoints.count == 0) ? @"" : [NSString stringWithFormat:@"%@%@", errorDescription, _errorDescription];
+        }];
     }
     
     
