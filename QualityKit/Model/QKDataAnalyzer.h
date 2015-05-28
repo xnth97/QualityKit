@@ -52,6 +52,17 @@
  */
 + (void)fixData:(NSArray *)dataArr indexesOfErrorRows:(NSArray *)indexesOfErrorRows checkRules:(NSArray *)rulesArr controlChartType:(NSString *)type block:(void(^)(id UCLValue, id LCLValue, float CLValue, NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
+/**
+ *  对数据使用已保存的控制图
+ *
+ *  @param dataArr  原始数据数组
+ *  @param UCLValue UCL 值
+ *  @param LCLValue LCL 值
+ *  @param CLValue  CL 值
+ *  @param rulesArr 应用检测规则数组
+ *  @param type     控制图类型
+ *  @param block    回调 block
+ */
 + (void)getStatisticalValuesUsingSavedControlChartFromData:(NSArray *)dataArr UCL:(id)UCLValue LCL:(id)LCLValue CL:(float)CLValue checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void(^)(NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
 @end
