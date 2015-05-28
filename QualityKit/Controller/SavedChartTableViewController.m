@@ -51,6 +51,8 @@
     _token = [realm addNotificationBlock:^(NSString *notification, RLMRealm *realm) {
         chartData = [QKSavedControlChart allObjectsInRealm:realm];
     }];
+    
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {

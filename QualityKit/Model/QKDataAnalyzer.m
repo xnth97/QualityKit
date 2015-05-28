@@ -225,6 +225,7 @@
         
         float UCLValue = CLValue + 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(nSum / dataArray.count);
         float LCLValue = CLValue - 3 * sqrt(CLValue * (1 - CLValue)) / sqrt(nSum / dataArray.count);
+        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
         
         block(UCLValue, LCLValue, CLValue, pArr);
     }
@@ -243,6 +244,7 @@
         
         float UCLValue = CLValue + 3 * sqrt(CLValue * (1 - pBar));
         float LCLValue = CLValue - 3 * sqrt(CLValue * (1 - pBar));
+        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
         
         block(UCLValue, LCLValue, CLValue, pArr);
     }
@@ -259,6 +261,7 @@
         float CLValue = cSum / dataArray.count;
         float UCLValue = CLValue + 3 * sqrt(CLValue);
         float LCLValue = CLValue - 3 * sqrt(CLValue);
+        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
         
         block(UCLValue, LCLValue, CLValue, cArr);
     }
@@ -278,6 +281,7 @@
         
         float UCLValue = CLValue + 3 * sqrt(CLValue) / sqrt(nSum / dataArray.count);
         float LCLValue = CLValue - 3 * sqrt(CLValue) / sqrt(nSum / dataArray.count);
+        LCLValue = (LCLValue >= 0) ? LCLValue : 0;
         
         block(UCLValue, LCLValue, CLValue, uArr);
     }

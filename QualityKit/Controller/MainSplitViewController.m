@@ -14,16 +14,17 @@
 @end
 
 @implementation MainSplitViewController {
-    // UIView *loginView;
+    UIView *loginView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     /*
-    
     loginView = [[UIView alloc] initWithFrame:self.view.frame];
     loginView.backgroundColor = [UIColor whiteColor];
+    
+    
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitle:@"Log In" forState:UIControlStateNormal];
@@ -34,7 +35,6 @@
     [loginView addSubview:btn];
     
     [self.view addSubview:loginView];
-     
      */
 }
 
