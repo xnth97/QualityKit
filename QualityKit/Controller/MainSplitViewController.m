@@ -22,7 +22,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self initializeLoginView];
+    // [self initializeLoginView];
 }
 
 - (void)viewDidLoad {
