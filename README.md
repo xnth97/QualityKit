@@ -3,11 +3,25 @@
 
 # 简介
 
-这就是我正在做的计算机实习的大作业。学号3012209017好人一生平安。
+基于 iOS 平台进行控制图绘制与过程能力分析的软件。
 
 * 语言：Objective-C, C++, C
 * 平台：iOS
 * 数据库：Realm
+
+## 可执行文件
+
+Release 里的 HQSQualityKit.ipa。将其通过 iTunes 部署到 iPad 上即可运行。
+
+## 源代码
+
+项目使用 Xcode 6.3.1 在 OS X 10.10.3 下进行开发，源代码可直接 Clone 到本地。初次部署工程需在目录下执行`pod install`命令，使用生成的 xcworkspace 进行开发。如尚未安装 cocoapods，需执行`sudo gem install cocoapods`。
+
+编译工程使用终端进入目录，执行`xcodebuild -target QualityKit -configuration Release`进行编译。
+
+## 示例数据
+
+将 SampleData 文件夹中的数据复制到沙盒的 Documents 文件夹下即可使用。
 
 # Model
 
