@@ -1,100 +1,101 @@
-# QualityKit
-计算机实习的大作业
+QualityKit
+======================
+An iOS application to draw control charts
 
-# 简介
+# Introduction
 
-基于 iOS 平台进行控制图绘制与过程能力分析的软件。
+QualityKit is an iOS application used in Industrial Engineering field, helping to draw control charts and do some simple process  capability analysis.
 
-* 语言：Objective-C, C++, C
-* 平台：iOS
-* 数据库：Realm
+Also, QualityKit could refer to the core framework of the application. QualityKit Framework is an Objective-C framework for Industrial Engineering and Quality Management, including data structure definitions, data calculating, statistical constants, graph drawing, etc. This framework would be open-sourced after a total cleaning.
 
-## 可执行文件
+* Language：Objective-C, C++, C
+* Platform：iOS
+* Database：Realm
 
-Release 里的 HQSQualityKit.ipa。将其通过 iTunes 部署到 iPad 上即可运行。
+## Binary
 
-## 源代码
+You can deploy `HQSQualityKit.ipa` in Release to iPad through iTunes.
 
-项目使用 Xcode 6.3.1 在 OS X 10.10.3 下进行开发，源代码可直接 Clone 到本地。初次部署工程需在目录下执行`pod install`命令，使用生成的 xcworkspace 进行开发。如尚未安装 cocoapods，需执行`sudo gem install cocoapods`。
+## Source Code
 
-编译工程使用终端进入目录，执行`xcodebuild -target QualityKit -configuration Release`进行编译。
+The project is developed using Xcode 6.3.1 under OS X 10.10.3. The source code could be freely cloned to local repository. For the first time, it’s necessary to run `pod install` under the QualityKit directory. If CocoaPods is not installed, you should run `sudo gem install cocoapods` in advance.
 
-## 示例数据
+## Sample Data
 
-将 SampleData 文件夹中的数据复制到沙盒的 Documents 文件夹下即可使用。
+Copy the data in SampleData directory to Documents in sandbox.
 
 # Model
 
-模型，用于处理逻辑、数据统计分析计算、文件与数据库 IO 操作、数据模型等的部分。主要处于后台进程运行。
+Model section is used to process the operation logic, calculating data, local file and database IO, define data models, etc. The model section mainly run in background thread. 
 
 ## QKDef
 
-各种宏定义以及一些统计常数。
+Macro definitions and statistical constants.
 
 ## QKDataAnalyzer
 
-根据特定质量管理控制图规则对数据进行处理的模块。类方法在头文件中有详细描述。
+The module which process data under specific rules of control charts. The class methods is described in header file as below.
 
 ```objc
 /**
- *  获取数组的统计学特征数据
+ *  Get statistical characteristic values of data.
  *
- *  @param dataArr  原数据数组
- *  @param rulesArr 对数据进行检测所应用的规则
- *  @param type     数据统计类型，如 C 图，XBar-R等
- *  @param block    回调 block，回调 UCL 值、LCL 值、CL 值、画图数组、出错点在画图数组中下标的数组及错误描述
+ *  @param dataArr  Original data array
+ *  @param rulesArr The rules to be applied to data
+ *  @param type     Type of control chart, e.g. C Chart，XBar-R Chart, etc
+ *  @param block    Callback block, including UCL Value, LCL Value, CL Value, data points in graph, indexes of error points in graph, and error description
  */
 + (void)getStatisticalValuesOfDoubleArray:(NSArray *)dataArr checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void(^)(id UCLValue, id LCLValue, float CLValue, NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
 /**
- *  对数据进行计算
+ *  Calculating data
  *
- *  @param dataArray 原数据数组
- *  @param type      控制图类型
- *  @param block     回调 block，回调 UCL 值、LCL 值、CL 值、画图数组
+ *  @param dataArray Original data array
+ *  @param type      Type of control chart
+ *  @param block     Callback block，including UCL Value, LCL Value, CL Value, data points in graph
  */
 + (void)calculateControlLineValuesOfData:(NSArray *)dataArray controlChartType:(NSString *)type block:(void(^)(id UCLValue, id LCLValue, float CLValue, NSArray *plotArr))block;
 
 /**
- *  对绘图点数组进行检验
+ *  Examine the data points of graph
  *
- *  @param plotArray 绘图点数组
- *  @param UCL       UCL 值
- *  @param LCL       LCL 值
- *  @param CL        CL 值
- *  @param checkRule 检验规则，定义在 QKDef 里
- *  @param block     回调 block，回调出错点在绘图数组中的坐标、出错信息
+ *  @param plotArray Data points of graph
+ *  @param UCL       UCL Value
+ *  @param LCL       LCL Value
+ *  @param CL        CL Value
+ *  @param checkRule Rules of examining data, defined in QKDef
+ *  @param block     Callback block，including the indexes of error points and error description
  */
 + (void)checkData:(NSArray *)plotArray UCLValue:(id)UCL LCLValue:(id)LCL CLValue:(float)CL rule:(NSString *)checkRule block:(void(^)(NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
 /**
- *  对出错点进行修正。初始出错点数组个数不能为 0
+ *  Fix the error points. The number of initial error points couldn’t be 0.
  *
- *  @param dataArr            原始数据
- *  @param indexesOfErrorRows 出错点个数，即原始数据出错行数
- *  @param rulesArr           应用检测规则，定义在 QualityKitDef 里
- *  @param type               控制图类型
- *  @param block              回调 block，回调 UCL 值、LCL 值、CL 值、画图数组、出错点在画图数组中下标的数组及错误描述
+ *  @param dataArr            Original data
+ *  @param indexesOfErrorRows Indexes of error points, aka the indexes of rows of original data where error occurs
+ *  @param rulesArr           Rules of examining data, defined in QKDef
+ *  @param type               Type of control charts
+ *  @param block              Callback block，including the indexes of error points and error description
  */
 + (void)fixData:(NSArray *)dataArr indexesOfErrorRows:(NSArray *)indexesOfErrorRows checkRules:(NSArray *)rulesArr controlChartType:(NSString *)type block:(void(^)(id UCLValue, id LCLValue, float CLValue, NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 
 /**
- *  对数据使用已保存的控制图
+ *  Apply saved control chart to data
  *
- *  @param dataArr  原始数据数组
- *  @param UCLValue UCL 值
- *  @param LCLValue LCL 值
- *  @param CLValue  CL 值
- *  @param rulesArr 应用检测规则数组
- *  @param type     控制图类型
- *  @param block    回调 block
+ *  @param dataArr  Original data array
+ *  @param UCLValue UCL Value
+ *  @param LCLValue LCL Value
+ *  @param CLValue  CL Value
+ *  @param rulesArr Rules of examining data
+ *  @param type     Type of control chart
+ *  @param block    Callback block
  */
 + (void)getStatisticalValuesUsingSavedControlChartFromData:(NSArray *)dataArr UCL:(id)UCLValue LCL:(id)LCLValue CL:(float)CLValue checkRulesArray:(NSArray *)rulesArr controlChartType:(NSString *)type withBlock:(void(^)(NSArray *plotArr, NSArray *indexesOfErrorPoints, NSString *errorDescription))block;
 ```
 
 ## QKStatisticalFoundations
 
-Objective-C 的统计学常用封装。类方法定义在头文件中，大多数不需要注释。
+The Objective-C wrap of statistical methods. The class methods are defined in header files, most of which don’t need additional comments.
 
 ```objc
 + (float)sumValueOfArray:(NSArray *)array;
@@ -105,20 +106,20 @@ Objective-C 的统计学常用封装。类方法定义在头文件中，大多�
 + (float)rangeValueOfArray:(NSArray *)array;
 
 /**
- *  重排序为递增数组
+ *  Rearrange as a ascending array
  *
- *  @param array 输入数组
+ *  @param array Input array
  *
- *  @return 返回递增数组
+ *  @return Return the ascending array
  */
 + (NSArray *)ascendingArray:(NSArray *)array;
 
 /**
- *  重排序为递减数组
+ *  Rearrange as a descending array
  *
- *  @param array 输入数组
+ *  @param array Input array
  *
- *  @return 返回递减数组
+ *  @return Return the descending array
  */
 + (NSArray *)descendingArray:(NSArray *)array;
 
@@ -134,33 +135,33 @@ Objective-C 的统计学常用封装。类方法定义在头文件中，大多�
 
 ## QKProcessCapabilityAnalysis
 
-用于进行过程能力分析的封装。
+Wrap for process capability analysis.
 
 ## QKDataManager
 
-数据的读取、写入、编辑等封装。
+Wrap for data IO.
 
 ## QKDataProcessor
 
-数据模型转换器。涉及 Realm Object, NSArray, TSTableViewModel, QZWorkbook 等。
+Data type converted. Supported types including Realm Object, NSArray, TSTableViewModel, QZWorkbook, etc.
 
 ## QKExportManager
 
-生成控制图的导出。
+Export control chart.
 
 ## Data Model
 
 ### QKData5
 
-标准 XBar-R 等控制图的数据模型，Realm Object.
+Data structure of standard control charts like XBar-R. Subclass of Realm Object.
 
 ### QKSavedControlChart
 
-用于存储控制图以使用控制图。数据结构如下：
+Data structure of saved control charts as below.
 
 * _name_: NSString
-* _controlChartType_: NSString，基于 QKDef 的宏定义
-* _UCLValue_: NSData，封装的 NSNumber 或 NSArray 的 UCL 值或数组
+* _controlChartType_: NSString, macro definition based on QKDef
+* _UCLValue_: NSData, NSKeyedArchiver-archived NSNumber or NSArray
 * _LCLValue_: NSData
 * _CLValue_: float
 * _subUCLValue_: NSData
@@ -169,64 +170,64 @@ Objective-C 的统计学常用封装。类方法定义在头文件中，大多�
 
 # View
 
-视图，用于绘制直接出现在 UIWindow 上的 UIView，主要是控制图的绘制，在主线程运行。
+View section is used for drawing UIViews especially control charts on UIWindow and usually run in main thread.
 
 ## QKControlChartView
 
-绘制控制图的类，直接继承 UIView。具有以下属性：
+The subclass of UIView to draw control charts with properties as below.
 
-* _dataArr_: NSArray，原始数据数组
-* _UCLValue_: id，UCL 值或数组，可能是 NSNumber 或 NSArray
+* _dataArr_: NSArray, original data array
+* _UCLValue_: id, UCL Value or array，possibly NSNumber or NSArray
 * _LCLValue_: id
 * _CLValue_: float
-* _indexesOfErrorPoints_: NSArray，出错数据点的下标
+* _indexesOfErrorPoints_: NSArray, the indexes of error points
 
 ## MsgDisplay
 
-用于显示各种消息。
+Used for displaying messages.
 
 # Controller
 
-控制器，响应 View 层的操作并传递到 Model 层处理，接收 Model 分析后的数据以及时更新 View 层。
+Controller respond to operations on View layer and pass it to Model layer, and update View layer using analyzed data from Model layer.
 
 ## MainSplitViewController
 
-项目的 RootViewController，管理左右分栏并初始化登录 view，负责相应逻辑判断与处理。
+The RootViewController of this project, managing the Master-Detail controller and initialize log-in views.
 
 ## MasterViewController
 
-对 Excel 或 Realm 数据进行浏览、选择、新建与编辑。
+List Excel or Realm data.
 
 ## DetailViewController
 
-显示或编辑已选中的数据。
+Display or edit the selected data.
 
 ## ControlChartViewController
 
-根据选定类型及数据绘制控制图并导出控制图。主要属性：
+Draw and export control chart by the chosen type and data with the following properties.
 
-* _chartType_: NSString，在 QKDef 中定义
-* _dataArr_: NSArray，原始数据
-* _savedControlChart_: QKSavedControlChart，如使用已保存的控制图则不为 nil
-* _usingSavedControlChart_: Bool，是否使用已有控制图，其实赘余，不过为了方便
+* _chartType_: NSString
+* _dataArr_: NSArray
+* _savedControlChart_: QKSavedControlChart. If you don’t want to use saved control chart, this should be left `nil`
+* _usingSavedControlChart_: Bool. Whether the saved control chart is in use
 
 # RulesTableViewController
 
-选择检验使用的规则、是否自动修正、Shapiro Wilk 检验显著性等。
+Choose the rules in examination. Auto-Fix switch. Shapiro Wilk test.
 
 ## ProcessCapabilityViewController
 
-进行过程能力分析，输入 USL 及 LSL 值并导出过程能力分析报告。
+Process capability analysis. The report could be generated into PDF.
 
-### 委托方法
+### Delegate
 
 * `- (void)pushPDFPreviewViewControllerWithFileName:(NSString *)fileName;`
 
 ## SelectControlChartViewController
 
-通过框图选择合适的控制图类型。
+Select proper type of control chart through graph.
 
-### 委托方法
+### Delegate Methods
 
 * `- (void)selectXBarRChart;`
 * `- (void)selectXBarSChart;`
@@ -239,17 +240,10 @@ Objective-C 的统计学常用封装。类方法定义在头文件中，大多�
 
 ## SavedChartTableViewController
 
-浏览与删除已保存的控制图。
+Explore and delete the saved control charts.
 
-# 致谢
+# Acknowledgements
 
-本项目使用到的开源项目有：
+I would like to extend my sincere gratitude to the included open-source projects, without which this project would never be completed.
 
-* QZXLSReader
-* JXLS
-* TSUIKit
-* SVProgressHUD
-* ALActionBlocks
-* Realm
-
-在此致以感谢。
+To meet specific demands of this project, some open-source projects were modified manually and forked into my own repositories instead of being managed by CocoaPods. 

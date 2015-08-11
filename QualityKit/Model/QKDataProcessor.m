@@ -85,11 +85,11 @@
     
     if ([dataModelClass isEqualToString:[[QKData5 class] description]]) {
         for (int i = 0; i < 5; i ++) {
-            NSDictionary *tmpDic = @{@"title": [NSString stringWithFormat:@"%d", i + 1],
-                                     @"defWidth": @80};
+            NSDictionary *tmpDic = @{@"title" : [NSString stringWithFormat:@"%d", i + 1],
+                    @"defWidth" : @80};
             [columns addObject:[TSColumn columnWithDictionary:tmpDic]];
         }
-        
+
         RLMResults *allQKData5 = [QKData5 allObjectsInRealm:realm];
         for (QKData5 *tmp in allQKData5) {
             TSRow *row = [TSRow rowWithDictionary:@{
