@@ -24,7 +24,7 @@ Also, QualityKit could refer to the core framework of the application. QualityKi
 
 ### Generate PDF/PNG format report
 
-![](Screenshots/3.png)
+![](Screenshots/3.PNG)
 
 ### Visualized guide based on data
 
