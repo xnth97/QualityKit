@@ -10,7 +10,33 @@ Also, QualityKit could refer to the core framework of the application. QualityKi
 
 * Language：Objective-C, C++, C
 * Platform：iOS
-* Database：Realm
+* Database：Realm, SQLite
+
+## Screenshots
+
+### Draw control charts
+
+![](Screenshots/1.png)
+
+### Comparison between charts
+
+![](Screenshots/2.png)
+
+### Generate PDF/PNG format report
+
+![](Screenshots/3.png)
+
+### Visualized guide based on data
+
+![](Screenshots/4.png)
+
+### XLS/DB data read/write
+
+![](Screenshots/5.png)
+
+### Apply check and correct algorithms
+
+![](Screenshots/6.png)
 
 ## Binary
 
